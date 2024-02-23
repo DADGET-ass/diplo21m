@@ -1,0 +1,183 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: auto;
+    font-family: "Roboto Slab";
+    font-weight: 400;
+}
+
+*::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    z-index: -1;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--niche2);
+    border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--frame5);
+    border-radius: 2px;
+}
+
+
+/* Links */
+a {
+    color: var(--color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+ 
+    &:visited  {
+        text-decoration: none;
+        color: var(--color);
+    }
+    
+    &:hover  {
+        text-decoration: none;
+        opacity: .6;
+        transition: all .4s ease-in-out;
+    }
+}
+
+
+/* Common */
+
+aside, nav, footer, header, section, main {
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: inherit;
+	font-weight: inherit;
+}
+
+ul, ul li {
+	list-style-type: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+
+/* Form */
+
+input, textarea, button, select {
+	font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input {
+    caret-color: var(--accent);
+    caret-width: 6px;
+    
+    /* Firefox */
+    &::-moz-selection {
+        background-color: var(--grey2);
+    }
+    
+    /* WebKit/Blink */
+    &::selection {
+        background-color: var(--grey2);
+    }
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+button, 
+input[type='submit'] {
+    outline: none;
+    border: none;
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+legend {
+	display: block;
+}
+
+
+
+/* Table */
+
+.table-wrapper {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    overflow-x: auto;
+    border-collapse: collapse;
+    
+    tr {
+        border-bottom: 1px solid var(--gray-light-2);
+    }
+    thead {
+        th {
+            padding: 8px;
+            min-width: 180px;
+            font-family: 'Lato900';
+            text-align: center;
+            line-height: normal;
+            color: var(--color);
+        }
+    }
+    tbody { 
+        td {
+            padding: 8px;
+            min-width: 180px;
+            font-family: 'Lato400';
+            line-height: normal;
+            color: var(--color);
+            vertical-align: top;
+            text-align: center;
+        }
+    }
+}
+
+
+hr {
+    box-shadow: none;
+    border: none;
+    border-top: 1px solid  var(--grey3);
+}

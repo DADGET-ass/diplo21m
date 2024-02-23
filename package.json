@@ -1,0 +1,27 @@
+{
+  "name": "diplom",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "20.11.17",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
+    "@types/react-window": "^1.8.8",
+    "next": "13.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-window": "^1.8.9",
+    "sass": "^1.62.0",
+    "typescript": "5.3.3",
+    "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/zxcvbn": "^4.4.4"
+  }
+}

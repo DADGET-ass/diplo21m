@@ -1,0 +1,10 @@
+.headerLine {
+    height: 100px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+    background-color: var(--greenOne);
+
+    .icon {
+        position: absolute;
+        right: 20px;
+    }
+}
