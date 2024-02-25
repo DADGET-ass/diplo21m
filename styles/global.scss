@@ -2,3 +2,8 @@
 @import './assets/fonts/font.scss';
 @import './assets/mixins/responsive_font.scss';
 @import './colors.scss';
+
+.content {
+    display: flex;
+    gap: 10px;
+}

@@ -21,7 +21,7 @@ const Auth = () => {
                     <Input type="text" label="Логин" autoFocus placeholder={'Введите логин'} required/>
                     <Input type="password" label="Пароль" placeholder={'Введите пароль'} required/>
                 </Form>
-                <Button>
+                <Button type='submit'>
                     Вход
                 </Button>
             </div>

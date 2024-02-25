@@ -1,0 +1,9 @@
+.title {
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--grey);
+
+    &[data-lightTitle="true"]{
+        color: white;
+    }
+}

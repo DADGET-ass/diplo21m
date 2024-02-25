@@ -1,0 +1,17 @@
+@import '../index.module.scss';
+
+.coursesBlock {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--greenOne);
+
+    .arrow {
+        transition: .4s;
+    }
+
+    .rot {
+        transform: rotate(180deg);
+        transition: .4s;
+    }
+}

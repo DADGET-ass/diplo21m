@@ -8,9 +8,14 @@
     user-select: none;
 
     label {
+        cursor: pointer;
         padding-left: 5px;
         color: white;
-        @include responsive_font(24, 24);
+        @include responsive_font(18, 14);
+
+        &[data-disabled] {
+            cursor: not-allowed;
+        }
     }
 
     .input {
@@ -36,6 +41,11 @@
         &::selection {
             background: seagreen;
             color: white;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            background-color: #A1A1A1;
         }
 
         &[data-error=true] {

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import {
     formatPhoneNumber,
 } from '@/utils/formats'
@@ -24,6 +24,7 @@ interface InputProps {
     onChange?: (text: string) => void;
     isValid?: (result: boolean) => void;
     value?: string;
+    disabled?: boolean;
 }
 
 const formatDefault = (text: string) => text;
@@ -51,7 +52,7 @@ const typeInput = {
     },
 };
 
-const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, value }) => {
+const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, value, disabled }) => {
     const [error, setError] = useState<{
         state: boolean,
         code: number,
@@ -74,13 +75,16 @@ const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, 
         }
     }, [value]);
 
+    const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
+
     const input = (
         <div className={cls.inputWrapper}>
             {label && (
-                <label>{label}</label>
+                <label htmlFor={inputId} data-disabled={disabled}>{label}</label>
             )}
             <div className={cls.input}>
                 <input
+                    id={inputId}
                     autoFocus={autoFocus}
                     placeholder={placeholder}
                     required={required}
@@ -91,6 +95,7 @@ const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, 
                         const text = e.target.value;
                         setCurrentValue(typeInput[type].format(text));
                     }}
+                    disabled={disabled}
                     onFocus={() => {
                         setError((prevState) => ({
                             ...prevState,
