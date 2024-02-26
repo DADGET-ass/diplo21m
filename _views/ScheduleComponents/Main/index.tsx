@@ -1,6 +1,6 @@
 import { IDiscipline, getDisciplines } from "@/data/api/getDisciplines";
 import { useEffect, useState } from "react";
-import { FacultsPage } from "../Facults/FacultsHeader";
+import { FacultsPage } from "../FacultPage/FacultsHeader";
 import { LeftSide } from "../LeftSide";
 import cls from './index.module.scss'
 

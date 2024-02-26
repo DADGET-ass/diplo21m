@@ -21,7 +21,7 @@ export interface IFacultet {
     courses: Array<ICourse>;
 }
 
-const facultets: Array<IFacultet> = [
+export const facultets: Array<IFacultet> = [
     {
         _id: 0,
         name: "ПКС",
