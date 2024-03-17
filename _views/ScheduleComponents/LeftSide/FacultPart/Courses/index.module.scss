@@ -1,18 +1,19 @@
-.coursesBlock{
+.coursesBlock {
     padding: 12px 20px;
     display: flex;
     background-color: var(--greenOne);
 
-    .name{
+    .name {
         color: white;
         font-size: 20px;
-       
+
     }
 
     .arrow {
         margin-left: auto;
         color: white;
         transition: .4s;
+        cursor: pointer;
 
         svg {
             height: 100%;

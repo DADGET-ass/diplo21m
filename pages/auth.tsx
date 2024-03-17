@@ -6,11 +6,11 @@ import { WindowWrapper } from "@/_views/ui/WindowWrapper"
 const AuthPage = () =>{
     return(
         <main>
-        <Container>
+
             <WindowWrapper>
                     <Auth />
             </WindowWrapper>
-        </Container>
+      
         </main>
     )
 }

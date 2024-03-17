@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import {
     formatPhoneNumber,
 } from '@/utils/formats'
@@ -10,6 +10,7 @@ import {
 } from "@/utils/validations";
 import cls from './index.module.scss';
 import { EyeCloseIcon, EyeIcon } from '../svg_dynamic/base.svg';
+import { formatGroup } from '@/utils/formats/formatGroup';
 
 interface InputProps {
     label?: string;
@@ -17,7 +18,8 @@ interface InputProps {
     | "phoneNumber"
     | "email"
     | "password"
-    | "text";
+    | "text"
+    | "group";
     autoFocus?: boolean;
     required?: boolean;
     placeholder?: string;
@@ -50,9 +52,24 @@ const typeInput = {
         format: formatDefault,
         valid: validationDefault,
     },
+    group:{
+        type: "text",
+        format: formatGroup,
+        valid: validationDefault,
+    }
 };
 
-const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, value, disabled }) => {
+const Input: FC<InputProps> = ({ 
+    label, 
+    type, 
+    autoFocus, 
+    required, 
+    placeholder, 
+    value, 
+    disabled,
+    onChange,
+    isValid
+}) => {
     const [error, setError] = useState<{
         state: boolean,
         code: number,
@@ -62,8 +79,20 @@ const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, 
         code: 0,
         value: 'Что-то пошло не так'
     });
+    const inputRef = useRef<HTMLInputElement>(null);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<string>(value || "");
+    const TypeInput = typeInput[type];
+
+    useEffect(() => {
+        if (autoFocus && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
+
+    useEffect(() => {
+        onChange && onChange(currentValue);
+    }, [currentValue]);
 
     useEffect(() => {
         setCurrentValue(value || "");
@@ -76,6 +105,8 @@ const Input: FC<InputProps> = ({ label, type, autoFocus, required, placeholder, 
     }, [value]);
 
     const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
+
+    
 
     const input = (
         <div className={cls.inputWrapper}>

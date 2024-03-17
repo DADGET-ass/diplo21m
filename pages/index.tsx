@@ -4,12 +4,12 @@ import { Header } from '@/_views/ui/Header'
 import { useEffect, useState } from 'react'
 import { IDiscipline, getDisciplines } from '@/data/api/getDisciplines'
 import { _Main } from '@/_views/ScheduleComponents/Main'
+import { Layout } from '@/_views/ui/Layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   
-
   return (
     <>
       <Head>
@@ -19,8 +19,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Header />
-        <_Main />
+       <Layout>
+       <_Main />
+       </Layout>
+        
       </main>
     </>
   )

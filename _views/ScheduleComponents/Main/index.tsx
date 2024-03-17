@@ -9,8 +9,6 @@ const _Main = () => {
 
     const _main = (
         <div className={cls.main}>
-            <LeftSide />
-            <FacultsPage />
         </div>
     );
 

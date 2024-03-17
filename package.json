@@ -19,6 +19,7 @@
     "react-window": "^1.8.9",
     "sass": "^1.62.0",
     "typescript": "5.3.3",
+    "zustand": "^4.5.2",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

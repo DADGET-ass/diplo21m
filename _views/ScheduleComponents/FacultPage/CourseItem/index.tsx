@@ -1,11 +1,11 @@
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import cls from './index.module.scss';
 import { FC, useState } from 'react';
-import { ICourse } from '../index';
 import { GroupItem } from '../GroupItem';
+import { ICourses } from '@/data/api/getFacultets';
 
 interface CourseItemProps {
-    course: ICourse;
+    course: ICourses;
 }
 
 const CourseItem: FC<CourseItemProps> = ({ course }) => {
@@ -22,8 +22,8 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
                 </div>
             </div >
 
-            {isOpen && course.groups.map((group) => (
-                <GroupItem group={group} key={group._id} />
+            {isOpen && course.groups?.map((_groups) => (
+                <GroupItem group={_groups} key={_groups._id} />
             ))}
         </>
     );

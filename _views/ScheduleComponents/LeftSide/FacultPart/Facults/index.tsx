@@ -7,6 +7,7 @@ import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
 import { Courses } from '../Courses';
+import Link from 'next/link';
 
 interface Facultets {
     facultets: IFacultets;
@@ -19,12 +20,14 @@ const Facultets: FC<Facultets> = ({ facultets }) => {
         <>
             <div className={cls.facultsBlock} key={facultets._id} >
                 <div className={cls.facultContent}>
-                    <div className={cls.name}>
-                        {facultets.name}
-                    </div>
+                        <div className={cls.name}>
+                        <Link href={`/facultets/${facultets._id}`}>
+                            {facultets.name}
+                        </Link>
+                        </div>
                     <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
-                <ArrowIcon />
-            </div>
+                        <ArrowIcon />
+                    </div>
                 </div>
 
             </div>

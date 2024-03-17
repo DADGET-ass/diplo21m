@@ -2,8 +2,9 @@ import { FC, ReactNode, useState } from 'react';
 import cls from './index.module.scss';
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import { Facults, facultets } from '../../FacultPage';
-import { FacultItem } from '../../FacultPage/FacultItem';
+
 import { FacultsPart } from '../FacultPart';
+import Link from 'next/link';
 
 
 interface PartitionProps {
@@ -18,9 +19,11 @@ const Partition: FC<PartitionProps> = ({ title, children }) => {
     const partition = (
         <div className={cls.partitionBlock}>
             <div className={cls.part}>
+            <Link href="/facultets">
             <div className={cls.name}>
                 {title}
             </div>
+            </Link>
             <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                 <ArrowIcon />
             </div>

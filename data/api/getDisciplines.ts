@@ -8,7 +8,7 @@ export interface IDiscipline {
 
 }
 
-export type IResponseDisciplines = {
+ type IResponseDisciplines = {
     disciplines: Array<IDiscipline>;
   };
 
