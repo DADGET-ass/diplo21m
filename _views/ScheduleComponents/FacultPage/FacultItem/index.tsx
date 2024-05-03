@@ -1,12 +1,14 @@
 import { FC, useState } from 'react';
+
 import { Button } from '@/_views/ui/Button';
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
-import cls from './index.module.scss';
 import { CourseItem } from '../CourseItem';
 import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
-import { IFacultets } from '@/data/api/getFacultets';
+import { IFacultets } from '@/data/api';
+
+import cls from './index.module.scss';
 
 interface FacultItem {
     facultet: IFacultets;

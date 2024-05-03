@@ -1,0 +1,65 @@
+.dropdown {
+    position: relative;
+
+    width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+
+    input {
+        outline: none;
+        padding: 10px;
+        display: flex;
+        flex-grow: 1;
+        height: 60px;
+        background-color: white;
+        border: 1px solid transparent;
+        user-select: text;
+
+        &::placeholder {
+            color: grey;
+        }
+
+        
+    }
+    .arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: auto;
+        transition: .4s;
+        color: var(--grey);
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    .rot {
+        transform: rotate(180deg);
+        transition: .4s;
+    }
+
+    .options {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .option {
+        padding: 5px;
+        border: 1px solid var(--grey);
+        cursor: pointer;
+    }
+    
+    .option:hover {
+        background-color: #f0f0f0;
+    }
+}

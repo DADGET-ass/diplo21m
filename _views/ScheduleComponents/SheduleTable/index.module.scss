@@ -1,0 +1,26 @@
+.tableContainer {
+
+    .tableHead {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            border: 1px solid var(--grey);
+
+        }
+    }
+    .row {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
+
+        .item {
+            display: flex;
+            padding: 10px 10px;
+            border: 1px solid var(--grey);
+        }
+    }
+}

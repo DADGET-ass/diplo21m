@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import { Header } from '@/_views/ui/Header'
-import { useEffect, useState } from 'react'
-import { IDiscipline, getDisciplines } from '@/data/api/getDisciplines'
+
+
 import { _Main } from '@/_views/ScheduleComponents/Main'
 import { Layout } from '@/_views/ui/Layout'
 

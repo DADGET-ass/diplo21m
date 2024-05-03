@@ -1,13 +1,15 @@
 import { FormEvent, useState } from 'react';
+
 import { Header } from '@/_views/ui/Header';
 import { Button } from '@/_views/ui/Button';
 import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
-import cls from './index.module.scss';
 import { authUser } from '@/data/api/postLogin';
 import { setCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
-import { getFacultets } from '@/data/api/getFacultets';
+import { getFacultets } from '@/data/api';
+
+import cls from './index.module.scss';
 
 const Auth = () => {
     const [login, setLogin] = useState<string>('')

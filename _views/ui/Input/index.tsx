@@ -19,7 +19,8 @@ interface InputProps {
     | "email"
     | "password"
     | "text"
-    | "group";
+    | "group"
+    | "number";
     autoFocus?: boolean;
     required?: boolean;
     placeholder?: string;
@@ -52,20 +53,25 @@ const typeInput = {
         format: formatDefault,
         valid: validationDefault,
     },
-    group:{
+    group: {
         type: "text",
         format: formatGroup,
+        valid: validationDefault,
+    },
+    number: {
+        type: "number",
+        format: formatDefault,
         valid: validationDefault,
     }
 };
 
-const Input: FC<InputProps> = ({ 
-    label, 
-    type, 
-    autoFocus, 
-    required, 
-    placeholder, 
-    value, 
+const Input: FC<InputProps> = ({
+    label,
+    type,
+    autoFocus,
+    required,
+    placeholder,
+    value,
     disabled,
     onChange,
     isValid
@@ -106,7 +112,7 @@ const Input: FC<InputProps> = ({
 
     const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
 
-    
+
 
     const input = (
         <div className={cls.inputWrapper}>

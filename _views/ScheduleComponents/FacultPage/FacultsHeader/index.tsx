@@ -1,16 +1,20 @@
+import {
+    FormEvent,
+    useEffect,
+    useState
+} from 'react';
 import { Title } from '@/_views/ui/Title/Index';
-import cls from './index.module.scss';
 import { Arcticle } from '@/_views/ui/Arcticle';
 import { Button } from '@/_views/ui/Button';
 import { Facults } from '..';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
-import { addFacults } from '@/data/api/addFacults';
-import { IFacultets, getFacultets } from '@/data/api/getFacultets';
+import { addFacults } from '@/data/api';
+import { IFacultets, getFacultets } from '@/data/api';
 import { TextArea } from '@/_views/ui/textArea';
 
+import cls from './index.module.scss';
 
 const FacultsPage = () => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
@@ -24,22 +28,6 @@ const FacultsPage = () => {
 
     const [facultets, setFacultets] = useState<Array<IFacultets>>([])
 
-    // --------------------------------------------------------
-
-    const [text, setText] = useState<string>('');
-    const [group, setGroup] = useState<string>('');
-    const handleNameChange = (text: string) => {
-        setName(text);
-    };
-    
-    const handleGroupChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const newText = (event && event.target && event.target.value) || '';
-        const formattedText = newText + "-К";
-        setGroup(formattedText);
-    };
-    
-    
-    // --------------------------------------------------------
 
     useEffect(() => {
         getFacultets().then(e => {
@@ -98,14 +86,14 @@ const FacultsPage = () => {
                             placeholder={''}
                             required
                             value={name}
-                            onChange={handleNameChange}/>
+                            onChange={(value) => setName(value)} />
 
                         <TextArea
                             type="text"
-            
                             label="Группа"
                             value={name}
-                            onChange={handleGroupChange}/>
+                            onChange={(value) => setGroups(value)}
+                        />
                         {/* <Input type="text" label="Аудитории" placeholder={''} required value={audithories} onChange={(value) => setAudithories(value)} /> */}
                         <Button lightBtn type='submit'>
                             Создать

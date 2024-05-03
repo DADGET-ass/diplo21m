@@ -3,7 +3,15 @@
     height: calc(100vh - 100px);
     background-color: var(--greenOne);
     
-
+    .full{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding:10px 0;
+        font-size: 18px;
+        color: white;
+        background-color: var(--greenTwo);
+    }
 
     .name{
         padding: 12px 20px;

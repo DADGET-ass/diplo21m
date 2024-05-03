@@ -1,9 +1,11 @@
 import { FC, useState } from 'react';
-import cls from './index.module.scss';
+
 import { Button } from '@/_views/ui/Button';
 import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
-import { IGroups } from '@/data/api/getFacultets';
+import { IGroups } from '@/data/api';
+
+import cls from './index.module.scss';
 
 interface GroupItemProps {
     group: IGroups;

@@ -1,0 +1,49 @@
+.search {
+    
+    .iconSearch {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: auto;
+        transition: .4s;
+        color: white;
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    .iconCross {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: auto;
+        transition: .4s;
+        color: white;
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    .input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        input {
+            background: none;
+            font-weight: 200;
+            color: white;
+
+        }
+
+        input::placeholder {
+            color: white;
+           
+        }
+
+    }
+}

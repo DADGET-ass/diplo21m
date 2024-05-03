@@ -1,39 +1,63 @@
 import { FC, useState } from 'react';
-import { Button } from '@/_views/ui/Button';
-import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
-import cls from './index.module.scss';
-import { IFacultets } from '../index';
-import { PopUp } from '@/_views/ui/PopUp';
-import { Input } from '@/_views/ui/Input';
-import { Form } from '@/_views/ui/Form';
-import { Courses } from '../Courses';
 import Link from 'next/link';
+
+import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
+import { IFacultets } from '@/data/api';
+
+import { Courses } from '../Courses';
+
+import cls from './index.module.scss';
+import { useRouter } from 'next/router';
 
 interface Facultets {
     facultets: IFacultets;
+    searchValue: string
 }
 
-const Facultets: FC<Facultets> = ({ facultets }) => {
+const Facultets: FC<Facultets> = ({ facultets, searchValue }) => {
+    const { push } = useRouter()
     const [isOpen, setOpen] = useState<boolean>(false);
+
+    const highlightMatch = (text: string, searchQuery: string) => {
+        const lowerText = text?.toLowerCase();
+        const lowerSearchQuery = searchQuery.toLowerCase();
+
+        if (!searchQuery || !lowerText?.includes(lowerSearchQuery)) {
+            return <span>{text}</span>;
+        }
+
+        const startIdx = lowerText.indexOf(lowerSearchQuery);
+        const endIdx = startIdx + searchQuery.length;
+
+        return (
+            <span>
+                {text.substring(0, startIdx)}
+                <span className={cls.highlight}>{text.substring(startIdx, endIdx)}</span>
+                {text.substring(endIdx)}
+            </span>
+        );
+    };
 
     const facultItem = (
         <>
             <div className={cls.facultsBlock} key={facultets._id} >
                 <div className={cls.facultContent}>
-                        <div className={cls.name}>
-                        <Link href={`/facultets/${facultets._id}`}>
-                            {facultets.name}
-                        </Link>
-                        </div>
+                    <div
+                        className={cls.name}
+                        onClick={() => push(`/facultets/${facultets._id}`)}
+                    >
+                        {highlightMatch(facultets.name, searchValue)}
+                    </div>
                     <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                         <ArrowIcon />
                     </div>
                 </div>
 
             </div>
-            {isOpen && facultets.courses.map((course) => (
-                <Courses courses={course} key={course._id} />
-            ))}
+            {(isOpen || searchValue) && facultets.courses.filter((e) => JSON.stringify([e.groups, e.name]).toLowerCase().indexOf(searchValue.toLowerCase()) > -1).map((course) => (
+                <Courses courses={course} key={course._id} searchValue={searchValue} />
+            ))
+            }
 
         </>
 

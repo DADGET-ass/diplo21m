@@ -1,4 +1,4 @@
-import { methodDefault } from "./defaultAPI";
+import { methodDefault } from "../defaultAPI";
 
 
 export interface IGroups {
@@ -16,6 +16,7 @@ export interface IFacultets {
     _id: string,
     name: string,
     courses: Array<ICourses>,
+    groups: Array<IGroups>,
 }
 
 type IResponseFacultets = {

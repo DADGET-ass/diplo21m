@@ -1,4 +1,4 @@
-import { IDiscipline, getDisciplines } from "@/data/api/getDisciplines";
+
 import { useEffect, useState } from "react";
 import { FacultsPage } from "../FacultPage/FacultsHeader";
 import { LeftSide } from "../LeftSide";

@@ -1,5 +1,5 @@
-import { getCookie } from '../../utils/cookies/getCookie';
-import { methodDefault } from './defaultAPI';
+import { getCookie } from '../../../utils/cookies/getCookie';
+import { methodDefault } from '../defaultAPI';
 
 
 export type IResponseAddFacults = {

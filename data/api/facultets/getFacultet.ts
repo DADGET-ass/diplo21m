@@ -1,5 +1,5 @@
-import { methodDefault } from "./defaultAPI";
-import { IFacultets } from "./getFacultets";
+import { IFacultets } from './getFacultets';
+import { methodDefault } from "../defaultAPI";
 
 type IResponseFacultet = {
     facultet: Array<IFacultets>;
