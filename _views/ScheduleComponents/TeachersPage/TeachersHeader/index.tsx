@@ -12,6 +12,7 @@ import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
 import { addTeacher } from '@/data/api';
+import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 
 import cls from './index.module.scss';
 
@@ -26,8 +27,9 @@ interface TeachersHeaderProps {
     setTrigger: Dispatch<SetStateAction<boolean>>,
 }
 
-const TeachersHeader:FC<TeachersHeaderProps> = ({setTrigger}) => {
+const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+    const { userRole } = useAuthStore()
     const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState<IFormData>({
         surname: '',
@@ -60,7 +62,9 @@ const TeachersHeader:FC<TeachersHeaderProps> = ({setTrigger}) => {
         <>
             <div className={cls.title}>
                 <Title>Преподаватели</Title>
-                <Button darkBtn onClick={() => setOpenPopUp(true)}>Создать</Button>
+                {userRole === UserRoleEnum.admin && (
+                    <Button darkBtn onClick={() => setOpenPopUp(true)}>Создать</Button>
+                )}
             </div>
 
             {isOpenPopUp && (

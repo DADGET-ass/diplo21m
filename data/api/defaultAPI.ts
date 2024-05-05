@@ -9,21 +9,21 @@ export type IMethodDefault = {
     path: string;
     body?: BodyInit;
     method?: "GET" | "POST" | "DELETE";
-    headers?: Record<string, string>;
+    cookie?: string,
 };
 
 export const methodDefault = ({
     path,
     body,
     method,
-    headers = {},
+    cookie,
 }: IMethodDefault): Promise<any> =>
     fetch(`${API_URL}/${path}`, {
         body,
         method,
         headers: {
-            "content-type": "application/json",
-            ...headers,
+            'content-type': 'application/json',
+            Authorization: `Bearer ${getCookie('token', cookie) || ''}`,
         },
     })
         .then(async (e) => {

@@ -4,9 +4,8 @@ import {
     useState
 } from 'react';
 
-import { Button } from '@/_views/ui/Button';
 import { InnerFacultItem } from './FacultItem';
-import { PopUp } from '@/_views/ui/PopUp';
+
 import { IFacultets, getFacultets } from '@/data/api';
 
 import cls from './index.module.scss';

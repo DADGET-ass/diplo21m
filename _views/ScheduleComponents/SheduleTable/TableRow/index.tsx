@@ -2,9 +2,10 @@ import { FC, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { ScheduleItemProps } from "..";
-import { ILection, ITeacher } from "@/data/types/interfaces";
+import { IDiscipline, ILection, ITeacher } from "@/data/types/interfaces";
 
 import cls from '../index.module.scss';
+import { IDisciplines } from "@/data/api/disciplines/getDisciplines";
 
 const DropdownInput = dynamic(
     () =>
@@ -18,18 +19,26 @@ interface TableRowProps {
     item: ScheduleItemProps;
     teachers?: ITeacher[];
     index: number;
+    // disciplines: IDiscipline[];
     lections: ILection[];
 }
 
-const TableRow: FC<TableRowProps> = ({ item, teachers, index, lections }) => {
+const TableRow: FC<TableRowProps> = ({ item, teachers, index, lections}) => {
     const [activeTeacherId, setActiveTeacherId] = useState<string>('')
     const [activeLectionId, setActiveLectionId] = useState<string>('1');
+    const [activeDisciplinesId, setactiveDisciplinesId] = useState<string>('');
 
     return (
         <div className={cls.row} key={item.id}>
             <div className={cls.item}>{index + 1}</div>
             <div className={cls.item}>
-
+                {/* {disciplines && (
+                <DropdownInput
+                    options={disciplines.map((e) => ({ item: e.disciplines.name, id: e.id }))}
+                    active={disciplines.filter(e => e.id === activeDisciplinesId)[0].disciplines.name}
+                    setSelectedOption={setactiveDisciplinesId}
+                />
+                 )} */}
             </div>
             <div className={cls.item}>
                 {teachers && (

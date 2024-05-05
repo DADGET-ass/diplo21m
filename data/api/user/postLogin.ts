@@ -1,8 +1,12 @@
 
-import { methodDefault } from "./defaultAPI";
+import { UserRoleEnum } from "@/data/store/useAuthStore";
+import { methodDefault } from "../defaultAPI";
 
 export type IResponseLogin = {
-    token?: string;
+    user?: {
+        token: string,
+        role: UserRoleEnum,
+    }
     message?: string;
 };
 
@@ -18,5 +22,5 @@ export const authUser = ({ username, password }: loginProps): Promise<IResponseL
         body: JSON.stringify({
             username,
             password
-    })
-});
+        })
+    });

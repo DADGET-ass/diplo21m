@@ -26,7 +26,7 @@ const FacultsPage = () => {
     const [groupsArray, setGroupsArray] = useState<Array<string>>([])
     const [audithoriesArray, setAudithoriesArray] = useState<Array<string>>([])
 
-    const [facultets, setFacultets] = useState<Array<IFacultets>>([])
+    const [facultets, setFacultets] = useState<Array<IFacultets>>([]);
 
 
     useEffect(() => {

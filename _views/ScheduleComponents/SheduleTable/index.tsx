@@ -2,13 +2,12 @@ import React, { useEffect, useState, FC } from 'react';
 import dynamic from 'next/dynamic';
 import { maxPars } from '@/config';
 
-import { Input } from '@/_views/ui/Input';
-import { DropdownInput } from '@/_views/ui/DropInput';
-
 import { LectionTypeEnum } from '@/data/types/enums';
 import { ILection, ITeacher } from '@/data/types/interfaces';
 
 import cls from './index.module.scss';
+import { getDisciplines, getTeachersByDiscipline } from '@/data/api';
+import { IDisciplines } from '@/data/api/disciplines/getDisciplines';
 
 export interface ScheduleItemProps {
     id: number;
@@ -46,10 +45,17 @@ const SheduleTable = () => {
             },
         ]
     )
+    const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
+    
+    // useEffect(() => {
+    //     getDisciplines().then(e =>{
+    //         setDisciplines(e.disciplines);
+    //     })
+    // },[]);
 
     // useEffect(() => {
     //     try {
-    //         getTeachersByDiscipline({ id: disciplines.filter(e => e.id === activeLectionId) }).then(response => {    
+    //         getTeachersByDiscipline({ id: disciplines.id}).then(response => {    
     //             const updatedTeachers = response.teachers?.map(teacher => ({
     //                 teacher: teacher,
     //                 id: teacher._id
@@ -59,7 +65,7 @@ const SheduleTable = () => {
     //     } catch (err) {
     //         console.error(err);
     //     }
-    // }, [activeLectionId]);
+    // }, []);
 
     const addScheduleItem = () => {
         if (scheduleItems.length > maxPars) {
@@ -98,7 +104,12 @@ const SheduleTable = () => {
             </div>
             <div className={cls.tableBody}>
                 {scheduleItems.map((item, index) => (
-                    <TableRow item={item} index={index} lections={lections} teachers={teachers} />
+                    <TableRow 
+                    item={item} 
+                    index={index} 
+                    lections={lections} 
+                    teachers={teachers} 
+                    />
                 ))}
             </div>
             <button onClick={addScheduleItem}>Добавить занятие</button>

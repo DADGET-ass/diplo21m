@@ -4,28 +4,9 @@ import { Arcticle } from '@/_views/ui/Arcticle';
 import { IAllTeachers, getTeachers } from '@/data/api';
 
 import cls from './index.module.scss';
+import { Teacher } from './TeacherItem';
 
-// interface TeachersProps {
-//     isOpenPopUp: boolean;
-// }
 
-interface TeacherProps {
-    teacher: IAllTeachers;
-}
-
-const Teacher: FC<TeacherProps> = ({ teacher }) => {
-
-    return (
-        <>
-            <div style={{ textTransform: 'uppercase' }}>Личный идентификатор: №{teacher._id.slice(0, 8)}</div>
-            <div>Фамилия: {teacher.surname}</div>
-            <div>Имя: {teacher.name}</div>
-            <div>Отчество: {teacher.patronymic}</div>
-            <div>Всего часов: {teacher.aH}</div>
-            <div>Отработано часов: {teacher.hH || '0'}</div>
-        </>
-    )
-}
 
 const TeachersPage = () => {
     const [teachers, setTeachers] = useState<IAllTeachers[]>([]);

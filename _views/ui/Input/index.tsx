@@ -102,7 +102,7 @@ const Input: FC<InputProps> = ({
 
     useEffect(() => {
         setCurrentValue(value || "");
-        if (value?.length == 0) {
+        if (autoFocus && value?.length == 0) {
             setError((prevState) => ({
                 ...prevState,
                 state: true,
