@@ -6,7 +6,7 @@ import { LectionTypeEnum } from '@/data/types/enums';
 import { ILection, ITeacher } from '@/data/types/interfaces';
 
 import cls from './index.module.scss';
-import { getDisciplines, getTeachersByDiscipline } from '@/data/api';
+import { ITeachers, getDisciplines, getTeachersByDiscipline } from '@/data/api';
 import { IDisciplines } from '@/data/api/disciplines/getDisciplines';
 
 export interface ScheduleItemProps {
@@ -27,7 +27,14 @@ const TableRow = dynamic(
 
 const SheduleTable = () => {
     const [scheduleItems, setScheduleItems] = useState<ScheduleItemProps[]>([]);
-    const [teachers, setTeachers] = useState<Array<ITeacher>>()
+    const [teachers, setTeachers] = useState<Array<ITeachers>>();
+    const [activeFormDatas, setActiveFormDatas] = useState<{
+        activeDiscipline: string,
+        activeTeacher: string,
+    }>({
+        activeDiscipline: '',
+        activeTeacher: '',
+    });
 
     const [lections, setLections] = useState<Array<ILection>>(
         [
@@ -46,26 +53,22 @@ const SheduleTable = () => {
         ]
     )
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
-    
-    // useEffect(() => {
-    //     getDisciplines().then(e =>{
-    //         setDisciplines(e.disciplines);
-    //     })
-    // },[]);
 
-    // useEffect(() => {
-    //     try {
-    //         getTeachersByDiscipline({ id: disciplines.id}).then(response => {    
-    //             const updatedTeachers = response.teachers?.map(teacher => ({
-    //                 teacher: teacher,
-    //                 id: teacher._id
-    //             }));
-    //             setTeachers(updatedTeachers);
-    //         });
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }, []);
+    useEffect(() => {
+        getDisciplines().then(e => {
+            setDisciplines(e.disciplines);
+        })
+    }, []);
+
+    useEffect(() => {
+        try {
+            getTeachersByDiscipline({ id: disciplines.filter((e) => e.name === activeFormDatas.activeDiscipline)[0].id }).then(response => {
+                setTeachers(response.teachers);
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }, [activeFormDatas.activeDiscipline]);
 
     const addScheduleItem = () => {
         if (scheduleItems.length > maxPars) {
@@ -104,11 +107,15 @@ const SheduleTable = () => {
             </div>
             <div className={cls.tableBody}>
                 {scheduleItems.map((item, index) => (
-                    <TableRow 
-                    item={item} 
-                    index={index} 
-                    lections={lections} 
-                    teachers={teachers} 
+                    <TableRow
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        lections={lections}
+                        teachers={teachers}
+                        disciplines={disciplines}
+                        activeFormDatas={activeFormDatas}
+                        setActiveFormDatas={setActiveFormDatas}
                     />
                 ))}
             </div>

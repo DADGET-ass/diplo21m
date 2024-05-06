@@ -1,54 +1,61 @@
-import { ArrowIcon } from '../svg_dynamic/base.svg';
-import cls from './index.module.scss';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, FC } from 'react';
 
+import { Input } from '../Input';
+import { ArrowIcon } from '../svg_dynamic/base.svg';
+
+import cls from './index.module.scss';
 
 interface DropdownInputProps {
-    options: Array<{
-        item: string,
-        id: string
-    }>;
-    active: string;
-    setSelectedOption: Dispatch<SetStateAction<string>>
+    list: string[];
+    value: string;
+    setActiveValue: (value: string) => void;
 }
 
-const DropdownInput: React.FC<DropdownInputProps> = ({ options,
-    active,
-    setSelectedOption }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) => {
+    const [focus, setFocus] = useState<boolean>(false);
 
-    const handleToggle = () => {
-        setIsOpen(!isOpen);
-    };
+    const highlightMatch = (text: string, searchQuery: string) => {
+        const lowerText = text?.toLowerCase();
+        const lowerSearchQuery = searchQuery.toLowerCase();
 
-    const handleOptionClick = (option: string) => {
-        setSelectedOption(option);
-        setIsOpen(false);
+        if (!searchQuery || !lowerText?.includes(lowerSearchQuery)) {
+            return <span>{text}</span>;
+        }
+
+        const startIdx = lowerText.indexOf(lowerSearchQuery);
+        const endIdx = startIdx + searchQuery.length;
+
+        return (
+            <span>
+                {text.substring(0, startIdx)}
+                <span className={cls.highlight}>{text.substring(startIdx, endIdx)}</span>
+                {text.substring(endIdx)}
+            </span>
+        );
     };
 
     const dropDownInput = (
         <div className={cls.dropdown}>
-            <p>{active}</p>
-            <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={handleToggle}>
-                <ArrowIcon />
+            <div className={cls.input}>
+                <Input
+                    type='text'
+                    value={value}
+                    onChange={(currentValue) => setActiveValue(currentValue)}
+                    onFocus={() => setFocus(true)}
+                    onBlur={() => setFocus(false)}
+                />
             </div>
-            {isOpen && (
-                <div className={cls.options}>
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            className={cls.option}
-                            onClick={() => handleOptionClick(option.id)}
-                        >
-                            {option.item}
-                        </div>
+            {list.filter((e) => e.toLowerCase().includes(value.toLowerCase())).length > 0 && (
+                <div className={cls.drop} data-focus={setFocus}>
+                    {list.filter((e) => e.toLowerCase().includes(value.toLowerCase())).map((item, index) => (
+                        <p key={index} onClick={() => setActiveValue(item)}>{highlightMatch(item, value)}</p>
                     ))}
                 </div>
             )}
         </div>
     )
 
-    return options ? dropDownInput : null;
+    return dropDownInput;
 };
 
 export { DropdownInput }

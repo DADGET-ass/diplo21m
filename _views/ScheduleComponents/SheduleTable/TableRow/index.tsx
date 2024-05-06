@@ -1,11 +1,12 @@
-import { FC, useState } from "react";
+import { FC, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 
 import { ScheduleItemProps } from "..";
-import { IDiscipline, ILection, ITeacher } from "@/data/types/interfaces";
+import { ILection } from "@/data/types/interfaces";
 
 import cls from '../index.module.scss';
 import { IDisciplines } from "@/data/api/disciplines/getDisciplines";
+import { ITeachers } from "@/data/api";
 
 const DropdownInput = dynamic(
     () =>
@@ -17,45 +18,56 @@ const DropdownInput = dynamic(
 
 interface TableRowProps {
     item: ScheduleItemProps;
-    teachers?: ITeacher[];
+    teachers?: ITeachers[];
     index: number;
-    // disciplines: IDiscipline[];
+    disciplines: IDisciplines[];
     lections: ILection[];
+    activeFormDatas: {
+        activeDiscipline: string,
+        activeTeacher: string,
+    },
+    setActiveFormDatas: Dispatch<SetStateAction<{
+        activeDiscipline: string,
+        activeTeacher: string,
+    }>>
 }
 
-const TableRow: FC<TableRowProps> = ({ item, teachers, index, lections}) => {
-    const [activeTeacherId, setActiveTeacherId] = useState<string>('')
-    const [activeLectionId, setActiveLectionId] = useState<string>('1');
-    const [activeDisciplinesId, setactiveDisciplinesId] = useState<string>('');
-
+const TableRow: FC<TableRowProps> = ({ item,
+    teachers,
+    index,
+    lections,
+    disciplines,
+    activeFormDatas,
+    setActiveFormDatas
+}) => {
     return (
         <div className={cls.row} key={item.id}>
             <div className={cls.item}>{index + 1}</div>
             <div className={cls.item}>
-                {/* {disciplines && (
-                <DropdownInput
-                    options={disciplines.map((e) => ({ item: e.disciplines.name, id: e.id }))}
-                    active={disciplines.filter(e => e.id === activeDisciplinesId)[0].disciplines.name}
-                    setSelectedOption={setactiveDisciplinesId}
-                />
-                 )} */}
-            </div>
-            <div className={cls.item}>
-                {teachers && (
+                {disciplines && (
                     <DropdownInput
-                        options={teachers.map((e) => ({ item: e.teacher.surname, id: e.id }))}
-                        active={teachers.filter(e => e.id === activeTeacherId)[0].teacher.surname}
-                        setSelectedOption={setActiveTeacherId}
+                        list={disciplines.map(e => e.name)}
+                        value={activeFormDatas.activeDiscipline}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeDiscipline: newValue }))}
                     />
                 )}
             </div>
             <div className={cls.item}>
+                {teachers && (
+                    <DropdownInput
+                        list={teachers.map(e => `${e.surname} ${e.name || ''} ${e.patronymic || ''}`)}
+                        value={activeFormDatas.activeTeacher}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeTeacher: newValue }))}
+                    />
+                )}
+            </div>
+            {/* <div className={cls.item}>
                 <DropdownInput
                     options={lections.map((e) => ({ item: e.lection, id: e.id }))}
                     active={lections.filter(e => e.id === activeLectionId)[0].lection}
                     setSelectedOption={setActiveLectionId}
                 />
-            </div>
+            </div> */}
             <div className={cls.item}>{item.room}</div>
         </div>
     )

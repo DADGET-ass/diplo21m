@@ -2,7 +2,7 @@ import { methodDefault } from "../defaultAPI";
 
 
 export interface IDisciplines {
-    _id: string,
+    id: string,
     name: string,
 }
 

@@ -28,6 +28,8 @@ interface InputProps {
     isValid?: (result: boolean) => void;
     value?: string;
     disabled?: boolean;
+    onFocus?: () => void;
+    onBlur?: () => void;
 }
 
 const formatDefault = (text: string) => text;
@@ -74,7 +76,9 @@ const Input: FC<InputProps> = ({
     value,
     disabled,
     onChange,
-    isValid
+    isValid,
+    onFocus,
+    onBlur,
 }) => {
     const [error, setError] = useState<{
         state: boolean,
@@ -134,18 +138,10 @@ const Input: FC<InputProps> = ({
                     }}
                     disabled={disabled}
                     onFocus={() => {
-                        setError((prevState) => ({
-                            ...prevState,
-                            state: false,
-                            value: ''
-                        }))
+                        onFocus && onFocus();
                     }}
                     onBlur={() => {
-                        currentValue.length < 1 && required && setError((prevState) => ({
-                            ...prevState,
-                            state: true,
-                            value: 'Поле обязательно'
-                        }))
+                        onBlur && onBlur();
                     }}
                 />
                 {type === 'password' && currentValue.length > 0 && (
