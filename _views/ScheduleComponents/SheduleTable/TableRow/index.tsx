@@ -31,7 +31,6 @@ interface TableRowProps {
         activeTeacher: string,
     }>>
 }
-
 const TableRow: FC<TableRowProps> = ({ item,
     teachers,
     index,

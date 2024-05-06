@@ -20,7 +20,7 @@ const DisciplinesPage = () =>{
             {disciplines && disciplines.length ? (
                 <div className={cls.content}>
                     {disciplines?.map((e) => (
-                        <Disciplines disciplins={e} key={e._id} />
+                        <Disciplines disciplins={e} key={e.id} />
                     ))}
                 </div>
             ) : (
