@@ -3,6 +3,7 @@ import { FacultsPart } from './FacultPart';
 import { Partition } from './Partition';
 import cls from './index.module.scss';
 import { useRouter } from 'next/router';
+import { TeachersPart } from './TeachersPart';
 
 
 
@@ -24,7 +25,7 @@ const LeftSide = () => {
                 </div>
                 <div onClick={() => push('teachers')}>
                     <Partition title='Преподаватели'>
-                        <></>
+                        <TeachersPart/>
                     </Partition>
                 </div>
                 <div onClick={() => push('disciplines')}>

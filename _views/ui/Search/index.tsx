@@ -17,6 +17,10 @@ interface SearchProps {
 
 const Search: FC<SearchProps> = ({ setSearchValue, searchValue }) => {
 
+    const handleClearInput = () => {
+        setSearchValue('');
+      };
+
     const searching = (
         <div className={cls.search}>
             <div className={cls.input}>
@@ -30,7 +34,7 @@ const Search: FC<SearchProps> = ({ setSearchValue, searchValue }) => {
                     onChange={(value) => setSearchValue(value)}
                 />
                 <div className={cls.iconCross}>
-                    <CloseIcon />
+                    <button onClick={handleClearInput}><CloseIcon /></button>
                 </div>
             </div>
         </div>

@@ -48,13 +48,16 @@
             background-color: #A1A1A1;
         }
 
+        &:focus {
+            border-bottom: 1px solid white;
+        }
+
         &[data-error=true] {
             border: 1px solid red;
         }
 
-        &:focus {
-            border: 1px solid blue;
-        }
+      
+        
     }
 
     .eye {

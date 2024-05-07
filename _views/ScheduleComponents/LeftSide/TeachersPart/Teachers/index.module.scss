@@ -1,21 +1,12 @@
-.partitionBlock {
+.teachersContent{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--greenThird);
-    
-
-    .part{
-        display: flex;
-        padding: 12px 20px;
-    }
-    .name {
-        font-size: 20px;
+    background-color: var(--greenTwo);
+    border-bottom: 1px solid white;
+    padding: 12px 20px;
+    .name{
         color: white;
+        font-size: 20px;
         cursor: pointer;
-        // &:hover{
-        //     color: var(--lightGrey);
-        // }
     }
 
     .arrow {
@@ -32,4 +23,8 @@
         transform: rotate(180deg);
         transition: .4s;
     }
+}
+
+.highlight {
+    background-color: rgba($color: yellow, $alpha: .3);
 }
