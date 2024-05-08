@@ -1,16 +1,16 @@
 
 import { useEffect, useState } from 'react';
 import cls from './index.module.scss';
-import { ITeachers, getTeachers } from '@/data/api';
+import { IAllTeachers, getTeachers } from '@/data/api';
 import { Search } from '@/_views/ui/Search';
 import { TeacherItem } from './Teachers';
 
 const TeachersPart = () => {
-    const [teachers, setTeachers] = useState<Array<ITeachers>>([]);
+    const [teachers, setTeachers] = useState<Array<IAllTeachers>>([]);
     const [searchValue, setSearchValue] = useState<string>('')
 
     useEffect(() => {
-        getTeachers().then(e => {
+        getTeachers({id:''}).then(e => {
             setTeachers(e.teachers);
         });
     }, []);
@@ -24,7 +24,7 @@ const TeachersPart = () => {
                 />
 
                 {teachers.filter((e) => JSON.stringify(e).toLowerCase().indexOf(searchValue.toLocaleLowerCase()) > -1).map((teachers) => (
-                    <TeacherItem teachers={teachers} key={teachers._id} searchValue={searchValue} />
+                    <TeacherItem teachers={teachers} key={teachers.id} searchValue={searchValue} />
                 ))}
             </div>
         </>

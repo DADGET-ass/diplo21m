@@ -18,21 +18,20 @@ const LeftSide = () => {
             </Link>
             <div className={cls.name}>Расписание</div>
             <div className={cls.menu}>
-                <div onClick={() => push('facultets')}>
-                    <Partition title='Факультеты'>
-                        <FacultsPart />
-                    </Partition>
-                </div>
-                <div onClick={() => push('teachers')}>
+                <Link href={'facultets'} />
+                <Partition title='Факультеты'>
+                    <FacultsPart />
+                </Partition>
+
+                <Link href={'teachers'} />
                     <Partition title='Преподаватели'>
-                        <TeachersPart/>
+                        <TeachersPart />
                     </Partition>
-                </div>
-                <div onClick={() => push('disciplines')}>
+
+                <Link href={'disciplines'} />
                     <Partition title='Дисциплины'>
                         <></>
                     </Partition>
-                </div>
 
 
             </div>

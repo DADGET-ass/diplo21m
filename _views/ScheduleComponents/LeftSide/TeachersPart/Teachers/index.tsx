@@ -46,11 +46,11 @@ const TeacherItem: FC<Teachers> = ({ teachers, searchValue }) => {
 
 
     const teacherItem = (
-        <div className={cls.teachersBlock} key={teachers._id} >
+        <div className={cls.teachersBlock} key={teachers.id} >
             <div className={cls.teachersContent}>
                 <div
                     className={cls.name}
-                    // onClick={() => push(`/teachers/${teachers._id}`)}
+                    onClick={(e) => {e.stopPropagation; push(`/teachers/${teachers.id}`)}}
                 >
                     {highlightMatch(`${teachers.surname} ${formatInitials(teachers.name, teachers.patronymic)}`, searchValue)}
                 </div>

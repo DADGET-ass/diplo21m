@@ -1,10 +1,16 @@
-.teachersBlock{
+.teachersBlock {
     background-color: var(--lightGrey);
     margin-bottom: 10px;
     padding: 15px;
     border: 1px solid black;
 
-    .ident{
+    .ident {
         margin-bottom: 5px;
     }
+}
+
+.row {
+    display: flex;
+    gap: 5px;
+
 }

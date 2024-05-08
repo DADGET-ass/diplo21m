@@ -13,7 +13,7 @@ const TeachersPage = () => {
     const [trigger, setTrigger] = useState<boolean>(false);
 
     useEffect(() => {
-        getTeachers().then(e => {
+        getTeachers({id:''}).then(e => {
             setTeachers(e.teachers);
         })
     }, [trigger]);
@@ -24,7 +24,7 @@ const TeachersPage = () => {
             {teachers && teachers.length ? (
                 <div className={cls.content}>
                     {teachers?.map((e) => (
-                        <Teacher teacher={e} key={e._id} />
+                        <Teacher teacher={e} key={e.id} />
                     ))}
                 </div>
             ) : (
