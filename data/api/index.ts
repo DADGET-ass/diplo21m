@@ -1,3 +1,7 @@
+import { addIAudith } from './audithories/addAudithories';
+import { getIAudith } from '@/data/api/audithories/getAudithories';
+import { addTypes } from './disciplines/types/addTypes';
+import { getTypes } from './disciplines/types/getTypes';
 import { registrUser } from './user/postRegistration';
 import { getDisciplines } from './disciplines/getDisciplines';
 import { getFacultets } from './facultets/getFacultets';
@@ -28,6 +32,10 @@ export {
     getDisciplines,
     check,
     registrUser,
+    getTypes,
+    addTypes,
+    getIAudith,
+    addIAudith,
 }
 
 export type {

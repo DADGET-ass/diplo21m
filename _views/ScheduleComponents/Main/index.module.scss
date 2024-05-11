@@ -1,4 +1,37 @@
 .main {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     gap: 10px;
+
+    .textBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border: 4px solid var(--greenThird);
+        border-radius: 10px;
+
+        .text {
+            position: relative;
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--greenThird);
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 3px;
+                left: 50%;
+                bottom: -5px;
+                transform: translateX(-50%);
+                border-radius: 2px;
+                background-color: var(--greenThird);
+            }
+        }
+
+    }
+
 }

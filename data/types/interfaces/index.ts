@@ -1,9 +1,9 @@
 import { IDiscipline } from './IDiscipline';
-import { ILection } from './ILection';
+import { ITypes } from './ILection';
 import { ITeacher } from './ITeacher';
 
 export type {
     ITeacher,
-    ILection,
+    ITypes,
     IDiscipline,
 }

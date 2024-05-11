@@ -1,18 +1,22 @@
 import { FC, ReactNode, useState } from 'react';
-import cls from './index.module.scss';
+import Link from 'next/link';
+
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import { Facults } from '../../FacultPage';
-
 import { FacultsPart } from '../FacultPart';
-import Link from 'next/link';
+
+import cls from './index.module.scss';
+import { LeftMenuEnum } from '..';
+
 
 
 interface PartitionProps {
     title: string;
     children: ReactNode;
+    type: LeftMenuEnum
 }
 
-const Partition: FC<PartitionProps> = ({ title, children }) => {
+const Partition: FC<PartitionProps> = ({ title, children, type }) => {
 
     const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -20,9 +24,9 @@ const Partition: FC<PartitionProps> = ({ title, children }) => {
         <div className={cls.partitionBlock}>
             <div className={cls.part}>
 
-                <div className={cls.name}>
+                <Link className={cls.name} href={`/${type}`}>
                     {title}
-                </div>
+                </Link>
 
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev) }}>
                     <ArrowIcon />

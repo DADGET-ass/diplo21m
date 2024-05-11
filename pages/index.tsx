@@ -8,7 +8,7 @@ import { Layout } from '@/_views/ui/Layout'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  
+
   return (
     <>
       <Head>
@@ -17,12 +17,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-       <Layout>
-       <_Main />
-       </Layout>
-        
-      </main>
+
+      <Layout>
+        <_Main />
+      </Layout>
+
+
     </>
   )
 }

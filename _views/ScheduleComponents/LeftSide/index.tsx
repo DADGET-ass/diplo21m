@@ -5,33 +5,37 @@ import cls from './index.module.scss';
 import { useRouter } from 'next/router';
 import { TeachersPart } from './TeachersPart';
 
-
+export enum LeftMenuEnum {
+    facult = 'facultets',
+    teachers = 'teachers',
+    disciplines = 'disciplines'
+}
 
 const LeftSide = () => {
     const { push } = useRouter
+
+
         ()
 
     return (
         <div className={cls.leftSide}>
-            <Link href="/fullShedule">
-                <div className={cls.full}>Полное расписание</div>
-            </Link>
+
+
+            <div className={cls.full} onClick={() => push(`/fullShedule`)}>Полное расписание</div>
+
             <div className={cls.name}>Расписание</div>
             <div className={cls.menu}>
-                <Link href={'facultets'} />
-                <Partition title='Факультеты'>
+                <Partition title='Факультеты' type={LeftMenuEnum.facult}>
                     <FacultsPart />
                 </Partition>
 
-                <Link href={'teachers'} />
-                    <Partition title='Преподаватели'>
-                        <TeachersPart />
-                    </Partition>
+                <Partition title='Преподаватели' type={LeftMenuEnum.teachers}>
+                    <TeachersPart />
+                </Partition>
 
-                <Link href={'disciplines'} />
-                    <Partition title='Дисциплины'>
-                        <></>
-                    </Partition>
+                <Partition title='Дисциплины' type={LeftMenuEnum.disciplines}>
+                    <></>
+                </Partition>
 
 
             </div>

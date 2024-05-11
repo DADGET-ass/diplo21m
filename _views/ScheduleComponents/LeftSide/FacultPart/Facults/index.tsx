@@ -42,12 +42,12 @@ const Facultets: FC<Facultets> = ({ facultets, searchValue }) => {
         <>
             <div className={cls.facultsBlock} key={facultets._id} >
                 <div className={cls.facultContent}>
-                    <div
+                    <Link
                         className={cls.name}
-                        onClick={() => push(`/facultets/${facultets._id}`)}
+                        href={`/facultets/${facultets._id}`}
                     >
                         {highlightMatch(facultets.name, searchValue)}
-                    </div>
+                    </Link>
                     <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                         <ArrowIcon />
                     </div>

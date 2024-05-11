@@ -3,10 +3,14 @@
     background-color: var(--greenTwo);
     border-bottom: 1px solid white;
     padding: 12px 20px;
+    &:hover {
+        background-color: var(--greenOne)
+    }
     .name{
         color: white;
         font-size: 20px;
         cursor: pointer;
+       
     }
 
     .arrow {

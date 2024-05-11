@@ -1,8 +1,35 @@
 .headerLine {
     position: relative;
+    display: flex;
+    align-items: center;
+
     height: 100px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
     background-color: var(--greenOne);
+
+    .title {
+
+        padding-left: 20px;
+
+        .name {
+            color: white;
+            font-size: 60px;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 4px;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+                border-radius: 2px;
+                background-color: white;
+            }
+        }
+
+    }
 
     .icon {
         position: absolute;

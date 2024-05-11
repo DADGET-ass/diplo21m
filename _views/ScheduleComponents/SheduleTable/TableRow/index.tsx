@@ -2,11 +2,12 @@ import { FC, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 
 import { ScheduleItemProps } from "..";
-import { ILection } from "@/data/types/interfaces";
 
 import cls from '../index.module.scss';
 import { IDisciplines } from "@/data/api/disciplines/getDisciplines";
 import { ITeachers } from "@/data/api";
+import { ITypes } from "@/data/api/disciplines/types/getTypes";
+import { IAudith } from "@/data/api/audithories/getAudithories";
 
 const DropdownInput = dynamic(
     () =>
@@ -21,21 +22,27 @@ interface TableRowProps {
     teachers?: ITeachers[];
     index: number;
     disciplines: IDisciplines[];
-    lections: ILection[];
+    audithories: IAudith[];
+    types: ITypes[];
     activeFormDatas: {
         activeDiscipline: string,
         activeTeacher: string,
+        activeTypes: string,
+        activeAudithories: string,
     },
     setActiveFormDatas: Dispatch<SetStateAction<{
         activeDiscipline: string,
         activeTeacher: string,
+        activeTypes: string,
+        activeAudithories: string,
     }>>
 }
 const TableRow: FC<TableRowProps> = ({ item,
     teachers,
     index,
-    lections,
+    types,
     disciplines,
+    audithories,
     activeFormDatas,
     setActiveFormDatas
 }) => {
@@ -60,14 +67,28 @@ const TableRow: FC<TableRowProps> = ({ item,
                     />
                 )}
             </div>
-            {/* <div className={cls.item}>
-                <DropdownInput
-                    options={lections.map((e) => ({ item: e.lection, id: e.id }))}
-                    active={lections.filter(e => e.id === activeLectionId)[0].lection}
-                    setSelectedOption={setActiveLectionId}
-                />
-            </div> */}
-            <div className={cls.item}>{item.room}</div>
+            <div className={cls.item}>
+                {types && (
+                    <DropdownInput
+                        list={types.map(e => e.name)}
+                        value={activeFormDatas.activeTypes}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeTypes: newValue }))}
+                        
+                    />
+                    
+                )}
+                
+            </div>
+            <div className={cls.item}>
+            {audithories && (
+                    <DropdownInput
+                        list={audithories.map(e => e.name)}
+                        value={activeFormDatas.activeAudithories}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeAudithories: newValue }))}
+                        
+                    />
+                    
+                )}</div>
         </div>
     )
 }

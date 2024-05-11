@@ -2,23 +2,30 @@
     width: 20vw;
     height: calc(100vh - 100px);
     background-color: var(--greenOne);
-    
-    .full{
+
+    .full {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding:10px 0;
+        padding: 10px 0;
         font-size: 18px;
         color: white;
         background-color: var(--greenTwo);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--greenOne)
+        }
+
+
     }
 
-    .name{
+    .name {
         padding: 12px 20px;
         font-size: 32px;
         color: white;
         background-color: var(--greenThird);
-        border-bottom:3px solid white;
+        border-bottom: 3px solid white;
     }
 
 }

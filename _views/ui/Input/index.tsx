@@ -34,6 +34,7 @@ interface InputProps {
 
 const formatDefault = (text: string) => text;
 
+
 const typeInput = {
     phoneNumber: {
         type: "phone",
@@ -64,7 +65,8 @@ const typeInput = {
         type: "number",
         format: formatDefault,
         valid: validationDefault,
-    }
+    },
+  
 };
 
 const Input: FC<InputProps> = ({
@@ -92,6 +94,7 @@ const Input: FC<InputProps> = ({
     const inputRef = useRef<HTMLInputElement>(null);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<string>(value || "");
+    const [checked, setChecked] = useState<Boolean>(false);
     const TypeInput = typeInput[type];
 
     useEffect(() => {
@@ -124,6 +127,7 @@ const Input: FC<InputProps> = ({
                 <label htmlFor={inputId} data-disabled={disabled}>{label}</label>
             )}
             <div className={cls.input}>
+
                 <input
                     id={inputId}
                     autoFocus={autoFocus}
@@ -144,6 +148,9 @@ const Input: FC<InputProps> = ({
                         onBlur && onBlur();
                     }}
                 />
+          
+
+
                 {type === 'password' && currentValue.length > 0 && (
                     <div className={cls.eye} onMouseDown={() => setShowPassword(true)} onMouseUp={() => setShowPassword(false)} onMouseLeave={() => setShowPassword(false)}>
                         {!showPassword ? <EyeCloseIcon /> : <EyeIcon />}

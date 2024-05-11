@@ -6,6 +6,13 @@ import { SheduleTable } from '../SheduleTable';
 
 import cls from './index.module.scss';
 import { ICourses, IFacultets, IGroups, getFacultets } from '@/data/api';
+import { Title } from '@/_views/ui/Title/Index';
+import { Calendar } from '@/_views/ui/Calendar';
+import { useDateStore } from '@/data/store/useDateStore';
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
+import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+import { SpectateShedule } from '../SpectateShedule';
+
 
 interface CoursesProps {
     course: ICourses;
@@ -16,6 +23,7 @@ const Courses: FC<CoursesProps> = ({ course }) => {
 
     return (
         <>
+
             <div className={cls.group}>
                 <div className={cls.facultsBlock}>
                     <div className={cls.name}>
@@ -39,6 +47,8 @@ interface GroupsProps {
 
 const Group: FC<GroupsProps> = ({ group }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
+    const { mode } = useTabsStore();
+    const { userRole } = useAuthStore();
 
     return (
         <>
@@ -54,7 +64,11 @@ const Group: FC<GroupsProps> = ({ group }) => {
             </div>
             {isOpen && (
                 <div className={cls.table}>
-                    <SheduleTable />
+                    {userRole === UserRoleEnum.admin && mode === ModeEnum.edit ? (
+                        <SheduleTable />
+                    ) : (
+                        <SpectateShedule />
+                    )}
                 </div>
 
             )}
@@ -89,9 +103,8 @@ const Facult: FC<FacultProps> = ({ facult }) => {
 }
 
 const FullShedule = () => {
-
+    const { selectedDate } = useDateStore()
     const [facultets, setFacultets] = useState<Array<IFacultets>>([]);
-
 
     useEffect(() => {
         getFacultets().then(e => {
@@ -102,6 +115,12 @@ const FullShedule = () => {
     return (
         <>
             <Arcticle>
+
+                <div className={cls.title}>
+                    <Title>Расписание</Title>
+                    <Calendar />
+                </div>
+
                 {facultets.map((facult) => (
                     <Facult facult={facult} key={facult._id} />
                 ))}

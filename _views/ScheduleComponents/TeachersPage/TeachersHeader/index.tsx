@@ -15,6 +15,7 @@ import { addTeacher } from '@/data/api';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 
 import cls from './index.module.scss';
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 interface IFormData {
     surname: string,
@@ -30,6 +31,7 @@ interface TeachersHeaderProps {
 const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
     const { userRole } = useAuthStore()
+    const { mode } = useTabsStore()
     const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState<IFormData>({
         surname: '',
@@ -56,13 +58,13 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
         })
     }
 
-
+    console.warn(mode)
 
     return (
         <>
             <div className={cls.title}>
                 <Title>Преподаватели</Title>
-                {userRole === UserRoleEnum.admin && (
+                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit &&(
                     <Button darkBtn onClick={() => setOpenPopUp(true)}>Создать</Button>
                 )}
             </div>

@@ -8,14 +8,15 @@
     .part{
         display: flex;
         padding: 12px 20px;
+        &:hover {
+            background-color: var(--greenTwo)
+        }
     }
     .name {
         font-size: 20px;
         color: white;
         cursor: pointer;
-        // &:hover{
-        //     color: var(--lightGrey);
-        // }
+       
     }
 
     .arrow {

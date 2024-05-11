@@ -1,13 +1,15 @@
 .teachersContent{
+    color: white;
+        font-size: 20px;
+        cursor: pointer;
     display: flex;
     background-color: var(--greenTwo);
     border-bottom: 1px solid white;
     padding: 12px 20px;
-    .name{
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
+    &:hover {
+        background-color: var(--greenOne)
     }
+
 
     .arrow {
         margin-left: auto;
