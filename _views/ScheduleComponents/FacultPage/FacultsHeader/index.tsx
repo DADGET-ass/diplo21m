@@ -14,6 +14,10 @@ import { addFacults } from '@/data/api';
 import { IFacultets, getFacultets } from '@/data/api';
 import { TextArea } from '@/_views/ui/textArea';
 
+
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
+import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+
 import cls from './index.module.scss';
 
 const FacultsPage = () => {
@@ -28,7 +32,8 @@ const FacultsPage = () => {
 
     const [facultets, setFacultets] = useState<Array<IFacultets>>([]);
 
-
+    const { userRole } = useAuthStore()
+    const { mode } = useTabsStore()
     useEffect(() => {
         getFacultets().then(e => {
             setFacultets(e.facultets)
@@ -73,7 +78,10 @@ const FacultsPage = () => {
         <Arcticle >
             <div className={cls.title}>
                 <Title>Факультеты</Title>
-                <Button darkBtn onClick={() => setOpenPopUp(true)}>Создать</Button>
+                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                    <Button darkBtn onClick={() => setOpenPopUp(true)}>Создать</Button>
+                )}
+
             </div>
             <Facults isOpenPopUp={isOpenPopUp} facultets={facultets} />
             {isOpenPopUp && (

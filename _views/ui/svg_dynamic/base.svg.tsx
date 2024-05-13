@@ -46,3 +46,31 @@ export const ArrowDownIcon = () => (
         <path fillRule="evenodd" clipRule="evenodd" d="M0.705953 1.82834C0.333233 1.5047 0.333293 0.926072 0.706079 0.602513C1.01136 0.33755 1.46508 0.337608 1.77028 0.602651L6.00131 4.27688L10.2306 0.602856C10.5357 0.337732 10.9895 0.337711 11.2948 0.602808C11.6672 0.926276 11.6672 1.50446 11.2948 1.82795L6.00131 6.42634L0.705953 1.82834Z" fill="currentColor" />
     </svg>
 )
+
+export const LogIn = () => (
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="42" height="42" fill="url(#pattern0_323_20)" />
+        <defs>
+            <pattern id="pattern0_323_20" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use href="#image0_323_20" transform="scale(0.015625)" />
+            </pattern>
+            <image id="image0_323_20" width="64" height="64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOpSURBVHic7dpLrF1THMfxT+vWq7m0Fa56DYi4VyRUg5pJkHjVK21aYYghJhoRA6/QiVxpTBg1BhIi5NZIEAkiEQYI2oRJuRqakqq36jkGK0fuWXvfntda+9yTs7/JGuzB/v3//7XWXuu//mtTU1Mzziyr0NYUbsZ1OBenYxX2Yx5fYg7v4K8K/crONF7DETS7aIfwOCaH4WxKVmAWh3UXeNx+xKbKvU7EGmEq9xP4wtbAdiyv1v3BmMTnygP6GNuwXlgDjsc5uFaYLfsWeW+20ggGYDl2KQbwjbAAduJEPIw/SzTuzuBvcu5XdPwtrO5R53LF2fA3zk/maQZOxgHtTn+I4/rUm8HBSO+Vwd3Mx6Panf1Z+M4HYWuk2cC6ATWzsUe7sw8m0v0g0t2eSDcp09qd/AMrE2nfHmnvSaSblHu1O7krofZKxV3htFTiqRKMM6PnTxLpwu/Y3cFe36TqgLXR875Eui2+j56XXAfEpD5lxnrNVMKpOiAe8TMS6baIRzzZDMvVAesT6RIWwQs62Bs6M8Z8G2TMEyF4TDEVnhpQc0uk2cClA2pmI/VhaNqIHYbgAcXj8Jt6Pw5fJuz9I3UcJuwqbyh2wtfY2MX7J+Ah5QWRezL4m4WT8IXy0tZHwuK4DqdiQtjjr8YziqPeajsqjSABpxjjomiLFXhW/2Xx/dhcudcZmMHrur8Y+RVPCJ9Sdqq8GlsrLITX4zyhXLZauACZF9aNObwtLII1NTU1S55J4bi6A+8Kicwvetvu9gr/DIwUF+NFoWA5aLLTxLfVut8/ZwknsoY0gY9UB2zV+/Tups0LucHRuFJIiW9MGVC3LMPTFg/gB7wgrAWXCAlOytx9i/Z0uvJOeE554Ltxm7wHlTj4pjAYlfGIYuD/CIWPicy2y4I/jCsy2/2faxQPMAdwVQW2NysG/y/urMA2Qkl7b+TAIVxUge2hBw9PRg4cwU0V2F0Swa9SrMZW8ZfWrfovnnRqn+HCbh25L3r5oFDiys138gTfanNlRsu2sHi6zeKnvsMaMdYorvzxxWQucn0CDXwqlOY6sjF6+asUkfXAJuWL4F1VObAtMv58VYYXUGknxGvA2dHzMO7hX8UdQtAtjsFOFcyEndp7fpjXUYulwhtSGolnwLHR828pjfXIy8KIL5wJE7glpZGlfuVU1gnv5zT4krzJSFnrpia4AU/hhiRRHoVhdEDTEEti8ScQ/5A4dkzhPd1fZKZo3dQEa2pqarLwH/zQdykHVolXAAAAAElFTkSuQmCC" />
+        </defs>
+    </svg>
+
+
+)
+export const LogOut = () => (
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="42" height="42" fill="url(#pattern0_323_16)" />
+        <defs>
+            <pattern id="pattern0_323_16" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use href="#image0_323_16" transform="scale(0.015625)" />
+            </pattern>
+            <image id="image0_323_16" width="64" height="64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALKSURBVHic7du7axVBFMfxT6JWVqZI1FotbXwhoohPVLSRgBI7G/VPEHsRDQg+UPRPEBQsfGGvhZWiSaGdjwjxFRQSo9dirJLd+9qd3b2PLwwX9t65c85vZ8+cmdmhT58+fXqYgRLb3oIxrGyhzmdMYQJP8C2CXYWwGb9Ry1Dm8Bh7C7Y9F67J5vzC8ghr2jFkMIMTVWIfnmNP2YY0y0ahC+fZC2rCY3WkFUPKDIKbcAKrWqgzInT11XV+M4NteNm+adVmQAiid6X3hAksK8vAIhnFT8kinCnRrkI5iHmLBfikR3oBXJTcCzpmVMjKCiH4LRTgSqOK3ZIHfBWSoYVsaFSxWwSAZwnX6g2XKE6AYRzF+ohtfEy41kqOEY2dwqythr8YFycBG5UcCEtn0mKjbshfhEoKsER6zp+3CJUUAO5JT1nzFKGyAgzjjfgiVFYAggivpItwW/YRqdICEF+EygtAXBE6QgDiidAxAhBHhLYEWNrknx/Dfixv0ah6TNf57qQwxz+tAnfxrPQ7Fbuca8HOaI/Ah4xOZClJE5w02hKgmeeszC4YfdW6GQGuxjaiDpdjN9BMEDyPtzgg3yA4gh11vr+JCzm2VylG1B8GbyloGCyDGM7TIQLEcp4OECCm81RcgNjOU2EBen5B5I74zlNhAX6I7zwRU+GsvEu4dlNFZnpFsF2Y+taEjZFLemxjBIaE9YS1EdsYs9j52UaVml0QycoXybu3eZK0EdpwOt1Nu8NbE669b1SpWwQYEt4VXMiLog0pi3HJAXB3mUYVxSH8kbyc1vUvSR3HL8l3/1SJdkVlUAh496Wn2K81OcIVNQwm0ep5gQFhVrnu/2caM0JSNJ/JusjkcV4gqczhcIF+tM11+Ts/rY2oX1YekHeO/kB4+/xpzv8bjTzOC8ziIXZlMaTTzgtMCS9BTwqHpr5HsKtPnz59eod/yNcWLpm/VAwAAAAASUVORK5CYII=" />
+        </defs>
+    </svg>
+
+
+
+)

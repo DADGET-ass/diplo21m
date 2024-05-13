@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import cls from './index.module.scss';
 import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 
 const Radio = () => {
-    const [selectedTab, setSelectedTab] = useState(1);
-    const { setMode } = useTabsStore();
+    const { setMode, mode } = useTabsStore();
 
-    const changeTab = (newValue: number) => {
-        setSelectedTab(newValue);
-        if (newValue === 1) {
-            setMode(ModeEnum.spectate);
-            return
-        }
-        setMode(ModeEnum.edit);
+    const changeTab = (newValue: ModeEnum) => {
+        setMode(newValue),
+            localStorage.setItem('tabs', newValue)
     }
+
+    useEffect(() => {
+        const _mode = localStorage.getItem('tabs')
+        setMode(_mode === ModeEnum.edit ? ModeEnum.edit : ModeEnum.spectate)
+    }, [])
 
     return (
         <div className={cls.content}>
@@ -23,8 +23,8 @@ const Radio = () => {
                     type="radio"
                     name="radio"
                     value="1"
-                    checked={selectedTab === 1}
-                    onChange={() => changeTab(1)}
+                    checked={mode === ModeEnum.spectate}
+                    onChange={() => changeTab(ModeEnum.spectate)}
                 />
                 <div className="name">Просмотр</div>
             </div>
@@ -33,8 +33,8 @@ const Radio = () => {
                     type="radio"
                     name="radio"
                     value="2"
-                    checked={selectedTab === 2}
-                    onChange={() => changeTab(2)}
+                    checked={mode === ModeEnum.edit}
+                    onChange={() => changeTab(ModeEnum.edit)}
                 />
                 <div className="name">Редактирование</div>
             </div>

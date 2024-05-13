@@ -12,6 +12,7 @@ import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 
 import cls from './index.module.scss';
 
+
 const Auth = () => {
     const [login, setLogin] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -50,8 +51,12 @@ const Auth = () => {
                     <Button type='submit'>
                         Вход
                     </Button>
+                    
                     {validError && <div className={cls.error}>{validError}</div>}
                 </Form>
+                <div className={cls.reg} onClick={() => push(`/registration`)}>
+                    Зарегистрироваться
+                </div>
             </div>
 
         </div>

@@ -6,6 +6,8 @@ import { Input } from '@/_views/ui/Input';
 import { IGroups } from '@/data/api';
 
 import cls from './index.module.scss';
+import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 interface GroupItemProps {
     group: IGroups;
@@ -14,6 +16,9 @@ interface GroupItemProps {
 const GroupItem: FC<GroupItemProps> = ({ group }) => {
 
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+    const { userRole } = useAuthStore()
+    const { mode } = useTabsStore()
+
 
     const groupItem = (
         <>
@@ -21,7 +26,10 @@ const GroupItem: FC<GroupItemProps> = ({ group }) => {
                 <div className={cls.name}>
                     {group.name}
                 </div>
-                <Button darkBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
+                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                    <Button darkBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
+                )}
+                
             </div>
             {isOpenPopUp && (
                 <PopUp title='Редактирование группы' setOpenPopUp={setOpenPopUp}>

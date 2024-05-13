@@ -13,9 +13,9 @@ import { Input } from '@/_views/ui/Input';
 import { Form } from '@/_views/ui/Form';
 import { addTeacher } from '@/data/api';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 import cls from './index.module.scss';
-import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 interface IFormData {
     surname: string,
@@ -57,8 +57,6 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
             setTrigger(prev => !prev);
         })
     }
-
-    console.warn(mode)
 
     return (
         <>

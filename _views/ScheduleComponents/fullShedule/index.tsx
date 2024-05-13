@@ -12,6 +12,7 @@ import { useDateStore } from '@/data/store/useDateStore';
 import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import { SpectateShedule } from '../SpectateShedule';
+import { Button } from '@/_views/ui/Button';
 
 
 interface CoursesProps {
@@ -65,10 +66,12 @@ const Group: FC<GroupsProps> = ({ group }) => {
             {isOpen && (
                 <div className={cls.table}>
                     {userRole === UserRoleEnum.admin && mode === ModeEnum.edit ? (
-                        <SheduleTable />
+                        <SheduleTable group={group}/>
+                        
                     ) : (
                         <SpectateShedule />
                     )}
+                     
                 </div>
 
             )}
@@ -119,6 +122,7 @@ const FullShedule = () => {
                 <div className={cls.title}>
                     <Title>Расписание</Title>
                     <Calendar />
+                   
                 </div>
 
                 {facultets.map((facult) => (

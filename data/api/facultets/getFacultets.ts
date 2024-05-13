@@ -16,7 +16,6 @@ export interface IFacultets {
     _id: string,
     name: string,
     courses: Array<ICourses>,
-    groups: Array<IGroups>,
 }
 
 type IResponseFacultets = {

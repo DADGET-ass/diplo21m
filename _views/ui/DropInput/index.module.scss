@@ -12,6 +12,7 @@
 
 .drop {
     position: absolute;
+    z-index: 1111;
     top: 100%;
     background-color: black;
     color: white;
@@ -19,7 +20,7 @@
     opacity: 1;
     transition: .4s;
 
-    p {
+    div {
         transition: .4s;
 
         &:hover {

@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
     height: 100px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
     background-color: var(--greenOne);
@@ -36,23 +35,67 @@
         display: flex;
         align-items: center;
         right: 20px;
-        
-        button{
+
+        button {
             background-color: white;
             padding: 5px;
             border-radius: 10px;
             margin-right: 10px;
             transition: .4s;
-            &:hover{
+
+            &:hover {
                 background-color: var(--lightGrey);
                 transition: .4s;
             }
-            .svg{
+
+            .svg {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
         }
     }
-   
+
+}
+
+.content {
+    background-image: url(/college2.png);
+    background-position-y: bottom;
+    background-size: 100%;
+
+    .block {
+        display: flex;
+        height: 100vh;
+        justify-content: space-around;
+        background-repeat: no-repeat;
+        padding: 100px 0 100px;
+
+        .photo {
+            display: flex;
+
+
+            .img {
+                background-color: white;
+                width: 350px;
+                height: 420px;
+                border-radius: 30px;
+            }
+        }
+
+        .infoBlock {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+            background-color: white;
+            border-radius: 30px;
+            width: 60%;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    }
+
 }

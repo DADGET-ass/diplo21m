@@ -2,7 +2,7 @@ import { methodDefault } from "../../defaultAPI";
 
 
 export interface ITypes {
-    id: string,
+    _id: string,
     name: string,
 }
 

@@ -24,20 +24,11 @@ interface TableRowProps {
     disciplines: IDisciplines[];
     audithories: IAudith[];
     types: ITypes[];
-    activeFormDatas: {
-        activeDiscipline: string,
-        activeTeacher: string,
-        activeTypes: string,
-        activeAudithories: string,
-    },
-    setActiveFormDatas: Dispatch<SetStateAction<{
-        activeDiscipline: string,
-        activeTeacher: string,
-        activeTypes: string,
-        activeAudithories: string,
-    }>>
+    activeFormDatas: ScheduleItemProps,
+    setActiveFormDatas: Dispatch<SetStateAction<ScheduleItemProps[]>>,
 }
-const TableRow: FC<TableRowProps> = ({ item,
+const TableRow: FC<TableRowProps> = ({
+    item,
     teachers,
     index,
     types,
@@ -47,14 +38,22 @@ const TableRow: FC<TableRowProps> = ({ item,
     setActiveFormDatas
 }) => {
     return (
-        <div className={cls.row} key={item.id}>
-            <div className={cls.item}>{index + 1}</div>
+        <div className={cls.row} key={item.number}>
+            <div className={cls.item}>
+                {index + 1}
+            </div>
             <div className={cls.item}>
                 {disciplines && (
                     <DropdownInput
                         list={disciplines.map(e => e.name)}
-                        value={activeFormDatas.activeDiscipline}
-                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeDiscipline: newValue }))}
+                        value={activeFormDatas.discipline}
+                        setActiveValue={newValue => {
+                            setActiveFormDatas(prevState => {
+                                const updatedScheduleItems = [...prevState];
+                                updatedScheduleItems[index] = { ...updatedScheduleItems[index], discipline: newValue };
+                                return updatedScheduleItems;
+                            })
+                        }}
                     />
                 )}
             </div>
@@ -62,8 +61,12 @@ const TableRow: FC<TableRowProps> = ({ item,
                 {teachers && (
                     <DropdownInput
                         list={teachers.map(e => `${e.surname} ${e.name || ''} ${e.patronymic || ''}`)}
-                        value={activeFormDatas.activeTeacher}
-                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeTeacher: newValue }))}
+                        value={activeFormDatas.teacher}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => {
+                            const updatedScheduleItems = [...prevState];
+                            updatedScheduleItems[index] = { ...updatedScheduleItems[index], teacher: newValue };
+                            return updatedScheduleItems;
+                        })}
                     />
                 )}
             </div>
@@ -71,24 +74,31 @@ const TableRow: FC<TableRowProps> = ({ item,
                 {types && (
                     <DropdownInput
                         list={types.map(e => e.name)}
-                        value={activeFormDatas.activeTypes}
-                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeTypes: newValue }))}
-                        
+                        value={activeFormDatas.type}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => {
+                            const updatedScheduleItems = [...prevState];
+                            updatedScheduleItems[index] = { ...updatedScheduleItems[index], type: newValue };
+                            return updatedScheduleItems;
+                        })}
                     />
-                    
+
                 )}
-                
+
             </div>
             <div className={cls.item}>
-            {audithories && (
+                {audithories && (
                     <DropdownInput
                         list={audithories.map(e => e.name)}
-                        value={activeFormDatas.activeAudithories}
-                        setActiveValue={newValue => setActiveFormDatas(prevState => ({ ...prevState, activeAudithories: newValue }))}
-                        
+                        value={activeFormDatas.audithoria}
+                        setActiveValue={newValue => setActiveFormDatas(prevState => {
+                            const updatedScheduleItems = [...prevState];
+                            updatedScheduleItems[index] = { ...updatedScheduleItems[index], audithoria: newValue };
+                            return updatedScheduleItems;
+                        })}
                     />
-                    
-                )}</div>
+
+                )}
+            </div>
         </div>
     )
 }

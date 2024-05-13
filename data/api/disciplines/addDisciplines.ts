@@ -1,20 +1,23 @@
 import { methodDefault } from "../defaultAPI";
 
 export interface IDiscipline {
-    _id: string,
     name: string,
-    groups: string,
+    groups: Array<string>,
     teachers: Array<string>,
-    aH: number,
-
 }
 
- type IResponseDisciplines = {
-    disciplines: Array<IDiscipline>;
-  };
+type IResponseDisciplines = {
+    message?: string,
+    error?: string,
+};
 
-export const addDisciplines = (): Promise<IResponseDisciplines> =>
+export const addDisciplines = ({ name, groups, teachers }: IDiscipline): Promise<IResponseDisciplines> =>
     methodDefault({
         path: `discipline/add`,
         method: "POST",
+        body: JSON.stringify({
+            name,
+            groups,
+            teachers,
+        })
     });

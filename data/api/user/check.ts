@@ -3,6 +3,7 @@ import { methodDefault } from "../defaultAPI";
 
 interface IResponseCheck {
     user: {
+        token: { status: string; role: UserRoleEnum; };
         status: string,
         role: UserRoleEnum
     }

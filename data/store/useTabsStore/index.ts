@@ -6,11 +6,11 @@ export enum ModeEnum {
 }
 
 interface TabsState {
-  mode: ModeEnum;
+  mode: ModeEnum | null;
   setMode: (mode: ModeEnum) => void;
 }
 
 export const useTabsStore = create<TabsState>((set) => ({
-  mode: ModeEnum.spectate,
-  setMode: (mode) => set({ mode }),
+  mode: null,
+  setMode: (mode) =>  set({ mode }),
 }));

@@ -9,6 +9,8 @@ import { Form } from '@/_views/ui/Form';
 import { IFacultets } from '@/data/api';
 
 import cls from './index.module.scss';
+import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 
 interface FacultItem {
     facultet: IFacultets;
@@ -18,6 +20,9 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
 
+    const { userRole } = useAuthStore()
+    const { mode } = useTabsStore()
+
     const facultItem = (
         <>
             <div className={cls.facultsBlock} key={facultet._id} >
@@ -25,7 +30,11 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
                     <div className={cls.name}>
                         {facultet.name}
                     </div>
+                    {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
                     <Button lightBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
+                )}
+
+                    
                 </div>
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />

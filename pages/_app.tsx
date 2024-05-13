@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const checkToken = () => {
     check().then(e => {
-      if (!e.user.status) {
+      if (!e.user) {
         setAuth(false);
         if (['/auth', '/registration'].includes(asPath)) {
           return
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
           push('auth');
         }
       }
-      if (e.user.role !== userRole) {
+      if (e.user && e.user.role !== userRole) {
         setUserRole(e.user.role)
       }
       setAuth(true)
@@ -39,6 +39,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <Component
       {...pageProps}
     />
-    
+
   )
 }

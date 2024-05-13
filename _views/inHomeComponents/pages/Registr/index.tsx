@@ -61,6 +61,9 @@ const RegistrPage = () => {
                         </div>
                     )}
                 </Form>
+                <div className={cls.aut} onClick={() => push(`/auth`)}>
+                    Уже есть аккаунт?
+                </div>
             </div>
 
         </div>

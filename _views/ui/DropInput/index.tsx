@@ -45,10 +45,10 @@ const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) 
                     onBlur={() => setFocus(false)}
                 />
             </div>
-            {list.filter((e) => e.toLowerCase().includes(value.toLowerCase())).length > 0 && (
-                <div className={cls.drop} data-focus={setFocus}>
+            {list.filter((e) => e.toLowerCase().includes(value?.toLowerCase())).length > 0 && (
+                <div className={cls.drop} data-focus={focus}>
                     {list.filter((e) => e.toLowerCase().includes(value.toLowerCase())).map((item, index) => (
-                        <p key={index} onClick={() => setActiveValue(item)}>{highlightMatch(item, value)}</p>
+                        <div key={index} onClick={() => setActiveValue(item)}>{highlightMatch(item, value)}</div>
                     ))}
                 </div>
             )}

@@ -3,7 +3,7 @@ import { methodDefault } from "../defaultAPI";
 
 
 export interface IAudith {
-    id: string,
+    _id: string,
     name: string,
 }
 

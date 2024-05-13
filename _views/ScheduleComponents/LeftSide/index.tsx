@@ -8,7 +8,8 @@ import { TeachersPart } from './TeachersPart';
 export enum LeftMenuEnum {
     facult = 'facultets',
     teachers = 'teachers',
-    disciplines = 'disciplines'
+    disciplines = 'disciplines',
+    audithories = 'audithories'
 }
 
 const LeftSide = () => {
@@ -19,10 +20,7 @@ const LeftSide = () => {
 
     return (
         <div className={cls.leftSide}>
-
-
             <div className={cls.full} onClick={() => push(`/fullShedule`)}>Полное расписание</div>
-
             <div className={cls.name}>Расписание</div>
             <div className={cls.menu}>
                 <Partition title='Факультеты' type={LeftMenuEnum.facult}>
@@ -34,6 +32,9 @@ const LeftSide = () => {
                 </Partition>
 
                 <Partition title='Дисциплины' type={LeftMenuEnum.disciplines}>
+                    <></>
+                </Partition>
+                <Partition title='Аудитории' type={LeftMenuEnum.audithories}>
                     <></>
                 </Partition>
 

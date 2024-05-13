@@ -34,7 +34,7 @@ export interface IShedule {
 }
 
 type IResponseShedule = {
-    shedule: Array<IShedule>;
+    shedule?: Array<IShedule>;
 };
 
 export const getShedule = (): Promise<IResponseShedule> =>

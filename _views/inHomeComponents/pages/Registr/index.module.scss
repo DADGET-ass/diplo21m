@@ -23,9 +23,15 @@
         border-radius: 40px;
 
         button {
-            padding: 5px 60px;
-            margin-top: 78px;
+            margin-top: 10px;
             @include responsive_font(40, 40);
         }
+    }
+
+    .aut {
+        color: white;
+        margin-top: 10px;
+        @include responsive_font(20, 30);
+        cursor: pointer;
     }
 }
