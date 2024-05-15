@@ -36,7 +36,7 @@ const AudithoriesHeader = () => {
                             label="Название"
                             placeholder={''}
                             value={name}
-                            onChange={(value) => setName(value)} />
+                            onChange={(value) => setName(value as string)} />
 
                         {/* <p>Учителя</p>
                         

@@ -75,7 +75,7 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
                             label="Фамилия"
                             placeholder={''}
                             value={formData.surname}
-                            onChange={(value) => setFormData((prev) => ({ ...prev, surname: value }))}
+                            onChange={(value) => setFormData((prev) => ({ ...prev, surname: value as string}))}
                             required
                         />
 
@@ -84,7 +84,7 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
                             label="Имя"
                             placeholder={''}
                             value={formData.name}
-                            onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
+                            onChange={(value) => setFormData((prev) => ({ ...prev, name: value as string}))}
                             required
                         />
 
@@ -93,7 +93,7 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
                             label="Отчество"
                             placeholder={''}
                             value={formData.patronymic}
-                            onChange={(value) => setFormData((prev) => ({ ...prev, patronymic: value }))}
+                            onChange={(value) => setFormData((prev) => ({ ...prev, patronymic: value as string}))}
                             required
                         />
 
@@ -102,7 +102,7 @@ const TeachersHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
                             label="Нагрузка"
                             placeholder={''}
                             value={formData.aH}
-                            onChange={(value) => setFormData((prev) => ({ ...prev, aH: value }))}
+                            onChange={(value) => setFormData((prev) => ({ ...prev, aH: value as string }))}
                             required
                         />
                         <div className={cls.error}>{serverError}</div>

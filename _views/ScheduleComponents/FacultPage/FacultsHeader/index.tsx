@@ -102,7 +102,7 @@ const FacultsPage = () => {
                             value={name}
                             onChange={(value) => setGroups(value)}
                         />
-                        {/* <Input type="text" label="Аудитории" placeholder={''} required value={audithories} onChange={(value) => setAudithories(value)} /> */}
+                    
                         <Button lightBtn type='submit'>
                             Создать
                         </Button>

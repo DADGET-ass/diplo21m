@@ -8,7 +8,7 @@ import { IDisciplines, getDisciplines } from '@/data/api/disciplines/getDiscipli
 const DisciplinesPage = () =>{
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
     useEffect(() => {
-        getDisciplines().then(e =>{
+        getDisciplines({id:''}).then(e =>{
             setDisciplines(e.disciplines);
         })
     },[]);

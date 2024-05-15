@@ -1,9 +1,15 @@
 import { methodDefault } from "../defaultAPI";
 
+export interface IGroups {
+    groupName: string,
+    aH:number,
+}
+
 export interface IDiscipline {
     name: string,
-    groups: Array<string>,
+    groups: Array<IGroups>,
     teachers: Array<string>,
+    pc:boolean,
 }
 
 type IResponseDisciplines = {
@@ -11,7 +17,7 @@ type IResponseDisciplines = {
     error?: string,
 };
 
-export const addDisciplines = ({ name, groups, teachers }: IDiscipline): Promise<IResponseDisciplines> =>
+export const addDisciplines = ({ name, groups, teachers, pc }: IDiscipline): Promise<IResponseDisciplines> =>
     methodDefault({
         path: `discipline/add`,
         method: "POST",
@@ -19,5 +25,6 @@ export const addDisciplines = ({ name, groups, teachers }: IDiscipline): Promise
             name,
             groups,
             teachers,
+            pc
         })
     });

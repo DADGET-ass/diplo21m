@@ -3,15 +3,18 @@ import cls from './index.module.scss';
 import { FC, useEffect, useState } from 'react';
 import { Arcticle } from '@/_views/ui/Arcticle';
 import { IDisciplines, getDisciplines } from '@/data/api/disciplines/getDisciplines';
+import { IAllTeachers, ITeachers } from '@/data/api';
+import { TeacherItem } from '../../LeftSide/TeachersPart/Teachers';
+import { Teacher } from '../../TeachersPage/TeacherItem';
 
-interface DisciplinesProps{
+interface DisciplinesProps {
     disciplins: IDisciplines;
 }
 
-const Disciplines: FC<DisciplinesProps> = ({disciplins}) => {
-  
-    const [isOpen, setOpen] = useState<boolean>(false);
+const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
 
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const [teachers, setTeachers] = useState<IAllTeachers[]>([]);
 
 
     const discipline = (
@@ -27,12 +30,11 @@ const Disciplines: FC<DisciplinesProps> = ({disciplins}) => {
                 </div>
 
             </div>
-            {isOpen && (
-                <div className={cls.table}>
-                    a
-                </div>
+            {isOpen && teachers?.map((teacher) => (
+                <Teacher teacher={teacher} key={teacher.id} />
+                
+            ))}
 
-            )}
         </Arcticle>
     );
     return discipline;

@@ -10,8 +10,10 @@ type IResponsedisciplines = {
     disciplines: Array<IDisciplines>;
 };
 
-export const getDisciplines = (): Promise<IResponsedisciplines> =>
+export const getDisciplines = ({ id }: { id?: string }): Promise<IResponsedisciplines> =>
     methodDefault({
         path: `discipline/get`,
         method: "GET",
     });
+
+    // ?groupId=${id}

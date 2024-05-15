@@ -1,7 +1,7 @@
 import { methodDefault } from "../defaultAPI";
 
 
-export interface IGroups {
+export interface IGroupsFacult {
     _id: string,
     name: string,
 }
@@ -9,7 +9,7 @@ export interface IGroups {
 export interface ICourses {
     _id: string,
     name: string,
-    groups: Array<IGroups>,
+    groups: Array<IGroupsFacult>,
 }
 
 export interface IFacultets {

@@ -122,7 +122,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group }) => {
     }, []);
 
     useEffect(() => {
-        getDisciplines().then(e => {
+        getDisciplines({ id: group._id }).then(e => {
             setDisciplines(e.disciplines);
         })
     }, []);

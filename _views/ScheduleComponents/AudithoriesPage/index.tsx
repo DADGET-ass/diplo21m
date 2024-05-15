@@ -2,6 +2,7 @@ import { Arcticle } from "@/_views/ui/Arcticle";
 import { AudithoriesHeader } from "./AudithoriesHeader";
 import { useEffect, useState } from "react";
 import { IAudith, getIAudith } from "@/data/api/audithories/getAudithories";
+import { Audithories } from "./Audithories";
 
 import cls from './index.module.scss';
 
@@ -22,9 +23,9 @@ const AudithoriesPage = () => {
             
             {audithories && audithories.length ? (
                 <div className={cls.content}>
-                    {/* {audithories?.map((e) => (
-                        <Disciplines disciplins={e} key={e.id} />
-                    ))} */}
+                    {audithories?.map((e) => (
+                        <Audithories audithories={e} key={e._id} />
+                    ))}
                 </div>
             ) : (
                 <>

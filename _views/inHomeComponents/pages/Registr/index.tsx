@@ -49,9 +49,9 @@ const RegistrPage = () => {
 
             <div className={cls.registrBlock}>
                 <Form onSubmit={onSubmit}>
-                    <Input type="text" label="Логин" placeholder={'Введите логин'} required value={formData.login} onChange={(value) => setFormData(prev => ({ ...prev, login: value }))} />
-                    <Input type="password" label="Пароль" placeholder={'Введите пароль'} required value={formData.password} onChange={(value) => setFormData(prev => ({ ...prev, password: value }))} />
-                    <Input type="password" label="Повторите пароль" placeholder={'Повторите пароль'} required value={formData.rePassword} onChange={(value) => setFormData(prev => ({ ...prev, rePassword: value }))} />
+                    <Input type="text" label="Логин" placeholder={'Введите логин'} required value={formData.login} onChange={(value) => setFormData(prev => ({ ...prev, login: value as string}))} />
+                    <Input type="password" label="Пароль" placeholder={'Введите пароль'} required value={formData.password} onChange={(value) => setFormData(prev => ({ ...prev, password: value as string}))} />
+                    <Input type="password" label="Повторите пароль" placeholder={'Повторите пароль'} required value={formData.rePassword} onChange={(value) => setFormData(prev => ({ ...prev, rePassword: value as string}))} />
                     <Button type='submit'>
                         Вход
                     </Button>

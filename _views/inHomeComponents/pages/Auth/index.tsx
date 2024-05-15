@@ -46,8 +46,8 @@ const Auth = () => {
 
             <div className={cls.loginBlock}>
                 <Form onSubmit={onSubmit}>
-                    <Input type="text" label="Логин" autoFocus placeholder={'Введите логин'} required value={login} onChange={(value) => setLogin(value)} />
-                    <Input type="password" label="Пароль" placeholder={'Введите пароль'} required value={password} onChange={(value) => setPassword(value)} />
+                    <Input type="text" label="Логин" placeholder={'Введите логин'} required value={login} onChange={(value) => setLogin(value as string)} />
+                    <Input type="password" label="Пароль" placeholder={'Введите пароль'} required value={password} onChange={(value) => setPassword(value as string)} />
                     <Button type='submit'>
                         Вход
                     </Button>
