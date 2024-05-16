@@ -19,12 +19,13 @@
     }
 
     .input {
-
+        position: relative;
         display: flex;
 
     }
 
     input {
+        
         outline: none;
         padding: 10px;
         display: flex;

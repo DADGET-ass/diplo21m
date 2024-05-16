@@ -85,4 +85,19 @@
         }
 
     }
+
+    @media (max-width: 400px) {
+        .registrBlock {
+            max-width: 80vw;
+            button {
+                padding: 2px 10px;
+                @include responsive_font(25, 20);
+            }
+            .reg {
+                @include responsive_font(20, 10);
+       
+            }
+        }
+
+    }
 }
