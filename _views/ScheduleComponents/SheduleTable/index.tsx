@@ -17,6 +17,7 @@ import { IGroups } from '@/data/api';
 import { useDateStore } from '@/data/store/useDateStore';
 
 import cls from './index.module.scss';
+import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 export interface ScheduleItemProps {
     discipline: string;
@@ -76,7 +77,7 @@ const TableRowWithTeachers: FC<{
 };
 
 interface SheduleTableProps {
-    group: IGroups;
+    group: IGroupsFacult;
 }
 
 const SheduleTable: FC<SheduleTableProps> = ({ group }) => {

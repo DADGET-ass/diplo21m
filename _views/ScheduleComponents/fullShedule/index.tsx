@@ -13,6 +13,7 @@ import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import { SpectateShedule } from '../SpectateShedule';
 import { Button } from '@/_views/ui/Button';
+import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 
 interface CoursesProps {
@@ -43,7 +44,7 @@ const Courses: FC<CoursesProps> = ({ course }) => {
 }
 
 interface GroupsProps {
-    group: IGroups,
+    group: IGroupsFacult,
 }
 
 const Group: FC<GroupsProps> = ({ group }) => {
@@ -66,7 +67,7 @@ const Group: FC<GroupsProps> = ({ group }) => {
             {isOpen && (
                 <div className={cls.table}>
                     {userRole === UserRoleEnum.admin && mode === ModeEnum.edit ? (
-                        <SheduleTable group={group}/>
+                        <SheduleTable group={group} />
                         
                     ) : (
                         <SpectateShedule />

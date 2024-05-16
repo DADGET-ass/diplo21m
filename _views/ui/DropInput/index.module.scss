@@ -14,24 +14,26 @@
     position: absolute;
     z-index: 1111;
     top: 100%;
-    background-color: black;
-    color: white;
+    background-color: white;
+   
+    color: rgb(0, 0, 0);
     width: 100%;
     opacity: 1;
     transition: .4s;
 
     div {
         transition: .4s;
-
+        border: 1px solid var(--grey);
+        border-top: none;
         &:hover {
             cursor: pointer;
-            color: blue;
+            background-color: var(--greenOne);
             transition: .4s;
         }
 
-        &:not(:last-child) {
-            margin-bottom: 5px;
-        }
+        // &:not(:last-child) {
+        //     margin-bottom: 5px;
+        // }
     }
 
     &[data-focus="false"] {

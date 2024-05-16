@@ -1,6 +1,7 @@
 import { IDiscipline, ITeacher } from "@/data/types/interfaces";
 import { methodDefault } from "../defaultAPI";
-import { IGroups } from "../facultets/getFacultets";
+import { IGroups } from "../disciplines/addDisciplines";
+
 
 
 

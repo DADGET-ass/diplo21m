@@ -40,7 +40,7 @@ const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) 
                 <Input
                     type='text'
                     value={value}
-                    onChange={(currentValue) => setActiveValue(currentValue)}
+                    onChange={(currentValue) => setActiveValue(currentValue as string)}
                     onFocus={() => setFocus(true)}
                     onBlur={() => setFocus(false)}
                 />

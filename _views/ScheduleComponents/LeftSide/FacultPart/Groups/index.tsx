@@ -2,9 +2,10 @@ import { FC, useState } from 'react';
 import cls from './index.module.scss';
 import { IGroups } from '@/data/api';
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
+import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 interface GroupsProps {
-    group: IGroups;
+    group: IGroupsFacult;
     searchValue: string,
 }
 

@@ -7,7 +7,7 @@ import { getDisciplines } from './disciplines/getDisciplines';
 import { getFacultets } from './facultets/getFacultets';
 import { authUser } from './user/postLogin';
 import { getFacultet } from './facultets/getFacultet';
-import { addDisciplines } from './disciplines/addDisciplines';
+import { addDisciplines, IGroups } from './disciplines/addDisciplines';
 import { addFacults } from './facultets/addFacults';
 import { getTeachersByDiscipline } from './teachers/getTeachersByDiscipline';
 import { getTeachers } from './teachers/getTeachers';
@@ -16,7 +16,7 @@ import { IFacultets } from './facultets/getFacultets';
 import { addTeacher } from './teachers/addTeacher';
 import { addTeacherProps } from './teachers/addTeacher';
 import { ICourses } from './facultets/getFacultets';
-import { IGroups } from './facultets/getFacultets';
+
 import { ITeachers } from './teachers/getTeachersByDiscipline';
 import { check } from './user/check';
 

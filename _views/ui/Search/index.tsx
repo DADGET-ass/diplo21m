@@ -31,7 +31,7 @@ const Search: FC<SearchProps> = ({ setSearchValue, searchValue }) => {
                     type='text'
                     placeholder='Поиск'
                     value={searchValue}
-                    onChange={(value) => setSearchValue(value)}
+                    onChange={(value) => setSearchValue(value as string)}
                 />
                 <div className={cls.iconCross}>
                     <button onClick={handleClearInput}><CloseIcon /></button>

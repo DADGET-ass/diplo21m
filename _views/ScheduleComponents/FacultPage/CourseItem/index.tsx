@@ -22,14 +22,14 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />
                 </div>
-            </div >
+            </div>
 
-            {isOpen && course.groups?.map((_groups) => (
-                <GroupItem group={_groups} key={_groups._id} />
+            {isOpen && course.groups?.map((group) => (
+                <GroupItem group={group} key={group._id} />
             ))}
         </>
     );
-    return courseItem
+    return courseItem;
 };
 
-export { CourseItem }
+export { CourseItem };

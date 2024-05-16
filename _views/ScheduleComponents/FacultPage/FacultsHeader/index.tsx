@@ -94,7 +94,7 @@ const FacultsPage = () => {
                             placeholder={''}
                             required
                             value={name}
-                            onChange={(value) => setName(value)} />
+                            onChange={(value) => setName(value as string)} />
 
                         <TextArea
                             type="text"
