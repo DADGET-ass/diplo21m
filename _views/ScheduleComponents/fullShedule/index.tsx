@@ -14,97 +14,8 @@ import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import { SpectateShedule } from '../SpectateShedule';
 import { Button } from '@/_views/ui/Button';
 import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
+import { Facult } from './Facult';
 
-
-interface CoursesProps {
-    course: ICourses;
-}
-
-const Courses: FC<CoursesProps> = ({ course }) => {
-    const [isOpen, setOpen] = useState<boolean>(false);
-
-    return (
-        <>
-
-            <div className={cls.group}>
-                <div className={cls.facultsBlock}>
-                    <div className={cls.name}>
-                        {course.name}
-                    </div>
-                </div>
-                <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
-                    <ArrowIcon />
-                </div>
-            </div>
-            {isOpen && course.groups.map((group) => (
-                <Group group={group} key={group._id} />
-            ))}
-        </>
-    )
-}
-
-interface GroupsProps {
-    group: IGroupsFacult,
-}
-
-const Group: FC<GroupsProps> = ({ group }) => {
-    const [isOpen, setOpen] = useState<boolean>(false);
-    const { mode } = useTabsStore();
-    const { userRole } = useAuthStore();
-
-    return (
-        <>
-            <div className={cls.group}>
-                <div className={cls.facultsBlock}>
-                    <div className={cls.name}>
-                        {group.name}
-                    </div>
-                </div>
-                <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
-                    <ArrowIcon />
-                </div>
-            </div>
-            {isOpen && (
-                <div className={cls.table}>
-                    {userRole === UserRoleEnum.admin && mode === ModeEnum.edit ? (
-                        <SheduleTable group={group} />
-                        
-                    ) : (
-                        <SpectateShedule />
-                    )}
-                     
-                </div>
-
-            )}
-        </>
-    )
-}
-
-interface FacultProps {
-    facult: IFacultets,
-}
-
-const Facult: FC<FacultProps> = ({ facult }) => {
-    const [isOpen, setOpen] = useState<boolean>(false);
-
-    return (
-        <>
-            <div className={cls.group}>
-                <div className={cls.facultsBlock}>
-                    <div className={cls.name}>
-                        {facult.name}
-                    </div>
-                </div>
-                <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
-                    <ArrowIcon />
-                </div>
-            </div>
-            {isOpen && facult.courses.map((course) => (
-                <Courses course={course} key={course._id} />
-            ))}
-        </>
-    )
-}
 
 const FullShedule = () => {
     const { selectedDate } = useDateStore()
@@ -123,7 +34,7 @@ const FullShedule = () => {
                 <div className={cls.title}>
                     <Title>Расписание</Title>
                     <Calendar />
-                   
+
                 </div>
 
                 {facultets.map((facult) => (

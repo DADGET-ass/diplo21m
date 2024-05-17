@@ -9,6 +9,8 @@ interface DropdownInputProps {
     list: string[];
     value: string;
     setActiveValue: (value: string) => void;
+ 
+
 }
 
 const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) => {

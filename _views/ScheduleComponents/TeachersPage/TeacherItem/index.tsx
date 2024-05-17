@@ -17,6 +17,7 @@ const Discipline: FC<DisciplineProps> = ({ name }) => {
 
 interface TeacherProps {
     teacher: IAllTeachers,
+
 }
 
 const Teacher: FC<TeacherProps> = ({ teacher }) => {

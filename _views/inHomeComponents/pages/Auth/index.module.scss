@@ -85,7 +85,7 @@
         }
 
     }
-    @media (max-width: 400px) {
+    @media (max-width: 502px) {
         .loginBlock {
             max-width: 80vw;
             button {
@@ -99,5 +99,21 @@
         }
 
     }
+
+    @media (max-width: 380px) {
+        .loginBlock {
+            max-width: 90vw;
+            button {
+                padding: 1px 10px;
+                @include responsive_font(25, 15);
+            }
+            .reg {
+                @include responsive_font(20, 10);
+       
+            }
+        }
+
+    }
+    
     
 }

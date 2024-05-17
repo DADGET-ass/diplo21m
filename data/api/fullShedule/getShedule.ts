@@ -40,6 +40,6 @@ type IResponseShedule = {
 
 export const getShedule = (): Promise<IResponseShedule> =>
     methodDefault({
-        path: `shedule/get}`,
+        path: `shedule/get`,
         method: "GET",
     });

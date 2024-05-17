@@ -1,0 +1,68 @@
+
+
+.group {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--greenTwo);
+    border-bottom: 3px solid white;
+
+    .facultsBlock {
+
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-between;
+        // flex-grow: 1;
+        .name {
+            color: white;
+            font-size: 18px;
+            
+        }
+
+
+    }
+
+    .arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: auto;
+        transition: .4s;
+        color: white;
+        cursor: pointer;
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    .rot {
+        transform: rotate(180deg);
+        transition: .4s;
+    }
+
+
+}
+
+.title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    border-radius: 2px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        border-radius: 2px;
+        background-color: var(--greenTwo);
+    }
+}

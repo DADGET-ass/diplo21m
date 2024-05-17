@@ -34,6 +34,7 @@ const DisciplinesHeader = () => {
         const groupArr: Array<IGroups> = groupName.split(',')
             .filter(_ => _ !== '')
             .map(group => ({
+                
                 groupName: group,
                 aH: 0,
             }));

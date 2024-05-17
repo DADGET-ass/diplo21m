@@ -14,7 +14,7 @@ interface DisciplinesProps {
 const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
 
     const [isOpen, setOpen] = useState<boolean>(false);
-    const [teachers, setTeachers] = useState<IAllTeachers[]>([]);
+    const [teachers, setTeachers] = useState<ITeachers[]>([]);
 
 
     const discipline = (
@@ -30,8 +30,9 @@ const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
                 </div>
 
             </div>
-            {isOpen && teachers?.map((teacher) => (
-                <Teacher teacher={teacher} key={teacher.id} />
+            {isOpen && teachers?.map((teachers) => (
+                <>{teachers.name}</>
+                
                 
             ))}
 
