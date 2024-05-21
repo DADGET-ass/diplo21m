@@ -7,8 +7,8 @@ export interface IItem {
 
 export interface IGroup {
     _id: string;
-    item: Array<IItem>;
-    burden: {
+    item: IItem;
+    burden?: {
         month: string;
         hH: number;
     };

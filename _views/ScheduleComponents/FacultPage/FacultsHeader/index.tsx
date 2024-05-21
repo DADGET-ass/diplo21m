@@ -40,32 +40,12 @@ const FacultsPage = () => {
         })
     }, [isOpenPopUp])
 
-    useEffect(() => {
-        const groupArr: Array<string> = []
-        for (const _ of groups.split(' ')) {
-            if (_ !== '') {
-                groupArr.push(_)
-            }
-        }
-        setGroupsArray(groupArr);
-    }, [groups])
-
-    useEffect(() => {
-        const audithoriesArr: Array<string> = []
-        for (const _ of audithories.split(' ')) {
-            if (_ !== '') {
-                audithoriesArr.push(_)
-            }
-        }
-        setAudithoriesArray(audithoriesArr);
-    }, [audithories])
-
-
+    
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault()
         console.log(name, groups, audithories)
-        addFacults({ name, groups: groupsArray, audithories: audithoriesArray }).then(e => {
+        addFacults({ name, groups: groupsArray }).then(e => {
             if (!e.result && e.message) {
                 setError(e.message);
                 return
@@ -88,19 +68,22 @@ const FacultsPage = () => {
                 <PopUp title='Создание факультета' setOpenPopUp={setOpenPopUp}>
                     <Form onSubmit={onSubmit}>
                         <Input
-                            type="text"
-                            
+                            type="text"          
                             label="Название"
                             placeholder={''}
                             required
                             value={name}
-                            onChange={(value) => setName(value as string)} />
+                            onChange={(value) => setName(value)} 
+                            upper
+                            />
 
                         <TextArea
                             type="text"
                             label="Группа"
-                            value={name}
+                            pre={name}
+                            value={groups}
                             onChange={(value) => setGroups(value)}
+                            setGroupsArray={setGroupsArray}
                         />
                     
                         <Button lightBtn type='submit'>

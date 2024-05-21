@@ -10,16 +10,14 @@ export type IResponseAddFacults = {
 interface addFacultsProps {
     name: string;
     groups: Array<string>;
-    audithories: Array<string>;
 };
 
-export const addFacults = ({ name, groups, audithories }: addFacultsProps): Promise<IResponseAddFacults> =>
+export const addFacults = ({ name, groups }: addFacultsProps): Promise<IResponseAddFacults> =>
     methodDefault({
         path: `facultet/add`,
         method: "POST",
         body: JSON.stringify({
             name,
-            groups,
-            audithories
+            groups
         })
     });

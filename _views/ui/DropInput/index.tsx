@@ -1,21 +1,35 @@
-import { Dispatch, SetStateAction, useState, FC, useMemo } from 'react';
+import {
+    Dispatch,
+    SetStateAction,
+    useState,
+    FC,
+    useMemo,
+    ChangeEvent,
+    useEffect,
+    useRef
+} from 'react';
 
 import { Input } from '../Input';
 import { ArrowIcon } from '../svg_dynamic/base.svg';
+import { CloseIcon } from '../svg_dynamic/base.svg';
 
 import cls from './index.module.scss';
 
 interface DropdownInputProps {
     label?: string;
     list: string[];
-    value: string;
-    setActiveValue: (value: string) => void;
- 
-
+    setArray: Dispatch<SetStateAction<string[]>>
 }
 
-const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list, label }) => {
+const DropdownInput: FC<DropdownInputProps> = ({
+    list,
+    label,
+    setArray
+}) => {
     const [focus, setFocus] = useState<boolean>(false);
+    const [words, setWords] = useState<string[]>([]);
+    const [currentValue, setCurrentValue] = useState<string>('');
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const highlightMatch = (text: string, searchQuery: string) => {
         const lowerText = text?.toLowerCase();
@@ -37,30 +51,76 @@ const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list, la
         );
     };
 
-    const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
+    const WordsRows = useMemo(() => {
+        return words.map((word, index) => (
+            <div className={cls.word} key={index}>
+                {`${word.split(' ')[0]} ${word.split(' ')[1] ? word.split(' ')[1].slice(0, 1) + '.' : ''} ${word.split(' ')[2] ? word.split(' ')[2].slice(0, 1) + '.' : ''} `}
+                <div className={cls.svg}
+                    onClick={() => {
+                        setWords((prevWords) => prevWords.filter((_, i) => i !== index));
+                    }}
+                >
+                    <CloseIcon />
+                </div>
+            </div>
+        ));
+    }, [words]);
+
+    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.target.value;
+        setCurrentValue(text);
+        if (text.endsWith(' ') && text.trim().length > 0) {
+            setCurrentValue('');
+        }
+    };
+
+    useEffect(() => {
+        setArray(words);
+    }, [words, setArray]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setFocus(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropdownRef]);
+
     const dropDownInput = (
-        <div className={cls.dropdown}>
-             {label && (
-               <label htmlFor={inputId}>{label}</label>
+        <div className={cls.dropdown} ref={dropdownRef}>
+            {label && (
+                <label>{label}</label>
             )}
             <div className={cls.input}>
-                <Input
-                    type='text'
-                    value={value}
-                    onChange={(currentValue) => setActiveValue(currentValue)}
+                {WordsRows}
+                <textarea name="drop"
+                    value={currentValue}
+                    onChange={handleTextChange}
                     onFocus={() => setFocus(true)}
-                    onBlur={() => setFocus(false)}
                 />
             </div>
-            {list.filter((e) => e.toLowerCase().includes(value?.toLowerCase())).length > 0 && (
+            {list.filter((e) => e.toLowerCase().includes(currentValue?.toLowerCase())).length > 0 && (
                 <div className={cls.drop} data-focus={focus}>
-                    {list.filter((e) => e.toLowerCase().includes(value.toLowerCase())).map((item, index) => (
-                        <div key={index} onClick={() => setActiveValue(item)}>{highlightMatch(item, value)}</div>
+                    {list.filter((e) => e.toLowerCase().includes(currentValue.toLowerCase()) && !words.includes(e)).map((item, index) => (
+                        <div 
+                        key={index}
+                         onClick={() => {
+                            setWords((prevWords) => [...prevWords, item.trim()]);
+                            setCurrentValue('');
+                        }}
+                         >
+                            {highlightMatch(item, currentValue)}
+                        </div>
                     ))}
                 </div>
             )}
         </div>
-    )
+    );
 
     return dropDownInput;
 };

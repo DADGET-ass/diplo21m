@@ -1,17 +1,25 @@
-import { FC, useEffect, useState } from 'react';
+import {
+    FC,
+    useEffect,
+    useState,
+    useMemo,
+    ChangeEvent,
+    Dispatch,
+    SetStateAction
+} from 'react';
 import cls from './index.module.scss';
 import { formatGroup } from '@/utils/formats';
 import { validationDefault } from '@/utils/validations';
+import { CloseIcon } from '../svg_dynamic/base.svg';
 
 interface AreaProps {
     label?: string;
-    type:
-    | "text"
-    | "group";
+    type: "text" | "group";
     onChange?: (text: string) => void;
     value?: string;
+    pre?: string;
+    setGroupsArray: Dispatch<SetStateAction<string[]>>
 };
-
 
 const formatDefault = (text: string) => text;
 
@@ -32,7 +40,9 @@ const TextArea: FC<AreaProps> = ({
     label,
     type,
     onChange,
-    value
+    value,
+    pre,
+    setGroupsArray
 }) => {
     const [error, setError] = useState<{
         state: boolean,
@@ -45,39 +55,68 @@ const TextArea: FC<AreaProps> = ({
     });
 
     const [currentValue, setCurrentValue] = useState<string>(value || "");
+    const [words, setWords] = useState<string[]>([]);
     const TypeInput = typeTextArea[type];
+
     useEffect(() => {
         setCurrentValue(value || "");
-        if (value?.length == 0) {
+        if (value?.length === 0) {
             setError((prevState) => ({
                 ...prevState,
                 state: true,
             }));
         }
     }, [value]);
+
     useEffect(() => {
-        onChange && onChange(currentValue);
+        if (onChange) {
+            onChange(currentValue);
+        }
     }, [currentValue]);
 
-    const textArea = (
+    const WordsRows = useMemo(() => {
+        return words.map((word, index) => (
+            <div className={cls.word} key={index}>
+                {word}
+                <div className={cls.svg}
+                    onClick={() => {
+                        setWords((prevWords) => prevWords.filter((_, i) => i !== index));
+                    }}
+                >
+                    <CloseIcon />
+                </div>
+            </div>
+        ));
+    }, [words]);
+
+    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.target.value;
+        setCurrentValue(text);
+        if (text.endsWith(' ') && text.trim().length > (pre ? pre.length : 0)) {
+            setWords((prevWords) => [...prevWords, text.trim().toUpperCase()]);
+            setCurrentValue('');
+        }
+    };
+
+    useEffect(() => {
+        setGroupsArray(words)
+    }, [words])
+
+    return (
         <div className={cls.inputTextArea}>
             {label && (
                 <label>{label}</label>
             )}
-            <textarea className={cls.textArea}
-            value={currentValue}
-            onChange={(e) => {
-                const text = e.target.value;
-                setCurrentValue(typeTextArea[type].format(text));
-            }}>
-
-            </textarea>
+            <div>
+                {WordsRows}
+                <textarea
+                    className={cls.textArea}
+                    value={currentValue ? currentValue : pre ? pre + currentValue : currentValue}
+                    onChange={handleTextChange}
+                />
+            </div>
         </div>
-
-        
     );
-    return textArea;
-
 };
 
 export { TextArea };

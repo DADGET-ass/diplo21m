@@ -5,15 +5,34 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
     label {
         cursor: pointer;
         padding-left: 5px;
         color: white;
-        @include responsive_font(18, 14);}
+        @include responsive_font(18, 14);
+    }
 
     .input {
+        padding: 5px;
         display: flex;
-        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+        background-color: #fff;
+    }
+
+    textarea {
+        outline: none;
+        padding: 10px;
+        display: flex;
+        flex-grow: 1;
+        height: 60px;
+        background-color: white;
+        border: 1px solid transparent;
+        user-select: text;
+        resize: none;
+        line-height: 40px;
+        text-transform: uppercase;
     }
 }
 
@@ -22,7 +41,7 @@
     z-index: 1111;
     top: 100%;
     background-color: white;
-
+    height: auto;
     color: rgb(0, 0, 0);
     width: 100%;
     opacity: 1;
@@ -49,9 +68,34 @@
 
     &[data-focus="false"] {
         opacity: 0;
-        z-index: 0;
-        cursor: default;
-        pointer-events: none;
+        height: 0;
+        transition: .4s;
+
+        div {
+            z-index: 0;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+}
+
+.word {
+    padding: 5px;
+    display: flex;
+    border-radius: 7px;
+    align-items: center;
+    background-color: var(--lightGrey);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    .svg {
+        background-color: var(--lightGrey);
+        transition: .4s;
+    }
+
+    &:hover .svg {
+        color: red;
         transition: .4s;
     }
 }

@@ -26,19 +26,15 @@ const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
                     <ArrowIcon />
                 </div>
             </div>
-            {/* {isOpen && (
+            {isOpen && (
                 <div className={cls.groups}>
                     {disciplins.groups.map(group => (
                         <div key={group._id} className={cls.groupName}>
-                            {group.item.map(item => (
-                                <div key={item._id}>
-                                    {item.name}
-                                </div>
-                            ))}
+                            {group.item.name}
                         </div>
                     ))}
                 </div>
-            )} */}
+            )}
         </Arcticle>
     );
 };

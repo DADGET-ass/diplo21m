@@ -11,7 +11,7 @@ import { UserRoleEnum, useAuthStore } from "@/data/store/useAuthStore";
 import { ModeEnum, useTabsStore } from "@/data/store/useTabsStore";
 import { DropdownInput } from "@/_views/ui/DropInput";
 import { IAllTeachers, addDisciplines, getFacultets, getTeachers } from "@/data/api";
-import { IDiscipline, IGroups } from "@/data/api/disciplines/addDisciplines";
+import { IDiscipline } from "@/data/api/disciplines/addDisciplines";
 import { IGroupsFacult } from "@/data/api/facultets/getFacultets";
 import { Checkbox } from "@/_views/ui/Checkbox";
 
@@ -23,30 +23,12 @@ const DisciplinesHeader = () => {
     const [groupName, setGroupName] = useState<string>('');
     const [teachers, setTeachers] = useState<IAllTeachers[]>([]);
     const [groups, setGroups] = useState<IGroupsFacult[]>([]);
-    const [groupsArray, setGroupsArray] = useState<Array<IGroups>>([]);
+    const [groupsArray, setGroupsArray] = useState<Array<string>>([]);
     const [teachersArray, setTeachersArray] = useState<Array<string>>([]);
     const [pc, setPc] = useState<boolean>(false);
 
     const { userRole } = useAuthStore();
     const { mode } = useTabsStore();
-
-
-    useEffect(() => {
-        const groupArr: Array<IGroups> = groupName.split(',')
-            .filter(_ => _ !== '')
-            .map(group => ({
-
-                groupName: group,
-                aH: 0,
-            }));
-        setGroupsArray(groupArr);
-    }, [groupName]);
-
-    useEffect(() => {
-        const teacherArr: Array<string> = teacherName.split(',')
-            .filter(_ => _ !== '');
-        setTeachersArray(teacherArr);
-    }, [teacherName]);
 
     useEffect(() => {
         getTeachers({ id: '' }).then(e => {
@@ -62,7 +44,7 @@ const DisciplinesHeader = () => {
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
-        addDisciplines({ name, groups: groupsArray, teachers: teachersArray, pc }).then(response => {
+        addDisciplines({ name, groups: groupsArray.map((e) => ({ groupName: e, aH: 0 })), teachers: teachersArray, pc }).then(response => {
             if (response.error) {
                 setError(response.error);
             } else {
@@ -93,25 +75,23 @@ const DisciplinesHeader = () => {
                             value={name}
                             onChange={(value) => setName(value as string)}
                         />
-                     
+
                         {teachers.length > 0 && (
                             <DropdownInput
                                 label="Преподаватели"
                                 list={teachers.map(e => `${e.surname} ${e.name} ${e.patronymic}`)}
-                                value={teacherName}
-                                setActiveValue={newValue => setTeacherName(newValue)}
+                                setArray={setTeachersArray}
                             />
                         )}
-                   
+
                         {groups.length > 0 && (
                             <DropdownInput
-                            label="Группы"
+                                label="Группы"
                                 list={groups.map(e => e.name)}
-                                value={groupName}
-                                setActiveValue={newValue => setGroupName(newValue)}
+                                setArray={setGroupsArray}
                             />
                         )}
-              
+
                         <Checkbox value='pc' checked={pc} onChange={() => setPc(prev => !prev)} name="pc">
                             Компьютерная аудитория
                         </Checkbox>

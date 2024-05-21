@@ -1,15 +1,15 @@
 import { methodDefault } from "../defaultAPI";
 
-export interface IGroups {
-    groupName: string,
-    aH:number,
-}
+
 
 export interface IDiscipline {
     name: string,
-    groups: Array<IGroups>,
+    groups: Array<{
+        groupName: string,
+        aH:number
+    }>,
     teachers: Array<string>,
-    pc:boolean,
+    pc: boolean,
 }
 
 type IResponseDisciplines = {
