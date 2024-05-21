@@ -13,10 +13,16 @@ import { LeftMenuEnum } from '..';
 interface PartitionProps {
     title: string;
     children: ReactNode;
-    type: LeftMenuEnum
+    type: LeftMenuEnum;
+    noArr?: boolean;
 }
 
-const Partition: FC<PartitionProps> = ({ title, children, type }) => {
+const Partition: FC<PartitionProps> = ({
+    title,
+    children,
+    type,
+    noArr
+}) => {
 
     const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -28,9 +34,11 @@ const Partition: FC<PartitionProps> = ({ title, children, type }) => {
                     {title}
                 </Link>
 
-                <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev) }}>
-                    <ArrowIcon />
-                </div>
+                {!noArr && (
+                    <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev) }}>
+                        <ArrowIcon />
+                    </div>
+                )}
             </div>
 
             {isOpen && children}

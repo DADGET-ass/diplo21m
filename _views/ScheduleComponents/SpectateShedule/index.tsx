@@ -1,23 +1,20 @@
 import {
     useEffect,
     useState,
-    FC
+    FC,
+    MutableRefObject
 } from 'react';
 import dynamic from 'next/dynamic';
 
-import { ITeachers, getDisciplines, getTeachersByDiscipline } from '@/data/api';
-import { maxPars } from '@/config';
+import { ITeachers, getTeachersByDiscipline } from '@/data/api';
 import { IDisciplines } from '@/data/api/disciplines/getDisciplines';
-import { ITypes, getTypes } from '@/data/api/disciplines/types/getTypes';
-import { IAudith, getIAudith } from '@/data/api/audithories/getAudithories';
+import { ITypes } from '@/data/api/disciplines/types/getTypes';
+import { IAudith } from '@/data/api/audithories/getAudithories';
 import { IShedule, getShedule } from '@/data/api/fullShedule/getShedule';
-import { Button } from '@/_views/ui/Button';
-import { IAddShedule } from '@/data/api/fullShedule/addShedule';
-import { IGroups } from '@/data/api';
 import { useDateStore } from '@/data/store/useDateStore';
+import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 import cls from './index.module.scss';
-import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 export interface ScheduleItemProps {
     discipline: string;
@@ -27,74 +24,27 @@ export interface ScheduleItemProps {
     number: number
 }
 
-
-const TableRow = dynamic(
-    () =>
-        import("@/_views/ScheduleComponents/SheduleTable/TableRow").then(
-            (e) => e.TableRow
-        ),
-    { ssr: false }
-);
-
-const TableRowWithTeachers: FC<{
-    item: ScheduleItemProps,
-    index: number,
-    types: ITypes[],
-    disciplines: IDisciplines[],
-    audithories: IAudith[],
-    activeFormDatas: ScheduleItemProps,
-    setActiveFormDatas: React.Dispatch<React.SetStateAction<ScheduleItemProps[]>>
-}> = ({ item, index, types, disciplines, audithories, activeFormDatas, setActiveFormDatas }) => {
-    const [teachers, setTeachers] = useState<ITeachers[]>([]);
-    const { selectedDate } = useDateStore()
-
-    useEffect(() => {
-        try {
-            getTeachersByDiscipline({
-                id: disciplines.filter((e) => e.name === item.discipline)[0].id,
-                date: selectedDate.toISOString().slice(0, 10)
-            }).then(response => {
-                setTeachers(response.teachers);
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    }, [item.discipline]);
-
-    return (
-        <TableRow
-            key={item.number}
-            item={item}
-            index={index}
-            types={types}
-            teachers={teachers}
-            disciplines={disciplines}
-            audithories={audithories}
-            activeFormDatas={activeFormDatas}
-            setActiveFormDatas={setActiveFormDatas}
-        />
-    );
-};
-
 interface SpectateSheduleProps {
     group: IGroupsFacult;
+    tableRef: MutableRefObject<HTMLDivElement | null>;
+
 }
 
-const SpectateShedule: FC<SpectateSheduleProps> = ({ group }) => {
-
+const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
+    const { selectedDate } = useDateStore()
     const [shedule, setShedule] = useState<Array<IShedule>>([]);
 
     useEffect(() => {
-        getShedule().then(response => {
-            if (response.shedule) {
-                setShedule(response.shedule);
+        getShedule({ date: selectedDate.toISOString().slice(0, 10), group: group._id }).then(response => {
+            if (response.schedule) {
+                setShedule(response.schedule);
             }
         });
-    }, []);
+    }, [selectedDate]);
 
     return (
 
-        <div className={cls.tableContainer}>
+        <div className={cls.tableContainer} ref={tableRef}>
             <div className={cls.btn}>
 
             </div>
@@ -117,28 +67,27 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group }) => {
 
             </div>
             <div className={cls.tableBody}>
-                {shedule.length > 0 ? (
-                    <div>
-                        {shedule.map((item) => (
-                            <div key={item.id}>
-                                {/* Отображаем дату расписания */}
-                                <h3>{item.date.toString()}</h3>
-                                {/* Отображаем элементы расписания */}
-                                {item.items.map((scheduleItem) => (
-                                    <div key={scheduleItem._id}>
-                                        {/* Отображаем свойства элемента расписания */}
-                                        <p>Дисциплина: {scheduleItem.discipline.name}</p>
-                                        <p>Преподаватель: {scheduleItem.teacher.name}</p>
-                                        <p>Тип: {scheduleItem.type.name}</p>
-                                        <p>Аудитория: {scheduleItem.audithories.name}</p>
-                                        <p>Номер: {scheduleItem.number}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
+                {shedule[0] ? shedule[0].items.map((item) => (
+                    <div className={cls.tableHead}>
+                        <div className={cls.item}>
+                            <div className={cls.name}>{item.number}</div>
+                        </div>
+                        <div className={cls.item}>
+                            <div className={cls.name}>{item.discipline.name}</div>
+                        </div>
+                        <div className={cls.item}>
+                            <div className={cls.name}>{item.teacher.surname} {item.teacher.name || ''} {item.teacher.patronymic || ''}</div>
+                        </div>
+                        <div className={cls.item}>
+                            <div className={cls.name}>{item.type.name}</div>
+                        </div>
+                        <div className={cls.item}>
+                            <div className={cls.name}>{item.audithoria.name} </div>
+                        </div>
+
                     </div>
-                ) : (
-                    <p>Расписание загружается...</p>
+                )) : (
+                    <div>Расписания пока нема</div>
                 )}
             </div>
         </div>

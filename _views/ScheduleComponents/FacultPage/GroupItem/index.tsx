@@ -34,10 +34,10 @@ const GroupItem: FC<GroupItemProps> = ({ group }) => {
             </div>
             {isOpenPopUp && (
                 <PopUp title='Редактирование группы' setOpenPopUp={setOpenPopUp}>
-                    <Input type="text" disabled label="Текущее название группы" placeholder={''} />
+                    <Input type="text" disabled label="Текущее название группы" placeholder={group.name} />
                     <Input type="text" autoFocus label="Новое название группы" placeholder={''} />
-                    <Input type="text" disabled label="Текущие дисциплины" placeholder={''} />
-                    <Input type="text" label="Новые дисциплины" placeholder={''} />
+                    {/* <Input type="text" disabled label="Текущие дисциплины" placeholder={''} />
+                    <Input type="text" label="Новые дисциплины" placeholder={''} /> */}
                     <Button lightBtn>Сохранить</Button>
                 </PopUp>
             )}

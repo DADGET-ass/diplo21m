@@ -12,9 +12,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const { isAuth, setAuth, setUserRole, userRole } = useAuthStore()
 
   const checkToken = () => {
-    
-
-
     check().then(e => {
       if (!e.user) {
         setAuth(false);

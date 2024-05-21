@@ -36,7 +36,7 @@ const Teacher: FC<TeacherProps> = ({ teacher }) => {
                     </div>
                 )}
                 <div>Всего часов: {teacher.aH}</div>
-                <div>Отработано часов: {teacher.hH || '0'}/{teacher.aH}</div>
+                <div>Отработано часов: {teacher.burden?.filter((e) => `${new Date(e.mounth)?.getFullYear()}_${new Date(e.mounth)?.getMonth}` == `${new Date().getFullYear()}_${new Date().getMonth}`)[0].hH || '0'}/{teacher.aH}</div>
             </div>
         </>
     )

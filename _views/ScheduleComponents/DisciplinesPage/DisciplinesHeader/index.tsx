@@ -13,6 +13,7 @@ import { DropdownInput } from "@/_views/ui/DropInput";
 import { IAllTeachers, addDisciplines, getFacultets, getTeachers } from "@/data/api";
 import { IDiscipline, IGroups } from "@/data/api/disciplines/addDisciplines";
 import { IGroupsFacult } from "@/data/api/facultets/getFacultets";
+import { Checkbox } from "@/_views/ui/Checkbox";
 
 const DisciplinesHeader = () => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
@@ -29,12 +30,12 @@ const DisciplinesHeader = () => {
     const { userRole } = useAuthStore();
     const { mode } = useTabsStore();
 
-  
+
     useEffect(() => {
         const groupArr: Array<IGroups> = groupName.split(',')
             .filter(_ => _ !== '')
             .map(group => ({
-                
+
                 groupName: group,
                 aH: 0,
             }));
@@ -87,34 +88,33 @@ const DisciplinesHeader = () => {
                     <Form onSubmit={onSubmit}>
                         <Input
                             type="text"
-                            autoFocus
                             label="Название"
                             placeholder=""
                             value={name}
                             onChange={(value) => setName(value as string)}
                         />
-                        <p>Учителя</p>
+                     
                         {teachers.length > 0 && (
                             <DropdownInput
+                                label="Преподаватели"
                                 list={teachers.map(e => `${e.surname} ${e.name} ${e.patronymic}`)}
                                 value={teacherName}
                                 setActiveValue={newValue => setTeacherName(newValue)}
                             />
                         )}
-                        <p>Группы</p>
+                   
                         {groups.length > 0 && (
                             <DropdownInput
+                            label="Группы"
                                 list={groups.map(e => e.name)}
                                 value={groupName}
                                 setActiveValue={newValue => setGroupName(newValue)}
                             />
                         )}
-                        <p>Компьютерный класс</p>
-                        <Input
-                            type="checkbox"
-                            checked={pc}
-                            onChange={(checked) => setPc(checked as boolean)}
-                        />
+              
+                        <Checkbox value='pc' checked={pc} onChange={() => setPc(prev => !prev)} name="pc">
+                            Компьютерная аудитория
+                        </Checkbox>
 
                         <Button lightBtn type='submit'>Создать</Button>
                         {error && <span>{error}</span>}

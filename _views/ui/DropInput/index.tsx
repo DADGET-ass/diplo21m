@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, FC } from 'react';
+import { Dispatch, SetStateAction, useState, FC, useMemo } from 'react';
 
 import { Input } from '../Input';
 import { ArrowIcon } from '../svg_dynamic/base.svg';
@@ -6,6 +6,7 @@ import { ArrowIcon } from '../svg_dynamic/base.svg';
 import cls from './index.module.scss';
 
 interface DropdownInputProps {
+    label?: string;
     list: string[];
     value: string;
     setActiveValue: (value: string) => void;
@@ -13,7 +14,7 @@ interface DropdownInputProps {
 
 }
 
-const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) => {
+const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list, label }) => {
     const [focus, setFocus] = useState<boolean>(false);
 
     const highlightMatch = (text: string, searchQuery: string) => {
@@ -36,13 +37,17 @@ const DropdownInput: FC<DropdownInputProps> = ({ value, setActiveValue, list }) 
         );
     };
 
+    const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
     const dropDownInput = (
         <div className={cls.dropdown}>
+             {label && (
+               <label htmlFor={inputId}>{label}</label>
+            )}
             <div className={cls.input}>
                 <Input
                     type='text'
                     value={value}
-                    onChange={(currentValue) => setActiveValue(currentValue as string)}
+                    onChange={(currentValue) => setActiveValue(currentValue)}
                     onFocus={() => setFocus(true)}
                     onBlur={() => setFocus(false)}
                 />

@@ -7,16 +7,30 @@ import cls from './index.module.scss';
 import { PopUp } from "@/_views/ui/PopUp";
 import { Form } from "@/_views/ui/Form";
 import { Input } from "@/_views/ui/Input";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { Checkbox } from "@/_views/ui/Checkbox";
+import { addIAudith } from "@/data/api";
 
 const AudithoriesHeader = () => {
 
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [pc, setPc] = useState<boolean>(false);
 
     const { userRole } = useAuthStore()
     const { mode } = useTabsStore()
+
+    const onSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        addIAudith({ name, pc }).then(e => {
+            if (e.error) {
+                setError(e.error);
+                return
+            }
+            setOpenPopUp(false)
+        })
+    }
 
     const audithoriesHeader = (
         <>
@@ -29,7 +43,7 @@ const AudithoriesHeader = () => {
             </div>
             {isOpenPopUp && (
                 <PopUp title='Создание аудитории' setOpenPopUp={setOpenPopUp}>
-                    <Form >
+                    <Form onSubmit={onSubmit}>
                         <Input
                             type="text"
                             autoFocus
@@ -37,7 +51,7 @@ const AudithoriesHeader = () => {
                             placeholder={''}
                             value={name}
                             onChange={(value) => setName(value as string)} />
-
+                        <Checkbox value="pc" checked={pc} onChange={() => setPc(prev => !prev)} name='pc'>Компьютерная аудитория</Checkbox>
                         {/* <p>Учителя</p>
                         
                             <DropdownInput
@@ -54,14 +68,15 @@ const AudithoriesHeader = () => {
                                 value={groupName}
                                 setActiveValue={newValue => setGroupName(newValue)}
                             /> */}
-                       
+
 
                         <Button lightBtn type='submit'>
                             Создать
                         </Button>
                         {error && <span>{error}</span>}
                     </Form>
-                </PopUp>)};
+                </PopUp>)
+            }
         </>
     );
     return audithoriesHeader;

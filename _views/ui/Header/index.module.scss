@@ -31,6 +31,11 @@
 
     }
 
+    img {
+        pointer-events: none;
+        user-select: none;
+    }
+
     .icon {
         position: absolute;
         display: flex;

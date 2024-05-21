@@ -89,7 +89,7 @@ const FacultsPage = () => {
                     <Form onSubmit={onSubmit}>
                         <Input
                             type="text"
-                            autoFocus
+                            
                             label="Название"
                             placeholder={''}
                             required

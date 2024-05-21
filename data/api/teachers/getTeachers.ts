@@ -14,7 +14,12 @@ export interface IAllTeachers {
     name: string,
     patronymic: string,
     aH: string,
-    hH: string,
+    burden: [
+        {
+            hH: number,
+            mounth: string,
+        }
+    ],
     disciplines: Array<IDisciplines>
 
 }

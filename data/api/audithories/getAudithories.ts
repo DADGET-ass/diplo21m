@@ -5,6 +5,7 @@ import { methodDefault } from "../defaultAPI";
 export interface IAudith {
     _id: string,
     name: string,
+    pc:boolean,
 }
 
 type IResponseAudith = {

@@ -1,5 +1,7 @@
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { formatPhoneNumber } from '@/utils/formats';
+import {
+    formatPhoneNumber,
+} from '@/utils/formats'
 import {
     validationPhone,
     validationEmail,
@@ -9,17 +11,21 @@ import {
 import cls from './index.module.scss';
 import { EyeCloseIcon, EyeIcon } from '../svg_dynamic/base.svg';
 import { formatGroup } from '@/utils/formats/formatGroup';
-
 interface InputProps {
     label?: string;
-    type: "phoneNumber" | "email" | "password" | "text" | "group" | "number" | "checkbox";
+    type:
+    | "phoneNumber"
+    | "email"
+    | "password"
+    | "text"
+    | "group"
+    | "number";
     autoFocus?: boolean;
     required?: boolean;
     placeholder?: string;
-    onChange?: (value: string | boolean) => void;
+    onChange?: (text: string) => void;
     isValid?: (result: boolean) => void;
     value?: string;
-    checked?: boolean;
     disabled?: boolean;
     onFocus?: () => void;
     onBlur?: () => void;
@@ -57,12 +63,7 @@ const typeInput = {
         type: "number",
         format: formatDefault,
         valid: validationDefault,
-    },
-    checkbox: {
-        type: "checkbox",
-        format: (value: string) => value,
-        valid: (value: string) => true,
-    },
+    }
 };
 
 const Input: FC<InputProps> = ({
@@ -72,7 +73,6 @@ const Input: FC<InputProps> = ({
     required,
     placeholder,
     value,
-    checked,
     disabled,
     onChange,
     isValid,
@@ -91,7 +91,6 @@ const Input: FC<InputProps> = ({
     const inputRef = useRef<HTMLInputElement>(null);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<string>(value || "");
-    const [currentChecked, setCurrentChecked] = useState<boolean>(checked || false);
     const TypeInput = typeInput[type];
 
     useEffect(() => {
@@ -99,36 +98,19 @@ const Input: FC<InputProps> = ({
             inputRef.current.focus();
         }
     }, []);
-
     useEffect(() => {
-        if (type !== "checkbox") {
-            onChange && onChange(currentValue);
-        } else {
-            onChange && onChange(currentChecked);
-        }
-    }, [currentValue, currentChecked]);
-
+        onChange && onChange(currentValue);
+    }, [currentValue]);
     useEffect(() => {
         setCurrentValue(value || "");
-        if (autoFocus && value?.length === 0) {
+        if (autoFocus && value?.length == 0) {
             setError((prevState) => ({
                 ...prevState,
                 state: true,
             }));
         }
     }, [value]);
-
     const inputId = useMemo(() => Math.random().toString(36).substring(7), []);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (type !== "checkbox") {
-            const text = e.target.value;
-            setCurrentValue(TypeInput.format(text));
-        } else {
-            setCurrentChecked(e.target.checked);
-        }
-    };
-
     const input = (
         <div className={cls.inputWrapper}>
             {label && (
@@ -140,11 +122,13 @@ const Input: FC<InputProps> = ({
                     autoFocus={autoFocus}
                     placeholder={placeholder}
                     required={required}
-                    type={type === "password" && showPassword ? "text" : TypeInput.type}
-                    value={type !== "checkbox" ? currentValue : undefined}
-                    checked={type === "checkbox" ? currentChecked : undefined}
+                    type={showPassword ? "text" : typeInput[type].type}
+                    value={currentValue}
                     data-error={error.state === true ? 'true' : ''}
-                    onChange={handleInputChange}
+                    onChange={(e) => {
+                        const text = e.target.value;
+                        setCurrentValue(typeInput[type].format(text));
+                    }}
                     disabled={disabled}
                     onFocus={() => {
                         onFocus && onFocus();
@@ -153,7 +137,6 @@ const Input: FC<InputProps> = ({
                         onBlur && onBlur();
                     }}
                 />
-
                 {type === 'password' && currentValue.length > 0 && (
                     <div className={cls.eye} onMouseDown={() => setShowPassword(true)} onMouseUp={() => setShowPassword(false)} onMouseLeave={() => setShowPassword(false)}>
                         {!showPassword ? <EyeCloseIcon /> : <EyeIcon />}
@@ -167,8 +150,6 @@ const Input: FC<InputProps> = ({
             </div>
         </div>
     );
-
-    return input;
+    return input
 };
-
-export { Input };
+export { Input }

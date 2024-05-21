@@ -2,6 +2,8 @@
     width: 20vw;
     height: calc(100vh - 100px);
     background-color: var(--greenOne);
+    display: flex;
+    flex-direction: column;
 
     .full {
         display: flex;
@@ -14,10 +16,8 @@
         cursor: pointer;
 
         &:hover {
-            background-color: var(--greenOne)
+            background-color: var(--greenOne);
         }
-
-
     }
 
     .name {
@@ -28,4 +28,28 @@
         border-bottom: 3px solid white;
     }
 
+    .menuBlock {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .menu {
+            flex-grow: 1;
+        }
+
+        .exit {
+            display: flex;
+            align-items: flex-end;
+            padding: 12px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: var(--greenThird);
+            margin-top: auto; 
+            cursor: pointer;
+            
+            &:hover {
+                background-color: var(--greenTwo);
+            }
+        }
+    }
 }

@@ -1,8 +1,4 @@
-import {
-    useEffect,
-    useState,
-    FC
-} from 'react';
+import { FC, useEffect, useState, MutableRefObject, Dispatch, SetStateAction, FormEvent } from 'react';
 import dynamic from 'next/dynamic';
 
 import { ITeachers, getDisciplines, getTeachersByDiscipline } from '@/data/api';
@@ -12,21 +8,12 @@ import { ITypes, getTypes } from '@/data/api/disciplines/types/getTypes';
 import { IAudith, getIAudith } from '@/data/api/audithories/getAudithories';
 import { IShedule, getShedule } from '@/data/api/fullShedule/getShedule';
 import { Button } from '@/_views/ui/Button';
-import { IAddShedule } from '@/data/api/fullShedule/addShedule';
-import { IGroups } from '@/data/api';
+import { AddShedulePayload, IItems, addShedule } from '@/data/api/fullShedule/addShedule';
 import { useDateStore } from '@/data/store/useDateStore';
-
-import cls from './index.module.scss';
 import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
-export interface ScheduleItemProps {
-    discipline: string;
-    teacher: string;
-    type: string;
-    audithoria: string;
-    number: number
-}
-
+import cls from './index.module.scss';
+import { Form } from '@/_views/ui/Form';
 
 const TableRow = dynamic(
     () =>
@@ -37,75 +24,86 @@ const TableRow = dynamic(
 );
 
 const TableRowWithTeachers: FC<{
-    item: ScheduleItemProps,
+    item: IItems,
     index: number,
     types: ITypes[],
     disciplines: IDisciplines[],
     audithories: IAudith[],
-    activeFormDatas: ScheduleItemProps,
-    setActiveFormDatas: React.Dispatch<React.SetStateAction<ScheduleItemProps[]>>
-}> = ({ item, index, types, disciplines, audithories, activeFormDatas, setActiveFormDatas }) => {
-    const [teachers, setTeachers] = useState<ITeachers[]>([]);
-    const { selectedDate } = useDateStore()
+    activeFormDatas: IItems,
+    setActiveFormDatas: React.Dispatch<React.SetStateAction<IItems[]>>
+    teachers: Array<ITeachers>;
+    setTeachers: Dispatch<SetStateAction<Array<ITeachers>>>;
+}> = ({
+    item,
+    index,
+    types,
+    disciplines,
+    audithories,
+    activeFormDatas,
+    setActiveFormDatas,
+    teachers,
+    setTeachers
+}) => {
+        const { selectedDate } = useDateStore()
 
-    useEffect(() => {
-        try {
-            getTeachersByDiscipline({
-                id: disciplines.filter((e) => e.name === item.discipline)[0].id,
-                date: selectedDate.toISOString().slice(0, 10)
-            }).then(response => {
-                setTeachers(response.teachers);
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    }, [item.discipline]);
+        useEffect(() => {
+            try {
+                getTeachersByDiscipline({
+                    id: disciplines.filter((e) => e.name === item.discipline)[0].id,
+                    date: selectedDate.toISOString().slice(0, 10)
+                }).then(response => {
+                    setTeachers(response.teachers);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }, [item.discipline]);
 
-    return (
-        <TableRow
-            key={item.number}
-            item={item}
-            index={index}
-            types={types}
-            teachers={teachers}
-            disciplines={disciplines}
-            audithories={audithories}
-            activeFormDatas={activeFormDatas}
-            setActiveFormDatas={setActiveFormDatas}
-        />
-    );
-};
+        return (
+            <TableRow
+                key={item.number}
+                item={item}
+                index={index}
+                types={types}
+                teachers={teachers}
+                disciplines={disciplines}
+                audithories={audithories}
+                activeFormDatas={activeFormDatas}
+                setActiveFormDatas={setActiveFormDatas}
+            />
+        );
+    };
 
 interface SheduleTableProps {
     group: IGroupsFacult;
+    tableRef: MutableRefObject<HTMLDivElement | null>;
 }
 
-const SheduleTable: FC<SheduleTableProps> = ({ group }) => {
-    const [scheduleItems, setScheduleItems] = useState<ScheduleItemProps[]>([]);
-    const [scheduleItemsId, setScheduleItemsId] = useState<ScheduleItemProps[]>([]);
-    const [teachers, setTeachers] = useState<Array<ITeachers>>();
+const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
+    const [scheduleItems, setScheduleItems] = useState<IItems[]>([]);
+    const [scheduleItemsId, setScheduleItemsId] = useState<IItems[]>([]);
+    const [teachers, setTeachers] = useState<Array<ITeachers>>([]);
     const { selectedDate } = useDateStore();
 
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
     const [types, setTypes] = useState<ITypes[]>([]);
     const [audithories, setAudithories] = useState<IAudith[]>([]);
     const [schedule, setSchedule] = useState<IShedule[]>([]);
+    const [serverMessage, setServerMessage] = useState<string>();
 
-    const [addShedule, setAddShedule] = useState<IAddShedule>();
+    const [addShedulePayload, setAddShedulePayload] = useState<AddShedulePayload>();
 
     useEffect(() => {
-        setAddShedule({ group: group._id, date: selectedDate.toLocaleDateString('ru-Ru', { year: 'numeric', month: '2-digit', day: '2-digit' }), items: scheduleItems });
-    }, [group, selectedDate, scheduleItems])
+        setAddShedulePayload({ group: group._id, date: selectedDate.toLocaleDateString('ru-Ru', { year: 'numeric', month: '2-digit', day: '2-digit' }), items: scheduleItems });
+    }, [group, selectedDate, scheduleItems]);
 
     useEffect(() => {
         const updatedItems = scheduleItems.map(item => {
             const audithoriaId = audithories?.find(audithoria => audithoria.name === item.audithoria)?._id || '';
             const disciplineId = disciplines?.find(discipline => discipline.name === item.discipline)?.id || '';
             const typeId = types?.find(type => type.name === item.type)?._id || '';
-            if (teachers) {
-                const teacherId = teachers?.find(teacher => teacher.name === item.teacher)?._id || '';
-            }
-            return { ...item, audithoria: audithoriaId };
+            const teacherId = teachers?.find(teacher => teacher.surname === item.teacher)?._id || '';
+            return { ...item, audithoria: audithoriaId, teacher: teacherId, type: typeId, discipline: disciplineId };
         });
         setScheduleItemsId(updatedItems);
     }, [scheduleItems, audithories]);
@@ -113,80 +111,88 @@ const SheduleTable: FC<SheduleTableProps> = ({ group }) => {
     useEffect(() => {
         getIAudith().then(e => {
             setAudithories(e.audithories);
-        })
+        });
     }, []);
 
     useEffect(() => {
         getTypes().then(e => {
             setTypes(e.types);
-        })
+        });
     }, []);
 
     useEffect(() => {
         getDisciplines({ id: group._id }).then(e => {
             setDisciplines(e.disciplines);
-        })
+        });
     }, []);
 
     const addScheduleItem = () => {
         if (scheduleItems.length > maxPars) {
-            return
+            return;
         }
-        const newItem: ScheduleItemProps = {
+        const newItem: IItems = {
             discipline: '',
             teacher: '',
             type: '',
             audithoria: '',
-            number: scheduleItems.length
+            number: scheduleItems.length + 1
         };
 
         setScheduleItems([...scheduleItems, newItem]);
     };
 
-    console.log(scheduleItemsId)
+    const onSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        addShedule({ date: selectedDate.toISOString().slice(0, 10), group: group._id, items: scheduleItemsId }).then(response => {
+            setServerMessage(response.message || '');
+            return;
+        });
+    };
 
     return (
-
-        <div className={cls.tableContainer}>
-            <div className={cls.btn}>
-                <Button darkBtn onClick={addScheduleItem}>Добавить занятие</Button>
-                <Button darkBtn>Создать</Button>
-            </div>
-            <div className={cls.tableHead}>
-                <div className={cls.item}>
-                    <div className={cls.name}>№</div>
+        <div className={cls.tableContainer} ref={tableRef}>
+            <Form onSubmit={onSubmit}>
+                <div className={cls.btn}>
+                    <Button darkBtn onClick={addScheduleItem}>Добавить занятие</Button>
+                    <Button darkBtn type='submit'>Создать</Button>
                 </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Дисциплина</div>
+                <div className={cls.tableHead}>
+                    <div className={cls.item}>
+                        <div className={cls.name}>№</div>
+                    </div>
+                    <div className={cls.item}>
+                        <div className={cls.name}>Дисциплина</div>
+                    </div>
+                    <div className={cls.item}>
+                        <div className={cls.name}>Преподаватель</div>
+                    </div>
+                    <div className={cls.item}>
+                        <div className={cls.name}>ТИП</div>
+                    </div>
+                    <div className={cls.item}>
+                        <div className={cls.name}>Аудитория</div>
+                    </div>
                 </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Преподаватель</div>
+                <div className={cls.tableBody}>
+                    {scheduleItems.map((item, index) => (
+                        <TableRowWithTeachers
+                            key={index}
+                            item={item}
+                            index={index}
+                            types={types}
+                            teachers={teachers}
+                            setTeachers={setTeachers}
+                            disciplines={disciplines}
+                            audithories={audithories}
+                            activeFormDatas={scheduleItems.filter((e) => e.number === item.number)[0]}
+                            setActiveFormDatas={setScheduleItems}
+                        />
+                    ))}
+                    {serverMessage && (
+                        <p>{serverMessage}</p>
+                    )}
                 </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>ТИП</div>
-                </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Аудитория </div>
-                </div>
-
-            </div>
-            <div className={cls.tableBody}>
-
-                {scheduleItems.map((item, index) => (
-                    <TableRowWithTeachers
-                        key={index}
-                        item={item}
-                        index={index}
-                        types={types}
-                        disciplines={disciplines}
-                        audithories={audithories}
-                        activeFormDatas={scheduleItems.filter((e) => e.number === item.number)[0]}
-                        setActiveFormDatas={setScheduleItems}
-                    />
-                ))}
-            </div>
-
-
+            </Form>
         </div>
     );
 };

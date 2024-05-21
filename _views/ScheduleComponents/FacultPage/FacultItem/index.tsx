@@ -23,6 +23,14 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
     const { userRole } = useAuthStore()
     const { mode } = useTabsStore()
 
+    const [formData, setFormData] = useState({
+        currentName: facultet.name,
+        newName: "",
+        newGroups: "",
+        newAuditories: "",
+    });
+    
+
     const facultItem = (
         <>
             <div className={cls.facultsBlock} key={facultet._id} >
@@ -47,7 +55,7 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
             {isOpenPopUp && (
                 <PopUp title='Редактирование факультета' setOpenPopUp={setOpenPopUp} >
                     <Form>
-                        <Input type="text" disabled label="Текущее название" placeholder={''} />
+                        <Input type="text" disabled label="Текущее название" placeholder={facultet.name} />
                         <Input type="text" autoFocus label="Новое название" placeholder={''} />
                         <Input type="text" disabled label="Текущие группы" placeholder={''} />
                         <Input type="text" label="Новые группы" placeholder={''} />

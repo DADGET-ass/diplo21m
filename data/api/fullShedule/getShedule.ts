@@ -12,19 +12,26 @@ export interface SheduleItem {
     }
     teacher: {
         _id: string;
+        surname: string;
         name: string;
+        patronymic: string;
     }
     type: {
         _id: string;
         name: string;
     }
-    audithories: {
+    audithoria: {
         _id: string;
         name: string;
     }
     number: number;
     _id: string;
 
+}
+
+interface IGetSheduleParams {
+    date: string,
+    group: string,
 }
 
 export interface IShedule {
@@ -35,11 +42,11 @@ export interface IShedule {
 }
 
 type IResponseShedule = {
-    shedule?: Array<IShedule>;
+    schedule?: Array<IShedule>;
 };
 
-export const getShedule = (): Promise<IResponseShedule> =>
+export const getShedule = ({ date, group }: IGetSheduleParams): Promise<IResponseShedule> =>
     methodDefault({
-        path: `shedule/get`,
+        path: `schedule/get?date=${date}&group=${group}`,
         method: "GET",
     });

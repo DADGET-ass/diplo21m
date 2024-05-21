@@ -1,13 +1,13 @@
 import { FC, useState, Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 
-import { ScheduleItemProps } from "..";
 
 import cls from '../index.module.scss';
 import { IDisciplines } from "@/data/api/disciplines/getDisciplines";
 import { ITeachers } from "@/data/api";
 import { ITypes } from "@/data/api/disciplines/types/getTypes";
 import { IAudith } from "@/data/api/audithories/getAudithories";
+import { IItems } from "@/data/api/fullShedule/addShedule";
 
 const DropdownInput = dynamic(
     () =>
@@ -18,14 +18,14 @@ const DropdownInput = dynamic(
 );
 
 interface TableRowProps {
-    item: ScheduleItemProps;
+    item: IItems;
     teachers?: ITeachers[];
     index: number;
     disciplines: IDisciplines[];
     audithories: IAudith[];
     types: ITypes[];
-    activeFormDatas: ScheduleItemProps,
-    setActiveFormDatas: Dispatch<SetStateAction<ScheduleItemProps[]>>,
+    activeFormDatas: IItems,
+    setActiveFormDatas: Dispatch<SetStateAction<IItems[]>>,
 }
 const TableRow: FC<TableRowProps> = ({
     item,
@@ -60,7 +60,7 @@ const TableRow: FC<TableRowProps> = ({
             <div className={cls.item}>
                 {teachers && (
                     <DropdownInput
-                        list={teachers.map(e => `${e.surname} ${e.name || ''} ${e.patronymic || ''}`)}
+                        list={teachers.map(e => e.surname)}
                         value={activeFormDatas.teacher}
                         setActiveValue={newValue => setActiveFormDatas(prevState => {
                             const updatedScheduleItems = [...prevState];

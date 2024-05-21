@@ -8,30 +8,13 @@
     border-bottom: 3px solid white;
 
     .audithories {
-
+      
         .name {
             color: white;
             font-size: 18px;
         }
 
-    }
-    .arrow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        margin-left: auto;
-        transition: .4s;
-        color: white;
-        cursor: pointer;
-
-        svg {
-            height: 100%;
-        }
+       
     }
 
-    .rot {
-        transform: rotate(180deg);
-        transition: .4s;
-    }
 }

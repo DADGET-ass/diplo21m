@@ -7,12 +7,22 @@ export interface IAudith {
     name: string,
 }
 
+interface addIAudithParams {
+    name: string,
+    pc: boolean
+}
+
 type IResponseAudith = {
-    audithories: Array<IAudith>;
+    error?: string;
+    message?: string;
 };
 
-export const addIAudith = (): Promise<IResponseAudith> =>
+export const addIAudith = ({ name, pc }: addIAudithParams): Promise<IResponseAudith> =>
     methodDefault({
         path: `audithories/add`,
         method: "POST",
+        body: JSON.stringify({
+            name,
+            pc
+        })
     });

@@ -22,7 +22,7 @@ const Auth = () => {
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault()
-        console.log(login, password)
+        console.log('asdsdasd', login, password)
         authUser({ username: login, password }).then(e => {
             if (e.message) {
                 setValidError(e.message);
@@ -46,7 +46,7 @@ const Auth = () => {
 
             <div className={cls.loginBlock}>
                 <Form onSubmit={onSubmit}>
-                    <Input type="text" label="Логин" placeholder={'Введите логин'} required value={login} onChange={(value) => setLogin(value as string)} />
+                    <Input type="text" label="Логин" placeholder={'Введите логин'} required value={login} onChange={(value) => setLogin(value)} />
                     <Input type="password" label="Пароль" placeholder={'Введите пароль'} required value={password} onChange={(value) => setPassword(value as string)} />
                     <Button type='submit'>
                         Вход

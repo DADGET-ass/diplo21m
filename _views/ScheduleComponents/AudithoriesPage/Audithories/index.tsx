@@ -11,7 +11,7 @@ interface AudithoriesProps {
 
 const Audithories: FC<AudithoriesProps> = ({ audithories }) => {
 
-    const [isOpen, setOpen] = useState<boolean>(false);
+ 
 
 
 
@@ -22,18 +22,14 @@ const Audithories: FC<AudithoriesProps> = ({ audithories }) => {
                     <div className={cls.name}>
                         {audithories.name}
                     </div>
+                    <div className={cls.pc}>
+                       {audithories.pc ? 'Компьютерная аудитория' : 'Обычная'}
+                    </div>
                 </div>
-                <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
-                    <ArrowIcon />
-                </div>
+               
 
             </div>
-            {isOpen && (
-                <div className={cls.table}>
-                    a
-                </div>
-
-            )}
+          
         </Arcticle>
     );
     return audithorie;
