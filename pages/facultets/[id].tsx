@@ -1,9 +1,9 @@
+import Layout from "@/_views/Layout";
 import { Facults } from "@/_views/ScheduleComponents/FacultPage";
 import { InnerFacultItem } from "@/_views/ScheduleComponents/FacultPage/FacultItem";
 import { Teacher } from "@/_views/ScheduleComponents/TeachersPage/TeacherItem"
 import { TeachersHeader } from "@/_views/ScheduleComponents/TeachersPage/TeachersHeader";
 import { Arcticle } from "@/_views/ui/Arcticle";
-import { Layout } from "@/_views/ui/Layout";
 import { IAllTeachers, IFacultets, getFacultets, getTeachers } from "@/data/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -27,10 +27,10 @@ const FacultetsComponent = () => {
     const facultetsComponent = (
         <>
             {facultets && (
-                <Layout>
+                <Layout title="Факультеты">
                     <Arcticle>
-                    <TeachersHeader setTrigger={setTrigger} />
-                    <InnerFacultItem facultet={facultets} />
+                        <TeachersHeader setTrigger={setTrigger} />
+                        <InnerFacultItem facultet={facultets} />
                     </Arcticle>
                 </Layout>
 

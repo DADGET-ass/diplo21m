@@ -1,10 +1,9 @@
+import Layout from "@/_views/Layout";
 import { DisciplinesPage } from "@/_views/ScheduleComponents/DisciplinesPage";
-import { Layout } from "@/_views/ui/Layout";
-
 
 const Disciplines = () =>{
     const disciplines =(
-        <Layout>
+        <Layout title="Дисциплины">
             <DisciplinesPage />
         </Layout>
     );

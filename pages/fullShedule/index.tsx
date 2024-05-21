@@ -1,10 +1,10 @@
+import Layout from "@/_views/Layout";
 import { FullShedule } from "@/_views/ScheduleComponents/fullShedule";
-import { Layout } from "@/_views/ui/Layout"
 
 
 const fullShedule = () => {
     return (
-        <Layout>
+        <Layout title="Расписание">
             <FullShedule />
         </Layout>
     );

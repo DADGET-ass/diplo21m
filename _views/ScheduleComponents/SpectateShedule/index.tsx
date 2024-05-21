@@ -39,57 +39,62 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
             if (response.schedule) {
                 setShedule(response.schedule);
             }
+            if (response.message) {
+                setShedule([])
+            }
         });
     }, [selectedDate]);
 
     return (
 
         <div className={cls.tableContainer} ref={tableRef}>
-            <div className={cls.btn}>
+            {shedule[0] ? shedule[0].items.map((item) => (
+                <>
+                    <div className={cls.btn}>
 
-            </div>
-            <div className={cls.tableHead}>
-                <div className={cls.item}>
-                    <div className={cls.name}>№</div>
-                </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Дисциплина</div>
-                </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Преподаватель</div>
-                </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>ТИП</div>
-                </div>
-                <div className={cls.item}>
-                    <div className={cls.name}>Аудитория </div>
-                </div>
-
-            </div>
-            <div className={cls.tableBody}>
-                {shedule[0] ? shedule[0].items.map((item) => (
+                    </div>
                     <div className={cls.tableHead}>
                         <div className={cls.item}>
-                            <div className={cls.name}>{item.number}</div>
+                            <div className={cls.name}>№</div>
                         </div>
                         <div className={cls.item}>
-                            <div className={cls.name}>{item.discipline.name}</div>
+                            <div className={cls.name}>Дисциплина</div>
                         </div>
                         <div className={cls.item}>
-                            <div className={cls.name}>{item.teacher.surname} {item.teacher.name || ''} {item.teacher.patronymic || ''}</div>
+                            <div className={cls.name}>Преподаватель</div>
                         </div>
                         <div className={cls.item}>
-                            <div className={cls.name}>{item.type.name}</div>
+                            <div className={cls.name}>ТИП</div>
                         </div>
                         <div className={cls.item}>
-                            <div className={cls.name}>{item.audithoria.name} </div>
+                            <div className={cls.name}>Аудитория </div>
                         </div>
 
                     </div>
-                )) : (
-                    <div>Расписания пока нема</div>
-                )}
-            </div>
+                    <div className={cls.tableBody}>
+                        <div className={cls.tableHead}>
+                            <div className={cls.item}>
+                                <div className={cls.name}>{item.number}</div>
+                            </div>
+                            <div className={cls.item}>
+                                <div className={cls.name}>{item.discipline?.name}</div>
+                            </div>
+                            <div className={cls.item}>
+                                <div className={cls.name}>{item.teacher.surname} {item.teacher.name || ''} {item.teacher.patronymic || ''}</div>
+                            </div>
+                            <div className={cls.item}>
+                                <div className={cls.name}>{item.type.name}</div>
+                            </div>
+                            <div className={cls.item}>
+                                <div className={cls.name}>{item.audithoria.name} </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </>
+            )) : (
+                <div>Расписания пока нема</div>
+            )}
         </div>
     );
 };

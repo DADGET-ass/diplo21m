@@ -1,16 +1,11 @@
-import { Container } from "@/_views/ui/Container"
-import { WindowWrapper } from "@/_views/ui/WindowWrapper"
+import Meta from "@/_views/seo/Meta";
 
 
-const _500Page = () =>{
-    return(
-        <main>
-        <Container>
-            <WindowWrapper>
-                    <div>Ошибка 500</div>
-            </WindowWrapper>
-        </Container>
-        </main>
+const _500Page = () => {
+    return (
+        <Meta title="Что-то пошло не так">
+            <div>Ошибка 500</div>
+        </Meta>
     )
 }
 

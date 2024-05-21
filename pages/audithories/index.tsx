@@ -1,15 +1,12 @@
+import Layout from "@/_views/Layout";
 import { AudithoriesPage } from "@/_views/ScheduleComponents/AudithoriesPage";
-import { Layout } from "@/_views/ui/Layout";
 
 
 const Audithories = () => {
     const audithories = (
-        <>
-            <Layout>
+            <Layout title="Аудитории">
                 <AudithoriesPage />
             </Layout>
-
-        </>
     );
     return audithories;
 };

@@ -13,11 +13,13 @@
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
     "@types/react-window": "^1.8.8",
+    "gsap": "^3.12.5",
     "next": "13.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-window": "^1.8.9",
     "sass": "^1.62.0",
+    "styled-components": "^6.1.11",
     "typescript": "5.3.3",
     "zustand": "^4.5.2",
     "zxcvbn": "^4.4.2"

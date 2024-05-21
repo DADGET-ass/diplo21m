@@ -1,7 +1,7 @@
+import Layout from "@/_views/Layout";
 import { Teacher } from "@/_views/ScheduleComponents/TeachersPage/TeacherItem"
 import { TeachersHeader } from "@/_views/ScheduleComponents/TeachersPage/TeachersHeader";
 import { Arcticle } from "@/_views/ui/Arcticle";
-import { Layout } from "@/_views/ui/Layout";
 import { IAllTeachers, getTeachers } from "@/data/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ const TeachersComponent = () => {
     const teachersComponent = (
         <>
             {teachers && (
-                <Layout>
+                <Layout title="Преподаватели">
                     <Arcticle>
                     <TeachersHeader setTrigger={setTrigger} />
                     <Teacher teacher={teachers} />

@@ -43,6 +43,7 @@ export interface IShedule {
 
 type IResponseShedule = {
     schedule?: Array<IShedule>;
+    message?:string;
 };
 
 export const getShedule = ({ date, group }: IGetSheduleParams): Promise<IResponseShedule> =>

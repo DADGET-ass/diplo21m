@@ -1,16 +1,12 @@
-import { Container } from "@/_views/ui/Container"
-import { WindowWrapper } from "@/_views/ui/WindowWrapper"
 
+import { Page404 } from "@/_views/ScheduleComponents/Page404";
+import Meta from "@/_views/seo/Meta";
 
-const _404Page = () =>{
-    return(
-        <main>
-        <Container>
-            <WindowWrapper>
-                    <div>Ошибка 404</div>
-            </WindowWrapper>
-        </Container>
-        </main>
+const _404Page = () => {
+    return (
+        <Meta title="Страница не найдена">
+            <Page404 />
+        </Meta>
     )
 }
 
