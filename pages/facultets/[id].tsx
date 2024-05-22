@@ -30,7 +30,7 @@ const FacultetsComponent = () => {
                 <Layout title="Факультеты">
                     <Arcticle>
                         <TeachersHeader setTrigger={setTrigger} />
-                        <InnerFacultItem facultet={facultets} />
+                        <InnerFacultItem facultet={facultets} setTrigger={setTrigger}/>
                     </Arcticle>
                 </Layout>
 

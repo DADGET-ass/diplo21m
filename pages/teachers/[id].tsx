@@ -28,7 +28,7 @@ const TeachersComponent = () => {
                 <Layout title="Преподаватели">
                     <Arcticle>
                     <TeachersHeader setTrigger={setTrigger} />
-                    <Teacher teacher={teachers} />
+                    <Teacher teacher={teachers} setTrigger={setTrigger}/>
                     </Arcticle>
                 </Layout>
 
