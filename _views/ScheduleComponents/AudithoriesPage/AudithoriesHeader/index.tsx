@@ -46,28 +46,12 @@ const AudithoriesHeader = () => {
                     <Form onSubmit={onSubmit}>
                         <Input
                             type="text"
-                            autoFocus
                             label="Название"
                             placeholder={''}
                             value={name}
                             onChange={(value) => setName(value as string)} />
                         <Checkbox value="pc" checked={pc} onChange={() => setPc(prev => !prev)} name='pc'>Компьютерная аудитория</Checkbox>
-                        {/* <p>Учителя</p>
-                        
-                            <DropdownInput
-                                list={teachers.map(e => `${e.surname} ${e.name} ${e.patronymic}`)}
-                                value={teacherName}
-                                setActiveValue={newValue => setTeacherName(newValue)}
-                            />
-                        
-
-                        <p>Группы</p>
-                        
-                            <DropdownInput
-                                list={groups.map(e => e.name)}
-                                value={groupName}
-                                setActiveValue={newValue => setGroupName(newValue)}
-                            /> */}
+                
 
 
                         <Button lightBtn type='submit'>

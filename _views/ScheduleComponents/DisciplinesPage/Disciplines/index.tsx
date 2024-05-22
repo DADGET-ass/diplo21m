@@ -1,4 +1,4 @@
-import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
+import { ArrowIcon, CloseIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import cls from './index.module.scss';
 import { FC, useState } from 'react';
 import { Arcticle } from '@/_views/ui/Arcticle';
@@ -6,9 +6,10 @@ import { IDisciplines } from '@/data/api/disciplines/getDisciplines';
 
 interface DisciplinesProps {
     disciplins: IDisciplines;
+    disciplineDelete:(id:string)=>void;
 }
 
-const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
+const Disciplines: FC<DisciplinesProps> = ({ disciplins, disciplineDelete }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
 
     return (
@@ -18,13 +19,14 @@ const Disciplines: FC<DisciplinesProps> = ({ disciplins }) => {
                     <div className={cls.name}>
                         {disciplins.name}
                     </div>
-                    {/* <div className={cls.delete}>
-                        удалить
-                    </div> */}
+                    <div className={cls.close} onClick={() => disciplineDelete(disciplins.id)}>
+                        <CloseIcon />
+                    </div>
                 </div>
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />
                 </div>
+               
             </div>
             {isOpen && (
                 <div className={cls.groups}>

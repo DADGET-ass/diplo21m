@@ -13,6 +13,12 @@ const DisciplinesPage = () =>{
         })
     },[]);
     
+    const disciplineDelete = (id: string) => {
+        setDisciplines((prevDisciplines) => prevDisciplines.filter((discipline) => discipline.id !== id));
+    };
+
+    
+
     const disciplinesPage =(
         <Arcticle>
             <DisciplinesHeader />
@@ -20,7 +26,7 @@ const DisciplinesPage = () =>{
             {disciplines && disciplines.length ? (
                 <div className={cls.content}>
                     {disciplines?.map((e) => (
-                        <Disciplines disciplins={e} key={e.id} />
+                        <Disciplines disciplins={e} key={e.id} disciplineDelete={disciplineDelete}/>
                     ))}
                 </div>
             ) : (
