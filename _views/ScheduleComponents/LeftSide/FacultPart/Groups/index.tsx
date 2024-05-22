@@ -1,8 +1,7 @@
-import { FC, useState } from 'react';
-import cls from './index.module.scss';
-import { IGroups } from '@/data/api';
-import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
+import { FC } from 'react';
 import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
+
+import cls from './index.module.scss';
 
 interface GroupsProps {
     group: IGroupsFacult;
@@ -33,11 +32,9 @@ const Groups: FC<GroupsProps> = ({ group, searchValue }) => {
     };
 
     const groupItem = (
-        <>
-            <div className={cls.groupsBlock}>
-                <span className={cls.name}>{highlightMatch(group.name, searchValue)}</span>
-            </div>
-        </>
+        <div className={cls.groupsBlock}>
+            <span className={cls.name}>{highlightMatch(group.name, searchValue)}</span>
+        </div>
     );
 
     return groupItem

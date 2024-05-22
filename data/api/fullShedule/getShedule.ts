@@ -1,9 +1,5 @@
 import { IDiscipline, ITeacher } from "@/data/types/interfaces";
 import { methodDefault } from "../defaultAPI";
-import { IGroups } from "../disciplines/addDisciplines";
-
-
-
 
 export interface SheduleItem {
     discipline: {
@@ -37,13 +33,16 @@ interface IGetSheduleParams {
 export interface IShedule {
     id: string,
     date: Date,
-    group: Array<IGroups>,
+    group: Array<{
+        _id: string,
+        name: string
+    }>,
     items: Array<SheduleItem>
 }
 
 type IResponseShedule = {
     schedule?: Array<IShedule>;
-    message?:string;
+    message?: string;
 };
 
 export const getShedule = ({ date, group }: IGetSheduleParams): Promise<IResponseShedule> =>

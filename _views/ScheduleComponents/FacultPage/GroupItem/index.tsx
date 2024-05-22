@@ -3,12 +3,11 @@ import { FC, useState } from 'react';
 import { Button } from '@/_views/ui/Button';
 import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
-import { IGroups } from '@/data/api';
-
-import cls from './index.module.scss';
+import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
-import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
+
+import cls from './index.module.scss';
 
 interface GroupItemProps {
     group: IGroupsFacult;

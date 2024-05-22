@@ -7,7 +7,7 @@ import { getDisciplines } from './disciplines/getDisciplines';
 import { getFacultets } from './facultets/getFacultets';
 import { authUser } from './user/postLogin';
 import { getFacultet } from './facultets/getFacultet';
-import { addDisciplines, IGroups } from './disciplines/addDisciplines';
+import { addDisciplines } from './disciplines/addDisciplines';
 import { addFacults } from './facultets/addFacults';
 import { getTeachersByDiscipline } from './teachers/getTeachersByDiscipline';
 import { getTeachers } from './teachers/getTeachers';
@@ -43,6 +43,5 @@ export type {
     IFacultets,
     addTeacherProps,
     ICourses,
-    IGroups,
     ITeachers
 }

@@ -18,13 +18,17 @@ import cls from './index.module.scss';
 interface DropdownInputProps {
     label?: string;
     list: string[];
-    setArray: Dispatch<SetStateAction<string[]>>
+    setArray?: Dispatch<SetStateAction<string[]>>,
+    value?: string;
+    setActiveValue?: (value: string) => void;
 }
 
 const DropdownInput: FC<DropdownInputProps> = ({
     list,
     label,
-    setArray
+    setArray,
+    value,
+    setActiveValue
 }) => {
     const [focus, setFocus] = useState<boolean>(false);
     const [words, setWords] = useState<string[]>([]);
@@ -75,7 +79,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
     };
 
     useEffect(() => {
-        setArray(words);
+        setArray && setArray(words);
     }, [words, setArray]);
 
     useEffect(() => {
@@ -99,22 +103,26 @@ const DropdownInput: FC<DropdownInputProps> = ({
             <div className={cls.input}>
                 {WordsRows}
                 <textarea name="drop"
-                    value={currentValue}
-                    onChange={handleTextChange}
+                    value={value ? value : currentValue}
+                    onChange={(e) => setActiveValue ? setActiveValue(e.target.value) : handleTextChange}
                     onFocus={() => setFocus(true)}
                 />
             </div>
-            {list.filter((e) => e.toLowerCase().includes(currentValue?.toLowerCase())).length > 0 && (
+            {list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue?.toLowerCase())).length > 0 && (
                 <div className={cls.drop} data-focus={focus}>
-                    {list.filter((e) => e.toLowerCase().includes(currentValue.toLowerCase()) && !words.includes(e)).map((item, index) => (
-                        <div 
-                        key={index}
-                         onClick={() => {
-                            setWords((prevWords) => [...prevWords, item.trim()]);
-                            setCurrentValue('');
-                        }}
-                         >
-                            {highlightMatch(item, currentValue)}
+                    {list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue.toLowerCase()) && !words.includes(e)).map((item, index) => (
+                        <div
+                            key={index}
+                            onClick={() => {
+                                if (setActiveValue) {
+                                    setActiveValue(item);
+                                    return
+                                }
+                                setWords((prevWords) => [...prevWords, item.trim()]);
+                                setCurrentValue('');
+                            }}
+                        >
+                            {highlightMatch(item, value ? value : currentValue)}
                         </div>
                     ))}
                 </div>
