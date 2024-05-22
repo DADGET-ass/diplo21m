@@ -24,7 +24,7 @@ const GroupItem: FC<GroupItemProps> = ({ group }) => {
         <>
             <div className={cls.groupsBlock}>
                 <div className={cls.name}>
-                {group.name}
+                {group.name} 
                 </div>
                 {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
                     <Button darkBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>

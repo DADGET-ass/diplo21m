@@ -24,7 +24,7 @@ const TeachersPage = () => {
             {teachers && teachers.length ? (
                 <div className={cls.content}>
                     {teachers?.map((e) => (
-                        <Teacher teacher={e} key={e.id} />
+                        <Teacher teacher={e} key={e.id} setTrigger={setTrigger}/>
                     ))}
                 </div>
             ) : (

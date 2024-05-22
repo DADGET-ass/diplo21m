@@ -16,7 +16,7 @@ export const ArrowIcon = () => (
 )
 
 export const CloseIcon = () => (
-    <svg width="20" height="20" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="15" height="15" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1.52833 26.0933L13.9617 13.6512L26.3951 26.0933L26.9713 25.5181L14.537 13.0755L26.9713 0.632527L26.3951 0.0581055L13.9617 12.4998L1.52833 0.0581055L0.952148 0.632527L13.3864 13.0755L0.952148 25.5181L1.52833 26.0933Z" fill="currentColor" />
     </svg>
 

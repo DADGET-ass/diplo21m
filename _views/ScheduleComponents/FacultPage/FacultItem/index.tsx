@@ -1,7 +1,7 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import { Button } from '@/_views/ui/Button';
-import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
+import { ArrowIcon, CloseIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import { CourseItem } from '../CourseItem';
 import { PopUp } from '@/_views/ui/PopUp';
 import { Input } from '@/_views/ui/Input';
@@ -11,12 +11,14 @@ import { IFacultets } from '@/data/api';
 import cls from './index.module.scss';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
+import { deleteFacultet } from '@/data/api/facultets/deleteFacultet';
 
 interface FacultItem {
     facultet: IFacultets;
+    setTrigger: Dispatch<SetStateAction<boolean>>
 }
 
-const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
+const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
 
@@ -29,7 +31,15 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
         newGroups: "",
         newAuditories: "",
     });
-    
+
+
+    const facultetDelete = () => {
+        deleteFacultet({ id: facultet._id }).then(e => {
+            if (e.message) {
+                setTrigger(prev => !prev)
+            }
+        })
+    }
 
     const facultItem = (
         <>
@@ -39,18 +49,25 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet }) => {
                         {facultet.name}
                     </div>
                     {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
-                    <Button lightBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
-                )}
+                        <Button lightBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
+                    )}
 
-                    
+
                 </div>
+                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                    <div className={cls.close} onClick={facultetDelete}>
+                        <CloseIcon />
+                    </div>
+                )}
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />
                 </div>
+
+
             </div>
             {isOpen && facultet.courses?.map((course) => (
                 <CourseItem course={course} key={course._id} />
-                
+
             ))}
             {isOpenPopUp && (
                 <PopUp title='Редактирование факультета' setOpenPopUp={setOpenPopUp} >

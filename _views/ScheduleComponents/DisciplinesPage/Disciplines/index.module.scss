@@ -15,6 +15,7 @@
         }
 
     }
+
     .arrow {
         display: flex;
         align-items: center;
@@ -34,4 +35,28 @@
         transform: rotate(180deg);
         transition: .4s;
     }
+
+    .close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: var(--lightGrey);
+        border-radius: 7px;
+        padding: 8px;
+
+        &:hover {
+            background-color: var(--grey);
+            color: red;
+        }
+    }
+
+}
+
+
+.groupName{
+    display: flex;
+    border: 1px solid var(--grey);
+    padding: 10px;
+
 }

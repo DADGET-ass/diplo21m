@@ -1,7 +1,7 @@
 import { Title } from "@/_views/ui/Title/Index";
 import cls from "./index.module.scss";
 import { Button } from "@/_views/ui/Button";
-import { FormEvent, useEffect, useState } from "react";
+import { Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from "react";
 import { PopUp } from "@/_views/ui/PopUp";
 import { Form } from "@/_views/ui/Form";
 import { Input } from "@/_views/ui/Input";
@@ -15,12 +15,15 @@ import { IDiscipline } from "@/data/api/disciplines/addDisciplines";
 import { IGroupsFacult } from "@/data/api/facultets/getFacultets";
 import { Checkbox } from "@/_views/ui/Checkbox";
 
-const DisciplinesHeader = () => {
-    const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+interface DisciplineHeaderProps {
+    isOpenPopUp: boolean;
+    setOpenPopUp: Dispatch<SetStateAction<boolean>>
+}
+
+const DisciplinesHeader:FC<DisciplineHeaderProps> = ({isOpenPopUp, setOpenPopUp}) => {
+
     const [error, setError] = useState<string>('');
     const [name, setName] = useState<string>('');
-    const [teacherName, setTeacherName] = useState<string>('');
-    const [groupName, setGroupName] = useState<string>('');
     const [teachers, setTeachers] = useState<IAllTeachers[]>([]);
     const [groups, setGroups] = useState<IGroupsFacult[]>([]);
     const [groupsArray, setGroupsArray] = useState<Array<string>>([]);
@@ -44,17 +47,13 @@ const DisciplinesHeader = () => {
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
-        addDisciplines({ name, groups: groupsArray.map((e) => ({ groupName: e, aH: 0 })), teachers: teachersArray, pc }).then(response => {
-            if (response.error) {
-                setError(response.error);
-            } else {
-                setError('');
-                setOpenPopUp(false);
+        addDisciplines({ name, groups: groupsArray.map((e) => ({ groupName: e, aH: 0 })), teachers: teachersArray, pc }).then(e => {
+            if (!e.message && e.error) {
+                setError(e.error);
+                return
             }
-        }).catch(err => {
-            setError('Произошла ошибка');
-            console.error(err);
-        });
+            setOpenPopUp(false);
+        })
     };
 
     const disciplinesHeader = (
@@ -73,7 +72,7 @@ const DisciplinesHeader = () => {
                             label="Название"
                             placeholder=""
                             value={name}
-                            onChange={(value) => setName(value as string)}
+                            onChange={(value) => setName(value)}
                         />
 
                         {teachers.length > 0 && (
@@ -96,7 +95,9 @@ const DisciplinesHeader = () => {
                             Компьютерная аудитория
                         </Checkbox>
 
-                        <Button lightBtn type='submit'>Создать</Button>
+                        <Button lightBtn type='submit'>
+                            Создать
+                            </Button>
                         {error && <span>{error}</span>}
                     </Form>
                 </PopUp>

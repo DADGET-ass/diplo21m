@@ -4,13 +4,15 @@
     position: relative;
 
     .toggleButton {
-        padding: 8px;
+        padding: 10px;
         display: flex;
         align-items: center;
         flex-grow: 1;
         gap: 2px;
         width: 100%;
-        background-color: var(--greenOne);
+        background-color: var(--greenThird);
+        border-radius: 7px;
+        color: white;
         cursor: pointer;
         transition: all .25s ease-in;
 
@@ -19,10 +21,9 @@
         }
 
         span {
-            font-family: "Lato800";
-            @include responsive_font(12,12);
+            @include responsive_font(15, 15);
         }
-        
+
         @media (max-width: 1095px) {
             padding: 5px;
             justify-content: center;
@@ -45,22 +46,21 @@
 .calendar {
     position: absolute;
     z-index: 999;
-    top: 0;
-    right: calc(-100% - 41px);
+    top: 40px;
+    right: 0;
     width: auto;
-
     padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-
-    border-radius: 2px;
+    border: 3px solid var(--greenTwo);
+    border-radius: 8px;
     background-color: white;
 
     @media (max-width: 1095px) {
         top: 30px;
         left: 0;
-        right: auto;
+        right: 0;
     }
 
     .controls {
@@ -73,6 +73,7 @@
         .arrowButton {
             display: flex;
             align-items: center;
+
             svg {
                 transform: rotate(90deg);
             }
@@ -85,8 +86,8 @@
         }
 
         h2.currentMonth {
-            font-family: "Lato800";
-            @include responsive_font(12, 12);
+
+            @include responsive_font(15, 15);
             text-transform: capitalize;
         }
     }
@@ -104,7 +105,7 @@
             color: grey;
             user-select: none;
             font-family: "Lato400";
-            @include responsive_font(12,12);
+            @include responsive_font(15, 15);
         }
 
         .cell {
@@ -118,20 +119,21 @@
             user-select: none;
             transition: all .2s ease;
             cursor: pointer;
-            font-family: "Lato400";
-            @include responsive_font(14,14);
+
+            @include responsive_font(14, 14);
 
             &.active {
                 transition: all .25s ease-in;
-                border: 1px solid blue;
-                background-color: blue;
-                ;
+                border: 1px solid var(--greenThird);
+                background-color: var(--greenOne);
+                color: white;
             }
 
             &:hover {
                 transition: all .25s ease-in;
                 background-color: transparent;
-                border: 1px solid blue;
+                border: 1px solid var(--greenThird);
+                color: black;
             }
 
             &.unavailable {
@@ -152,8 +154,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        font-family: "Lato800";
-        @include responsive_font(12,12);
+        @include responsive_font(15, 15);
 
         p {
             color: var(--grey);
@@ -166,11 +167,18 @@
     }
 
     .buttonsWrapper {
+
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 16px;
 
-        font-family: "Lato800";
+        button {
+            cursor: pointer;
+            color: black;
+            &:hover{
+                color: var(--greenOne);
+            }
+        }
     }
 }

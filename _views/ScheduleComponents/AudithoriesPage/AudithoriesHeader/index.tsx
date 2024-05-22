@@ -7,13 +7,18 @@ import cls from './index.module.scss';
 import { PopUp } from "@/_views/ui/PopUp";
 import { Form } from "@/_views/ui/Form";
 import { Input } from "@/_views/ui/Input";
-import { FormEvent, useState } from "react";
+import { Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import { Checkbox } from "@/_views/ui/Checkbox";
 import { addIAudith } from "@/data/api";
 
-const AudithoriesHeader = () => {
+interface DisciplineHeaderProps {
+    isOpenPopUp: boolean;
+    setOpenPopUp: Dispatch<SetStateAction<boolean>>
+}
 
-    const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+const AudithoriesHeader:FC<DisciplineHeaderProps> = ({isOpenPopUp, setOpenPopUp}) => {
+
+
     const [error, setError] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [pc, setPc] = useState<boolean>(false);

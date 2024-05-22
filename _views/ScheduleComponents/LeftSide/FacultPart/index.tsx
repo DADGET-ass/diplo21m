@@ -15,7 +15,7 @@ const FacultsPart = () => {
     }, []);
 
     return (
-        <div className={cls.facults}>
+        <div className={cls.facults} >
             <Search
                 setSearchValue={setSearchValue}
                 searchValue={searchValue}

@@ -17,7 +17,7 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
         <>
             <div className={cls.coursesBlock}>
                 <div className={cls.name}>
-                    {course.name}
+                    <span>Курс </span>{course.name}
                 </div>
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />

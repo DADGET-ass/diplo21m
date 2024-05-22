@@ -4,7 +4,9 @@
     background-color: var(--greenOne);
     display: flex;
     flex-direction: column;
-
+    overflow-y: auto;
+  
+    padding-right: 3px;
     .full {
         display: flex;
         align-items: center;
@@ -52,4 +54,18 @@
             }
         }
     }
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--greenTwo);
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: var(--lightGrey);
+        border-radius: 5px;
+    }
 }
+

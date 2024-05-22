@@ -32,4 +32,19 @@
         transform: rotate(180deg);
         transition: .4s;
     }
+
+    .close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: var(--lightGrey);
+        border-radius: 7px;
+        padding: 10px;
+
+        &:hover {
+            background-color: var(--grey);
+            color: red;
+        }
+    }
 }

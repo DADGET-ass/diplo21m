@@ -37,7 +37,9 @@ const Courses: FC<CoursesProps> = ({ courses, searchValue }) => {
     const courseItem = (
         <>
             <div className={cls.coursesBlock}>
-                <span className={cls.name}>{highlightMatch(courses.name, searchValue)}</span>
+                <span className={cls.name}>
+                    Курс {highlightMatch(courses.name, searchValue)}
+                    </span>
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>
                     <ArrowIcon />
                 </div>

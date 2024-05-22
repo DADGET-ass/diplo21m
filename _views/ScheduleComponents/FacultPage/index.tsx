@@ -16,12 +16,13 @@ interface FacultsProps {
 }
 
 const Facults: FC<FacultsProps> = ({ facultets }) => {
+    const [trigger, setTrigger] = useState<boolean>(false);
 
     return (
-        <div className={cls.facults}>
+        <div className={cls.content}>
 
             {facultets?.map((facultet) => (
-                <InnerFacultItem facultet={facultet} key={facultet._id} />
+                <InnerFacultItem facultet={facultet} key={facultet._id} setTrigger={setTrigger}/>
             ))}
 
         </div>

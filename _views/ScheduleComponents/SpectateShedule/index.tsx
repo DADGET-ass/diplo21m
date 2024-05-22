@@ -93,7 +93,7 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
                     </div>
                 </>
             )) : (
-                <div>Расписания пока нема</div>
+                <div>Расписание не создано</div>
             )}
         </div>
     );

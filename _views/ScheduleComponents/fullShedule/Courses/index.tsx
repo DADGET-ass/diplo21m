@@ -18,7 +18,7 @@ const Courses: FC<CoursesProps> = ({ course }) => {
             <div className={cls.group}>
                 <div className={cls.facultsBlock}>
                     <div className={cls.name}>
-                        {course.name}
+                    <span>Курс </span> {course.name}
                     </div>
                 </div>
                 <div className={`${cls.arrow} ${isOpen && cls.rot}`} onClick={() => setOpen(prev => !prev)}>

@@ -1,20 +1,13 @@
 import { methodDefault } from "../defaultAPI";
 
-export interface IDisciplines {
-    id: string;
-    name: string;
-}
 
 type IResponseDisciplines = {
     message?: string,
     error?: string,
 };
 
-export const deleteDisciplines = ({ id }: IDisciplines): Promise<IResponseDisciplines> =>
+export const deleteDisciplines = ({ id }: { id: string }): Promise<IResponseDisciplines> =>
     methodDefault({
-        path: `discipline/delete`,
+        path: `discipline/delete?id=${id}`,
         method: "POST",
-        body: JSON.stringify({
-            id,
-        })
     });
