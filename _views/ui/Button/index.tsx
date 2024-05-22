@@ -7,7 +7,7 @@ interface ButtonProps {
     darkBtn?: boolean;
     lightBtn?: boolean;
     onClick?: () => void;
-    type?: 'submit' ;
+    type?: 'submit' | 'button';
 }
 
 

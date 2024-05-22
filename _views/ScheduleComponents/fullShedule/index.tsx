@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Arcticle } from '@/_views/ui/Arcticle';
-import {  IFacultets, getFacultets } from '@/data/api';
+import { IFacultets, getFacultets } from '@/data/api';
 import { Title } from '@/_views/ui/Title/Index';
 import { Calendar } from '@/_views/ui/Calendar';
 import { Facult } from './Facult';
@@ -25,9 +25,11 @@ const FullShedule = () => {
                     <Title>Расписание</Title>
                     <Calendar />
                 </div>
-                {facultets.map((facult) => (
-                    <Facult facult={facult} key={facult._id} />
-                ))}
+                <div className={cls.content}>
+                    {facultets.map((facult) => (
+                        <Facult facult={facult} key={facult._id} />
+                    ))}
+                </div>
             </Arcticle>
         </>
     );

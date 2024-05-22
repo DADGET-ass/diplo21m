@@ -153,7 +153,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
         <div className={cls.tableContainer} ref={tableRef}>
             <Form onSubmit={onSubmit}>
                 <div className={cls.btn}>
-                    <Button darkBtn onClick={addScheduleItem}>Добавить занятие</Button>
+                    <Button darkBtn onClick={addScheduleItem} type='button'>Добавить занятие</Button>
                     <Button darkBtn type='submit'>Создать</Button>
                 </div>
                 <div className={cls.tableHead}>

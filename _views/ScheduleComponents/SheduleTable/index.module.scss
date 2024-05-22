@@ -1,34 +1,35 @@
-.tableContainer {
+.tableHead {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
 
-    .tableHead {
-        display: grid;
-        grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+        border: 1px solid var(--grey);
 
-        .item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 0;
-            border: 1px solid var(--grey);
-
-        }
     }
-    .tableBody{
-        
-        .btn{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    }
-    .row {
-        display: grid;
-        grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
+}
 
-        .item {
-            display: flex;
-            padding: 10px 10px;
-            border: 1px solid var(--grey);
-        }
+.btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
+
+    .item {
+        display: flex;
+        padding: 10px 10px;
+        border: 1px solid var(--grey);
     }
+}
+
+.tableContainer form {
+    overflow: hidden;
 }
