@@ -21,7 +21,16 @@
     }
 
     .tableBody {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
 
+        .item {
+            display: flex;
+        
+            padding: 10px;
+            border: 1px solid var(--grey);
+
+        }
         .btn {
             display: flex;
             justify-content: space-between;

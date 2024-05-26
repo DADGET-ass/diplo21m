@@ -60,6 +60,7 @@ const TableRow: FC<TableRowProps> = ({
             <div className={cls.item}>
                 {teachers && (
                     <DropdownInput
+                    // `${e.surname} ${e.name} ${e.patronymic}`
                         list={teachers.map(e => e.surname)}
                         value={activeFormDatas.teacher}
                         setActiveValue={newValue => setActiveFormDatas(prevState => {
@@ -90,7 +91,7 @@ const TableRow: FC<TableRowProps> = ({
                 {audithories && (
                     
                     <DropdownInput
-                        list={audithories.map(e => e.name)}
+                    list={audithories.map(e => `${e.name} ${e.pc ? "(Компьютерная)" : ""}`)}
                         value={activeFormDatas.audithoria}
                         setActiveValue={newValue => setActiveFormDatas(prevState => {
                             const updatedScheduleItems = [...prevState];

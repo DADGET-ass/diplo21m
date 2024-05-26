@@ -48,12 +48,7 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
     return (
 
         <div className={cls.tableContainer} ref={tableRef}>
-            {shedule[0] ? shedule[0].items.map((item) => (
-                <>
-                    <div className={cls.btn}>
-
-                    </div>
-                    <div className={cls.tableHead}>
+             <div className={cls.tableHead}>
                         <div className={cls.item}>
                             <div className={cls.name}>№</div>
                         </div>
@@ -71,8 +66,14 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
                         </div>
 
                     </div>
+            {shedule[0] ? shedule[0].items.map((item) => (
+                <>
+                    <div className={cls.btn}>
+
+                    </div>
+                   
                     <div className={cls.tableBody}>
-                        <div className={cls.tableHead}>
+                        
                             <div className={cls.item}>
                                 <div className={cls.name}>{item.number}</div>
                             </div>
@@ -86,10 +87,10 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
                                 <div className={cls.name}>{item.type.name}</div>
                             </div>
                             <div className={cls.item}>
-                                <div className={cls.name}>{item.audithoria.name} </div>
+                                <div className={cls.name}>Номер: {item.audithoria.name} </div>
                             </div>
 
-                        </div>
+                       
                     </div>
                 </>
             )) : (
