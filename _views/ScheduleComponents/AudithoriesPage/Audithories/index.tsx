@@ -59,22 +59,22 @@ const Audithories: FC<AudithoriesProps> = ({ audithories, setTrigger }) => {
             <div className={cls.audithoriesBlock}>
                 <div className={cls.audithories}>
                     <div className={cls.name}>
-                        {audithories.name}
+                        Номер: {audithories.name}
                     </div>
                     <div className={cls.pc}>
                         {audithories.pc ? 'Компьютерная аудитория' : 'Обычная'}
                     </div>
                 </div>
-                <div className={cls.btnBlock}>
-                    <Button lightBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
 
-                    {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
-                    <div className={cls.close} onClick={audithoriesDelete}>
-                    <CloseIcon />
-                </div>
+                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                    <div className={cls.btnBlock}>
+                        <Button lightBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
+                        <div className={cls.close} onClick={audithoriesDelete}>
+                            <CloseIcon />
+                        </div>
+
+                    </div>
                 )}
-                    
-                </div>
 
             </div>
 

@@ -26,7 +26,7 @@ const Courses: FC<CoursesProps> = ({ course }) => {
                 </div>
             </div>
             {isOpen && course.groups.map((group) => (
-                <Group group={group} key={group._id} />
+                <Group group={group} key={group._id}/>
             ))}
         </>
     )

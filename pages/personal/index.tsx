@@ -1,14 +1,15 @@
 import Layout from "@/_views/Layout";
 import { PersonalPage } from "@/_views/ScheduleComponents/PersonalPage";
+import Meta from "@/_views/seo/Meta";
 import Link from "next/link";
 
 
 
 const Personal = () => {
     const prsonal = (
-        <Layout title="Личное">
+        <Meta title="Личное">
             <PersonalPage />
-        </Layout>
+        </Meta>
     )
     return prsonal;
 }

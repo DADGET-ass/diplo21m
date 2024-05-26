@@ -13,7 +13,7 @@ export interface IAllTeachers {
     surname: string,
     name: string,
     patronymic: string,
-    aH: string,
+    aH: number,
     burden: [
         {
             hH: number,

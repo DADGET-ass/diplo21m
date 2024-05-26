@@ -7,18 +7,22 @@ import { Calendar } from '@/_views/ui/Calendar';
 import { Facult } from './Facult';
 
 import cls from './index.module.scss';
+import { Loader } from '@/_views/ui/Loader';
 
 
 const FullShedule = () => {
     const [facultets, setFacultets] = useState<Array<IFacultets>>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         getFacultets().then(e => {
             setFacultets(e.facultets)
+            setIsLoading(false)
         })
     }, [])
 
-    return (
+    return isLoading ? <div className={cls.loader}><Loader /></div> : (
         <>
             <Arcticle>
                 <div className={cls.title}>

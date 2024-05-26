@@ -5,14 +5,18 @@ import { Disciplines } from './Disciplines';
 import { useEffect, useState } from 'react';
 import { IDisciplines, getDisciplines } from '@/data/api/disciplines/getDisciplines';
 import { deleteDisciplines } from '@/data/api/disciplines/deleteDisciplines';
+import { Loader } from '@/_views/ui/Loader';
 
 const DisciplinesPage = () =>{
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(true);
+
     const [trigger, setTrigger] = useState<boolean>(false);
     useEffect(() => {
         getDisciplines({id:''}).then(e =>{
             setDisciplines(e.disciplines);
+            setIsLoading(false)
         })
     },[isOpenPopUp, trigger]);
 
@@ -38,7 +42,7 @@ const DisciplinesPage = () =>{
             )}
         </Arcticle>
     );
-    return disciplinesPage;
+    return isLoading ? <div className={cls.loader}><Loader /></div> :disciplinesPage;
 };
 
 export {DisciplinesPage}

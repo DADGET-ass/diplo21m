@@ -30,6 +30,7 @@ interface InputProps {
     onFocus?: () => void;
     onBlur?: () => void;
     upper?:boolean;
+    error?: string;
 }
 
 const formatDefault = (text: string) => text;
@@ -80,6 +81,7 @@ const Input: FC<InputProps> = ({
     onFocus,
     onBlur,
     upper,
+    
 }) => {
     const [error, setError] = useState<{
         state: boolean,

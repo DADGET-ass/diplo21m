@@ -2,7 +2,7 @@
 
 import { getCookie } from "@/utils/cookies";
 
-export const API_URL: string = "http://95.163.222.194:5000";
+export const API_URL: string = "https://atk-dstu.ru/backend";
 //#endregion
 
 export type IMethodDefault = {

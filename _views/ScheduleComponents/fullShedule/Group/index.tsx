@@ -2,7 +2,7 @@ import { ArrowIcon } from "@/_views/ui/svg_dynamic/base.svg";
 import { IGroupsFacult } from "@/data/api/facultets/getFacultets";
 import { UserRoleEnum, useAuthStore } from "@/data/store/useAuthStore";
 import { ModeEnum, useTabsStore } from "@/data/store/useTabsStore";
-import { FC, useRef, useState, useEffect } from "react";
+import { FC, useRef, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { SheduleTable } from "../../SheduleTable";
 
 import cls from './index.module.scss';
@@ -12,7 +12,7 @@ interface GroupsProps {
     group: IGroupsFacult,
 }
 
-const Group: FC<GroupsProps> = ({ group }) => {
+const Group: FC<GroupsProps> = ({ group, }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const { mode } = useTabsStore();
     const { userRole } = useAuthStore();
@@ -22,6 +22,7 @@ const Group: FC<GroupsProps> = ({ group }) => {
         if (tableRef.current) {
             if (isOpen) {
                 tableRef.current.style.maxHeight = `${tableRef.current.scrollHeight}px`;
+        
             } else {
                 tableRef.current.style.maxHeight = '0px';
             }

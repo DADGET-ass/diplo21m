@@ -86,7 +86,9 @@ const TableRow: FC<TableRowProps> = ({
 
             </div>
             <div className={cls.item}>
+                
                 {audithories && (
+                    
                     <DropdownInput
                         list={audithories.map(e => e.name)}
                         value={activeFormDatas.audithoria}

@@ -76,8 +76,8 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
                         <Input type="text" autoFocus label="Новое название" placeholder={''} />
                         <Input type="text" disabled label="Текущие группы" placeholder={''} />
                         <Input type="text" label="Новые группы" placeholder={''} />
-                        <Input type="text" disabled label="Текущие аудитории" autoFocus placeholder={''} />
-                        <Input type="text" label="Новые аудитории" placeholder={''} />
+                        {/* <Input type="text" disabled label="Текущие аудитории" autoFocus placeholder={''} />
+                        <Input type="text" label="Новые аудитории" placeholder={''} /> */}
                         <Button lightBtn type='submit'>Сохранить</Button>
                     </Form>
                 </PopUp>

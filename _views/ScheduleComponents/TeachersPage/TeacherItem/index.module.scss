@@ -16,24 +16,27 @@
 
 }
 
-.close {
-
-    position: absolute;
-    right: 10px;
-    top: 10px;
+.btnBlock {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-color: var(--lightGrey);
-    border: 1px solid black;
-   
-    border-radius: 7px;
-    padding: 8px;
-    margin-left: 10px;
+    .close {
 
-    &:hover {
-        background-color: var(--grey);
-        color: red;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: var(--lightGrey);
+        border: 1px solid black;
+
+        border-radius: 7px;
+        padding: 8px;
+        margin-left: 10px;
+
+        &:hover {
+            background-color: var(--grey);
+            color: red;
+        }
     }
 }

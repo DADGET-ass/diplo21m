@@ -77,6 +77,7 @@ const TableRowWithTeachers: FC<{
 interface SheduleTableProps {
     group: IGroupsFacult;
     tableRef: MutableRefObject<HTMLDivElement | null>;
+
 }
 
 const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
@@ -84,6 +85,8 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
     const [scheduleItemsId, setScheduleItemsId] = useState<IItems[]>([]);
     const [teachers, setTeachers] = useState<Array<ITeachers>>([]);
     const { selectedDate } = useDateStore();
+    const [trigger, setTrigger] = useState<boolean>(false);
+
 
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
     const [types, setTypes] = useState<ITypes[]>([]);
@@ -105,9 +108,13 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
             const teacherId = teachers?.find(teacher => teacher.surname === item.teacher)?._id || '';
             return { ...item, audithoria: audithoriaId, teacher: teacherId, type: typeId, discipline: disciplineId };
         });
+        
         setScheduleItemsId(updatedItems);
-    }, [scheduleItems, audithories]);
 
+    }, [scheduleItems, audithories, trigger]);
+
+    
+    
     useEffect(() => {
         getIAudith().then(e => {
             setAudithories(e.audithories);
@@ -128,8 +135,10 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
 
     const addScheduleItem = () => {
         if (scheduleItems.length > maxPars) {
+
             return;
         }
+
         const newItem: IItems = {
             discipline: '',
             teacher: '',
@@ -141,21 +150,38 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
         setScheduleItems([...scheduleItems, newItem]);
     };
 
+    const deleteScheduleItem = () => {
+        if (scheduleItems.length === 0) {
+            return;
+        }
+
+        const updatedScheduleItems = [...scheduleItems];
+        updatedScheduleItems.pop();
+
+        setScheduleItems(updatedScheduleItems);
+    };
+
+
+    
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         addShedule({ date: selectedDate.toISOString().slice(0, 10), group: group._id, items: scheduleItemsId }).then(response => {
             setServerMessage(response.message || '');
+
             return;
         });
+
     };
 
     return (
-        <div className={cls.tableContainer} ref={tableRef}>
+        <div className={cls.tableContainer} ref={tableRef} >
             <Form onSubmit={onSubmit}>
+                <Button darkBtn type='submit'>Создать</Button>
                 <div className={cls.btn}>
                     <Button darkBtn onClick={addScheduleItem} type='button'>Добавить занятие</Button>
-                    <Button darkBtn type='submit'>Создать</Button>
+                    <Button darkBtn onClick={deleteScheduleItem} type='button'>Удалить занятие</Button>
                 </div>
+
                 <div className={cls.tableHead}>
                     <div className={cls.item}>
                         <div className={cls.name}>№</div>
@@ -173,7 +199,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
                         <div className={cls.name}>Аудитория</div>
                     </div>
                 </div>
-                <div className={cls.tableBody}>
+                <div className={cls.tableBody} >
                     {scheduleItems.map((item, index) => (
                         <TableRowWithTeachers
                             key={index}

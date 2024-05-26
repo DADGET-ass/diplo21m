@@ -1,12 +1,12 @@
 import { Form } from '@/_views/ui/Form';
-import cls from './index.module.scss';
 import { Button } from '@/_views/ui/Button';
 import { Input } from '@/_views/ui/Input';
 import { FormEvent, useState } from 'react';
-import { registrUser } from '@/data/api';
-import { setCookie } from '@/utils/cookies';
-import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
+import { useAuthStore } from '@/data/store/useAuthStore';
 import { useRouter } from 'next/router';
+import { restorePassword } from '@/data/api/user/restorePassword';
+
+import cls from './index.module.scss';
 
 interface IFormData {
     mail: string;
@@ -14,8 +14,8 @@ interface IFormData {
     rePassword: string;
 }
 
-const RegistrPage = () => {
-    const { setAuth, setUserRole, userRole } = useAuthStore();
+const RestorePage = () => {
+    const { setAuth } = useAuthStore();
     const router = useRouter();
     const [formData, setFormData] = useState<IFormData>({
         mail: '',
@@ -26,8 +26,7 @@ const RegistrPage = () => {
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setServerMessage('Введите корректный e-mail.');
-
+       
         if (formData.password !== formData.rePassword) {
             setServerMessage('Пароли не совпадают.');
 
@@ -35,15 +34,9 @@ const RegistrPage = () => {
         }
 
         try {
-            const response = await registrUser({ mail: formData.mail, password: formData.password });
-
-
+            const response = await restorePassword({ mail: formData.mail, password: formData.password });
             if (response.user) {
-                setCookie('token', response.user.token);
                 setAuth(true);
-                if (userRole !== response.user.role) {
-                    setUserRole(response.user.role || UserRoleEnum.null);
-                }
                 router.push('/');
             } else if (response.message) {
                 setServerMessage(response.message);
@@ -56,7 +49,7 @@ const RegistrPage = () => {
 
     return (
         <div className={cls.authBlock}>
-            <div className={cls.registrBlock}>
+            <div className={cls.restoreBlock}>
                 <Form onSubmit={onSubmit}>
                     <Input 
                         type="email" 
@@ -68,8 +61,8 @@ const RegistrPage = () => {
                     />
                     <Input 
                         type="password" 
-                        label="Пароль" 
-                        placeholder="Введите пароль" 
+                        label="Новый пароль" 
+                        placeholder="Введите новый пароль" 
                         required 
                         value={formData.password} 
                         onChange={(value) => setFormData(prev => ({ ...prev, password: value }))} 
@@ -83,7 +76,7 @@ const RegistrPage = () => {
                         onChange={(value) => setFormData(prev => ({ ...prev, rePassword: value }))} 
                     />
                     <Button type="submit">
-                        Регистрация
+                        Восстановить
                     </Button>
                     {serverMessage && (
                         <div className={cls.error}>
@@ -99,4 +92,4 @@ const RegistrPage = () => {
     );
 };
 
-export {RegistrPage};
+export {RestorePage};

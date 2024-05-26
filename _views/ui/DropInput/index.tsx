@@ -49,7 +49,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
         return (
             <span>
                 {text.substring(0, startIdx)}
-                <span className={cls.highlight}>{text.substring(startIdx, endIdx)}</span>
+                <span className={cls.highlight}>{text.substring(startIdx, endIdx)}a</span>
                 {text.substring(endIdx)}
             </span>
         );

@@ -10,6 +10,7 @@
         cursor: pointer;
         padding-left: 5px;
         color: white;
+        
         @include responsive_font(18, 14);
     }
 
@@ -32,7 +33,6 @@
         user-select: text;
         resize: none;
         line-height: 40px;
-        text-transform: uppercase;
         overflow: hidden;
     }
 }

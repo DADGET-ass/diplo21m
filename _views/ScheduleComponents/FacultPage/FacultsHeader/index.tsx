@@ -19,11 +19,13 @@ import { ModeEnum, useTabsStore } from '@/data/store/useTabsStore';
 import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 
 import cls from './index.module.scss';
+import { Loader } from '@/_views/ui/Loader';
 
 const FacultsPage = () => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [name, setName] = useState<string>('')
+    const [isLoading, setIsLoading] = useState(true);
 
     const [groups, setGroups] = useState<string>('')
     const [audithories, setAudithories] = useState<string>('')
@@ -37,6 +39,7 @@ const FacultsPage = () => {
     useEffect(() => {
         getFacultets().then(e => {
             setFacultets(e.facultets)
+            setIsLoading(false)
         })
     }, [isOpenPopUp])
 
@@ -54,7 +57,7 @@ const FacultsPage = () => {
         })
     }
 
-    return (
+    return isLoading ? <div className={cls.loader}><Loader /></div> : (
         <Arcticle >
             <div className={cls.title}>
                 <Title>Факультеты</Title>
