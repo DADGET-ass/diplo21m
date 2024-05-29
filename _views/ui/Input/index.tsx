@@ -29,7 +29,7 @@ interface InputProps {
     disabled?: boolean;
     onFocus?: () => void;
     onBlur?: () => void;
-    upper?:boolean;
+    upper?: boolean;
     error?: string;
 }
 
@@ -81,7 +81,7 @@ const Input: FC<InputProps> = ({
     onFocus,
     onBlur,
     upper,
-    
+
 }) => {
     const [error, setError] = useState<{
         state: boolean,
@@ -143,7 +143,14 @@ const Input: FC<InputProps> = ({
                     data-upper={upper}
                 />
                 {type === 'password' && currentValue.length > 0 && (
-                    <div className={cls.eye} onMouseDown={() => setShowPassword(true)} onMouseUp={() => setShowPassword(false)} onMouseLeave={() => setShowPassword(false)}>
+                    <div
+                        className={cls.eye}
+                        onMouseDown={() => setShowPassword(true)}
+                        onMouseUp={() => setShowPassword(false)}
+                        onMouseLeave={() => setShowPassword(false)}
+                        onTouchStart={() => setShowPassword(true)}
+                        onTouchEnd={() => setShowPassword(false)}
+                    >
                         {!showPassword ? <EyeCloseIcon /> : <EyeIcon />}
                     </div>
                 )}

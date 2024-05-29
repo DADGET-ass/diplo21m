@@ -102,10 +102,10 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
 
     useEffect(() => {
         const updatedItems = scheduleItems.map(item => {
-            const audithoriaId = audithories?.find(audithoria => audithoria.name === item.audithoria)?._id || '';
+            const audithoriaId = audithories?.find(audithoria => audithoria.name === item.audithoria.split(' ')[0])?._id || '';
             const disciplineId = disciplines?.find(discipline => discipline.name === item.discipline)?.id || '';
             const typeId = types?.find(type => type.name === item.type)?._id || '';
-            const teacherId = teachers?.find(teacher => teacher.surname === item.teacher)?._id || '';
+            const teacherId = teachers?.find(teacher => teacher.surname === item.teacher.split(' ')[0])?._id || '';
             return { ...item, audithoria: audithoriaId, teacher: teacherId, type: typeId, discipline: disciplineId };
         });
         

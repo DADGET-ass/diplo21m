@@ -62,13 +62,9 @@
 
 .table {
     height: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-    transition: .4s;
 
     &[data-open="false"] {
-        overflow-y: hidden;
-        transition: .4s;
+        display: none;
     }
-    
+
 }

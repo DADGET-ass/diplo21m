@@ -12,7 +12,7 @@ const Title: FC<TitleProps> = ({ children, lightTitle }) => {
 
 
     return (
-        <div className={cls.title} data-lightTitle={lightTitle? 'true' : ''}>{children}</div>
+        <div className={cls.title} data-light-title={lightTitle? 'true' : ''}>{children}</div>
     );
 };
 

@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     check().then(e => {
       if (!e.user) {
         setAuth(false);
-        if (['/auth', '/registration'].includes(asPath)) {
+        if (['/auth', '/registration', '/recovery'].includes(asPath)) {
           return
         } else {
           push('auth');

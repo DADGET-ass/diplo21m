@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { FacultsPart } from './FacultPart';
 import { Partition } from './Partition';
-import cls from './index.module.scss';
 import { useRouter } from 'next/router';
 import { TeachersPart } from './TeachersPart';
+import { setCookie } from '@/utils/cookies';
+
+import cls from './index.module.scss';
 
 export enum LeftMenuEnum {
     facult = 'facultets',
@@ -14,10 +16,15 @@ export enum LeftMenuEnum {
 
 interface LeftSideProps {
     handleLogout: () => void;
-  }
+}
 
 const LeftSide = () => {
     const { push } = useRouter();
+
+    const exit = () => {
+        setCookie('token', ' ')
+        push('/auth')
+    }
 
     return (
         <div className={cls.leftSide}>
@@ -41,7 +48,7 @@ const LeftSide = () => {
                         <></>
                     </Partition>
                 </div>
-                <div className={cls.exit} onClick={() => push(`/auth`)}>
+                <div className={cls.exit} onClick={exit}>
                     Выйти
                 </div>
             </div>

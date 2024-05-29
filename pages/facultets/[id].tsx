@@ -1,6 +1,7 @@
 import Layout from "@/_views/Layout";
 import { Facults } from "@/_views/ScheduleComponents/FacultPage";
 import { InnerFacultItem } from "@/_views/ScheduleComponents/FacultPage/FacultItem";
+import { FacultsHeader } from "@/_views/ScheduleComponents/FacultPage/FacultHeader";
 import { Teacher } from "@/_views/ScheduleComponents/TeachersPage/TeacherItem"
 import { TeachersHeader } from "@/_views/ScheduleComponents/TeachersPage/TeachersHeader";
 import { Arcticle } from "@/_views/ui/Arcticle";
@@ -29,7 +30,7 @@ const FacultetsComponent = () => {
             {facultets && (
                 <Layout title="Факультеты">
                     <Arcticle>
-                        <TeachersHeader setTrigger={setTrigger} />
+                        <FacultsHeader setTrigger={setTrigger} />
                         <InnerFacultItem facultet={facultets} setTrigger={setTrigger}/>
                     </Arcticle>
                 </Layout>

@@ -1,8 +1,9 @@
 import { getCookie } from '../../../utils/cookies/getCookie';
 import { methodDefault } from '../defaultAPI';
+import { IGroupsFacult } from './getFacultets';
 
 
-export type IResponseAddFacults = {
+export type IResponseEditFacults = {
     result?: boolean;
     message?: string;
 };
@@ -14,7 +15,7 @@ interface editFacultsProps {
 
 };
 
-export const editFacults = ({ id, name, groups }: editFacultsProps): Promise<IResponseAddFacults> =>
+export const editFacults = ({ id, name, groups }: editFacultsProps): Promise<IResponseEditFacults> =>
     methodDefault({
         path: `facultet/edit`,
         method: "POST",

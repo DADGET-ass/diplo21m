@@ -1,7 +1,5 @@
 import { methodDefault } from "../defaultAPI";
 
-
-
 export interface IAudith {
     _id: string,
     name: string,

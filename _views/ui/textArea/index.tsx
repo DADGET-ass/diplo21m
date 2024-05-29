@@ -18,6 +18,7 @@ interface AreaProps {
     onChange?: (text: string) => void;
     value?: string;
     pre?: string;
+    preWords?: string[];
     setGroupsArray: Dispatch<SetStateAction<string[]>>
 };
 
@@ -39,6 +40,7 @@ const typeTextArea = {
 const TextArea: FC<AreaProps> = ({
     label,
     type,
+    preWords,
     onChange,
     value,
     pre,
@@ -67,6 +69,10 @@ const TextArea: FC<AreaProps> = ({
             }));
         }
     }, [value]);
+
+    useEffect(() => {
+        if (preWords) setWords(preWords)
+    }, [])
 
     useEffect(() => {
         if (onChange) {

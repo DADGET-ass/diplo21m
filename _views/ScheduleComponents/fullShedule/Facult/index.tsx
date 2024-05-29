@@ -24,7 +24,7 @@ const Facult: FC<FacultProps> = ({ facult }) => {
                 </div>
             </div>
             {isOpen && facult.courses.map((course) => (
-                <Courses course={course} key={course._id} />
+                <Courses course={course} key={course._id + facult._id} />
             ))}
         </>
     )

@@ -57,7 +57,7 @@ const Auth = () => {
                 <div className={cls.reg} onClick={() => push(`/registration`)}>
                     Зарегистрироваться
                 </div>
-                <div className={cls.restorePass} onClick={() => push(`/restorePassword`)}>
+                <div className={cls.restorePass} onClick={() => push(`/recovery`)}>
                     Забыли пароль?
                 </div>
             </div>

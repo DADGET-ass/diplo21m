@@ -1,5 +1,8 @@
 import {
+    Dispatch,
+    FC,
     FormEvent,
+    SetStateAction,
     useEffect,
     useState
 } from 'react';
@@ -21,7 +24,11 @@ import { UserRoleEnum, useAuthStore } from '@/data/store/useAuthStore';
 import cls from './index.module.scss';
 import { Loader } from '@/_views/ui/Loader';
 
-const FacultsPage = () => {
+interface TeachersHeaderProps {
+    setTrigger: Dispatch<SetStateAction<boolean>>,
+}
+
+const FacultsHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [name, setName] = useState<string>('')
@@ -40,6 +47,7 @@ const FacultsPage = () => {
         getFacultets().then(e => {
             setFacultets(e.facultets)
             setIsLoading(false)
+            setTrigger(prev => !prev);
         })
     }, [isOpenPopUp])
 
@@ -54,11 +62,12 @@ const FacultsPage = () => {
                 return
             }
             setOpenPopUp(false);
+            setTrigger(prev => !prev);
         })
     }
 
     return isLoading ? <div className={cls.loader}><Loader /></div> : (
-        <Arcticle >
+        <>
             <div className={cls.title}>
                 <Title>Факультеты</Title>
                 {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
@@ -66,7 +75,7 @@ const FacultsPage = () => {
                 )}
 
             </div>
-            <Facults isOpenPopUp={isOpenPopUp} facultets={facultets} />
+        
             {isOpenPopUp && (
                 <PopUp title='Создание факультета' setOpenPopUp={setOpenPopUp}>
                     <Form onSubmit={onSubmit}>
@@ -96,9 +105,9 @@ const FacultsPage = () => {
                     </Form>
                 </PopUp>
             )}
-        </Arcticle >
+        </>
 
     );
 };
 
-export { FacultsPage };
+export { FacultsHeader };

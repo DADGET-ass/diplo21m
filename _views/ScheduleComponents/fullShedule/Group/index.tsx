@@ -12,22 +12,11 @@ interface GroupsProps {
     group: IGroupsFacult,
 }
 
-const Group: FC<GroupsProps> = ({ group, }) => {
+const Group: FC<GroupsProps> = ({ group }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const { mode } = useTabsStore();
     const { userRole } = useAuthStore();
     const tableRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        if (tableRef.current) {
-            if (isOpen) {
-                tableRef.current.style.maxHeight = `${tableRef.current.scrollHeight}px`;
-        
-            } else {
-                tableRef.current.style.maxHeight = '0px';
-            }
-        }
-    }, [isOpen]);
 
     return (
         <>

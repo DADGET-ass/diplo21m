@@ -1,5 +1,5 @@
 import Layout from "@/_views/Layout";
-import { FacultsPage } from "@/_views/ScheduleComponents/FacultPage/FacultsHeader";
+import { Facults } from "@/_views/ScheduleComponents/FacultPage";
 import Link from "next/link";
 
 
@@ -7,7 +7,7 @@ import Link from "next/link";
 const Faculties = () => {
     return (
         <Layout title="Факультеты">
-            <FacultsPage />
+            <Facults />
         </Layout>
     )
 }
