@@ -1,19 +1,19 @@
+@import '../../../styles/assets/mixins/responsive_font.scss';
+
 .headerLine {
     position: relative;
     display: flex;
     align-items: center;
-
     height: 100px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
     background-color: var(--greenOne);
 
     .title {
-
         padding-left: 20px;
 
         .name {
             color: white;
-            font-size: 60px;
+            @include responsive_font(40, 8);
             position: relative;
 
             &::after {
@@ -29,6 +29,10 @@
             }
         }
 
+        .menu {
+            display: none;
+        }
+
     }
 
     img {
@@ -41,23 +45,150 @@
         display: flex;
         align-items: center;
         right: 20px;
-        
-        button{
+
+        button {
             background-color: white;
             padding: 5px;
             border-radius: 10px;
             margin-right: 10px;
             transition: .4s;
-            &:hover{
+
+            &:hover {
                 background-color: var(--lightGrey);
                 transition: .4s;
             }
-            .svg{
+
+            .svg {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
         }
     }
-   
+
+}
+
+
+@media (max-width: 829px) {
+    .headerLine {
+        height: 70px;
+
+        .title {
+            padding: 10px;
+
+            .name {
+                &::after {
+                    height: 3px;
+                    bottom: -2px;
+                }
+            }
+            .menu {
+                display:block;
+            }
+        }
+
+        .icon {
+            .btnPersonal {
+                display: none;
+            }
+
+            .logo {
+                width: 60px;
+            }
+
+
+        }
+    }
+}
+
+
+@media (max-width: 502px) {
+    .headerLine {
+        height: 70px;
+
+        .title {
+            padding-left: 10px;
+
+            .name {
+                &::after {
+                    height: 2px;
+                    bottom: -2px;
+                }
+            }
+
+        }
+
+        .icon {
+            right: 0px;
+            bottom: 0px;
+
+            .btnPersonal {
+                display: none;
+            }
+
+            .logo {
+                width: 40px;
+            }
+
+        }
+
+
+    }
+}
+
+@media (max-width: 380px) {
+
+    .headerLine {
+        height: 70px;
+
+        .title {
+            padding-left: 10px;
+
+            .name {
+                &::after {
+                    height: 1px;
+                    bottom: -2px;
+                }
+            }
+
+        }
+
+        .icon {
+            right: 0px;
+            bottom: 0px;
+
+            .btnPersonal {
+                display: none;
+            }
+
+            .logo {
+                width: 40px;
+            }
+
+
+        }
+    }
+}
+
+@media (max-width: 332px) {
+
+    .headerLine {
+
+        .icon {
+            align-items: flex-start;
+            padding: 0;
+            right: 0px;
+            top: 0px;
+
+            .btnPersonal {
+                display: none;
+            }
+
+            .logo {
+                width: 40px;
+
+            }
+        }
+
+    }
 }

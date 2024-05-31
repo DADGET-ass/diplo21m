@@ -16,6 +16,7 @@ import { editFacults } from '@/data/api/facultets/editFacultet';
 import { TextArea } from '@/_views/ui/textArea';
 import { DropdownInput } from '@/_views/ui/DropInput';
 import { Arcticle } from '@/_views/ui/Arcticle';
+import { addGroupToFacult } from '@/data/api/facultets/addGroupToFacult';
 
 interface FacultItem {
     facultet: IFacultets;
@@ -26,10 +27,12 @@ interface FacultItem {
 const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false);
+    const [isGroupPopUp, setGroupPopUp] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [groups, setGroups] = useState<string>('');
     const [groupsArray, setGroupsArray] = useState<Array<string>>([]);
-    const [name, setName] = useState<string>('')
+    const [name, setName] = useState<string>('');
+    const [newGroupName, setNewGroupName] = useState<string>(facultet.name+'9-К')
 
 
     const { userRole } = useAuthStore()
@@ -55,6 +58,19 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
             setOpenPopUp(false);
             setTrigger(prev => !prev);
         });
+
+    };
+
+    const onSubmitTwo = (e: FormEvent) => {
+        e.preventDefault();
+        addGroupToFacult({ id: facultet._id, groupName: newGroupName }).then(e => {
+            if (e.error) {
+                setError(e.error);
+                return
+            }
+            setGroupPopUp(false);
+            setTrigger(prev => !prev);
+        })
     };
 
     const facultetDelete = () => {
@@ -88,9 +104,37 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
 
 
             </div>
+
             {isOpen && facultet.courses?.map((course) => (
-                <CourseItem course={course} key={course._id} />
+                <CourseItem course={course} key={course._id} setTrigger={setTrigger} />
             ))}
+
+            {isOpen && userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                <Button lightBtn onClick={() => setGroupPopUp(true)}>Добавить группы</Button>
+            )}
+
+            {isGroupPopUp && (
+                <PopUp title='Добавить группу' setOpenPopUp={setGroupPopUp} >
+                    <Form onSubmit={onSubmitTwo}>
+                        <Input
+                            type="text"
+                            disabled
+                            label="Добавить к факульету"
+                            value={facultet.name}
+                        />
+                        <Input
+                            type="text"
+                            label="Название группы"
+                            placeholder={''}
+                            value={newGroupName}
+                            onChange={(e) => setNewGroupName(e)}
+                        />
+    
+
+                        <Button lightBtn type='submit'>Сохранить</Button>
+                    </Form>
+                </PopUp>
+            )}
 
             {isOpenPopUp && (
                 <PopUp title='Редактирование факультета' setOpenPopUp={setOpenPopUp} >
@@ -108,24 +152,6 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
                             placeholder={''}
                             value={facultet.name}
                             onChange={(value) => setFormData(prev => ({ ...prev, currentName: value }))}
-                        />
-                        <Input
-                            type="text"
-                            disabled
-                            label="Текущие группы"
-                            placeholder={facultet.courses
-                                .flatMap(course => course.groups)
-                                .map(group => group.name)
-                                .join(', ')}
-                        />
-                        <TextArea
-                            type="text"
-                            label="Группа"
-                            pre={name}
-                            value={groups}
-                            preWords={facultet.courses.flatMap(course => course.groups.map(group => group.name))}
-                            onChange={(value) => setGroups(value)}
-                            setGroupsArray={setGroupsArray}
                         />
 
                         <Button lightBtn type='submit'>Сохранить</Button>

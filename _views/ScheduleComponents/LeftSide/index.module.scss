@@ -68,4 +68,11 @@
         border-radius: 5px;
     }
 }
-
+@media (max-width: 1401px) {}
+@media (max-width: 829px) {
+    .leftSide{
+        display: none;
+    }
+}
+@media (max-width: 502px) {}
+@media (max-width: 380px) {}

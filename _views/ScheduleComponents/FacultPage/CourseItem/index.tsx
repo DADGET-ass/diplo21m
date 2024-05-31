@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import { ArrowIcon } from '@/_views/ui/svg_dynamic/base.svg';
 import { GroupItem } from '../GroupItem';
@@ -8,9 +8,10 @@ import cls from './index.module.scss';
 
 interface CourseItemProps {
     course: ICourses;
+    setTrigger: Dispatch<SetStateAction<boolean>>
 }
 
-const CourseItem: FC<CourseItemProps> = ({ course }) => {
+const CourseItem: FC<CourseItemProps> = ({ course, setTrigger }) => {
     const [isOpen, setOpen] = useState<boolean>(false);
 
     const courseItem = (
@@ -25,7 +26,7 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
             </div>
 
             {isOpen && course.groups?.map((group) => (
-                <GroupItem group={group} key={group._id} />
+                <GroupItem group={group} key={group._id} setTrigger={setTrigger} />
             ))}
         </>
     );

@@ -17,17 +17,23 @@ const Header = () => {
                 {userRole === UserRoleEnum.admin && (
                     <Tabs />
                 )}
-
+                <div className={cls.menu}>
+                    МЕНЮ
+                </div>
             </div>
 
-            <div className={cls.icon}>
-                <button onClick={() => push(`/personal`)}>
+            <div className={cls.icon} >
+                <button className={cls.btnPersonal} onClick={() => push(`/personal`)}>
                     <div className={cls.svg}>
                         <LogIn />
                     </div>
                 </button>
-                <img src="/logo.png" alt="Логотип" />
+
+                <div className={cls.logo}>
+                    <img src="/logo.png" alt="Логотип" />
+                </div>
             </div>
+
         </div>
     );
 };

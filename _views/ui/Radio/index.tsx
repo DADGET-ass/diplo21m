@@ -26,7 +26,7 @@ const Radio = () => {
                     checked={mode === ModeEnum.spectate}
                     onChange={() => changeTab(ModeEnum.spectate)}
                 />
-                <div className="name">Просмотр</div>
+                <div className={cls.name}>Просмотр</div>
             </div>
             <div className={cls.label}>
                 <input
@@ -36,7 +36,7 @@ const Radio = () => {
                     checked={mode === ModeEnum.edit}
                     onChange={() => changeTab(ModeEnum.edit)}
                 />
-                <div className="name">Редактирование</div>
+                <div className={cls.name}>Редактирование</div>
             </div>
         </div>
     );

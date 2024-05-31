@@ -104,14 +104,14 @@ input::-ms-clear {
 	display: none;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
+// input::-webkit-outer-spin-button,
+// input::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+// }
 
-input[type='number'] {
-    -moz-appearance: textfield;
-}
+// input[type='number'] {
+//     -moz-appearance: textfield;
+// }
 
 button, 
 input[type='submit'] {

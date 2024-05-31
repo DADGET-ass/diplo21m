@@ -1,3 +1,4 @@
+import { ITeacher } from "@/data/types/interfaces";
 import { methodDefault } from "../defaultAPI";
 
 export interface IItem {
@@ -11,7 +12,7 @@ export interface IGroup {
     burden?: {
         month: string;
         hH: number;
-    };
+    }[];
     aH: number;
 }
 
@@ -19,6 +20,8 @@ export interface IDisciplines {
     id: string;
     name: string;
     groups: IGroup[];
+    teachers: [],
+    pc: boolean,
 }
 
 type IResponsedisciplines = {
@@ -29,4 +32,5 @@ export const getDisciplines = ({ id }: { id?: string }): Promise<IResponsediscip
     methodDefault({
         path: `discipline/get`,
         method: "GET",
+
     });
