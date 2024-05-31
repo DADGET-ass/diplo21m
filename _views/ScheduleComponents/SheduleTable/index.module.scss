@@ -1,3 +1,6 @@
+@import '../../../styles/assets/mixins/responsive_font.scss';
+
+
 .tableHead {
     display: grid;
     grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr;
@@ -7,6 +10,10 @@
         justify-content: center;
         padding: 10px 0;
         border: 1px solid var(--grey);
+     
+           .name{
+            @include responsive_font(16, 10);
+           }
 
     }
 }
@@ -24,12 +31,16 @@
 
     .item {
         display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 10px 10px;
         border: 1px solid var(--grey);
-        
+       
     }
 }
 
 .tableContainer form {
     height: 100%;
 }
+
+

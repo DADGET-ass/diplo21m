@@ -1,3 +1,5 @@
+@import '../../../../styles/assets/mixins/responsive_font.scss';
+
 .disciplinesBlock {
     padding: 10px;
     display: flex;
@@ -11,7 +13,7 @@
 
         .name {
             color: white;
-            font-size: 18px;
+            @include responsive_font(18, 14);
         }
 
     }
@@ -61,7 +63,7 @@
     gap: 15px;
 }
 
-.groupName{
+.groupName {
     display: flex;
     justify-content: space-between;
 }
@@ -77,7 +79,7 @@
 
 .groupWrapper {
     display: grid;
-    grid-template-columns: repeat(2 ,1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 
     .groups,
@@ -103,7 +105,7 @@
 .center {
     justify-content: center;
 
-    
+
 }
 
 .rr {
@@ -111,4 +113,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+@media (max-width: 950px) {
+
+    .groupWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

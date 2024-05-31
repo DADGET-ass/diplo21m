@@ -1,3 +1,5 @@
+@import '../../../styles/assets/mixins/responsive_font.scss';
+
 .leftSide {
     width: 20vw;
     height: calc(100vh - 100px);
@@ -25,7 +27,8 @@
 
     .name {
         padding: 12px 20px;
-        font-size: 32px;
+        @include responsive_font(24, 18);
+      
         color: white;
         background-color: var(--greenThird);
         border-bottom: 3px solid white;
@@ -69,14 +72,18 @@
         border-radius: 5px;
     }
 }
-@media (max-width: 1401px) {}
-@media (max-width: 829px) {
+@media (max-width: 1401px) {
+    .leftSide{
+        width: 30vw;
+
+    }
+}
+@media (max-width: 950px) {
     .leftSide {
         position: fixed;
-        top: 70px;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 70px);
         z-index: 1000;
         padding-right: 0;
         transform: translateX(-100%);

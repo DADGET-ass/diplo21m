@@ -1,7 +1,6 @@
 @import '../index.module.scss';
-
+@import '../../../../styles/assets/mixins/responsive_font.scss';
 .facultsBlock {
-
     padding: 20px;
     display: flex;
     align-items: center;
@@ -14,6 +13,9 @@
         align-items: center;
         justify-content: space-between;
         flex-grow: 1;
+        .name{
+            @include responsive_font(18, 14);
+        }
     }
     .arrow {
         display: flex;
@@ -46,5 +48,12 @@
             background-color: var(--grey);
             color: red;
         }
+    }
+}
+
+
+@media (max-width: 950px) {
+    .facultsBlock {
+        padding: 15px;
     }
 }

@@ -21,7 +21,7 @@
         }
 
         span {
-            @include responsive_font(15, 15);
+            @include responsive_font(15, 8);
         }
 
         @media (max-width: 1095px) {
@@ -57,11 +57,16 @@
     border-radius: 8px;
     background-color: white;
 
-    @media (max-width: 1095px) {
-        top: 30px;
-        left: 0;
-        right: 0;
+    @media (max-width: 850px) {
+        position: fixed;
+        padding: 1px;
+        width: 100vw;
+        gap: 12px;
+        z-index: 1000;
+      
+      
     }
+  
 
     .controls {
         padding: 0 9px;
@@ -87,7 +92,7 @@
 
         h2.currentMonth {
 
-            @include responsive_font(15, 15);
+            @include responsive_font(15, 12);
             text-transform: capitalize;
         }
     }
@@ -105,7 +110,7 @@
             color: grey;
             user-select: none;
             font-family: "Lato400";
-            @include responsive_font(15, 15);
+            @include responsive_font(15, 10);
         }
 
         .cell {
@@ -120,7 +125,7 @@
             transition: all .2s ease;
             cursor: pointer;
 
-            @include responsive_font(14, 14);
+            @include responsive_font(14, 10);
 
             &.active {
                 transition: all .25s ease-in;
@@ -154,7 +159,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        @include responsive_font(15, 15);
+        @include responsive_font(15, 10);
 
         p {
             color: var(--grey);

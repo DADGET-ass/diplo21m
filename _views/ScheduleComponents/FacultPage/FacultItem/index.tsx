@@ -119,7 +119,7 @@ const InnerFacultItem: FC<FacultItem> = ({ facultet, setTrigger }) => {
                         <Input
                             type="text"
                             disabled
-                            label="Добавить к факульету"
+                            label="Добавить к факультету"
                             value={facultet.name}
                         />
                         <Input

@@ -1,8 +1,13 @@
+@import '../../../styles/assets/mixins/responsive_font.scss';
+
 .button {
-    padding: 4px 59px;
+    padding: 41px 59px;
     color: var(--greenOne);
     background-color: white;
     border-radius: 10px;
+    span{
+        @include responsive_font(15, 13);
+    }
 
     
 
@@ -45,3 +50,30 @@
         
     }
 }
+
+
+@media (max-width: 1401px) {}
+@media (max-width: 829px) {
+    .button {
+        &[data-dark="true"]{
+            padding: 4px 20px;
+        }
+
+        &[data-light="true"]{
+            padding: 4px 20px;
+        }
+    }
+    
+}
+@media (max-width: 502px) {
+    .button {
+        &[data-dark="true"]{
+            padding: 2px 20px;
+        }
+
+        &[data-light="true"]{
+            padding: 2px 20px;
+        }
+    }
+}
+@media (max-width: 380px) {}

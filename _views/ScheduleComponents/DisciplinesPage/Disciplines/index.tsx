@@ -118,15 +118,15 @@ const DisciplineForAH = ({ group,
                     ))}
                 </div>
             </div>
-            <div className={cls.close}>
-                {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
-                    <>
+            {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
+                <>
+                    <div className={cls.close}>
                         <div onClick={groupDelete}>
                             <CloseIcon />
                         </div>
-                    </>
-                )}
-            </div>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

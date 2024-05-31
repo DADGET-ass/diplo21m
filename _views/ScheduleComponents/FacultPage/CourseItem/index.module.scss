@@ -1,10 +1,14 @@
 @import '../index.module.scss';
-
+@import '../../../../styles/assets/mixins/responsive_font.scss';
 .coursesBlock {
     padding: 10px 20px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background-color: var(--greenOne);
+    .name{
+        @include responsive_font(18, 14);
+    }
     .arrow {
         transition: .4s;
     }
@@ -12,5 +16,11 @@
     .rot {
         transform: rotate(180deg);
         transition: .4s;
+    }
+}
+
+@media (max-width: 950px) {
+    .coursesBlock {
+        padding: 8px 15px;
     }
 }

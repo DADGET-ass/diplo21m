@@ -1,3 +1,5 @@
+@import '../../../styles/assets/mixins/responsive_font.scss';
+
 .tableContainer {
     height: auto;
     overflow: visible;
@@ -16,7 +18,9 @@
             justify-content: center;
             padding: 10px 0;
             border: 1px solid var(--grey);
-
+            .name{
+                @include responsive_font(16, 10);
+               }
         }
     }
 
@@ -46,6 +50,7 @@
             display: flex;
             padding: 10px 10px;
             border: 1px solid var(--grey);
+               
         }
     }
 }

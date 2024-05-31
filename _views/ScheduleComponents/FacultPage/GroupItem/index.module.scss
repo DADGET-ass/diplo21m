@@ -1,5 +1,5 @@
 @import '../index.module.scss';
-
+@import '../../../../styles/assets/mixins/responsive_font.scss';
 .groupsBlock{
     padding: 10px 20px;
     display: flex;
@@ -7,7 +7,7 @@
     border: 1px solid var(--grey);
     .name{
         color: var(--grey);
-        font-size: 20px;
+        @include responsive_font(18, 14);
         margin-right: auto;
     }
 

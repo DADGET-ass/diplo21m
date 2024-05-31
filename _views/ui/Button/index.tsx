@@ -28,7 +28,10 @@ const Button: FC<ButtonProps> = ({ children, darkBtn, lightBtn, onClick, type })
             onClick={handleClick}
             type={type}
         >
-            {children}
+            <span>
+                {children}
+            </span>
+
         </button>
     );
 };
