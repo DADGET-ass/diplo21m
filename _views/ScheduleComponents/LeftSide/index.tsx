@@ -27,7 +27,7 @@ const LeftSide = () => {
     }
 
     return (
-        <div className={cls.leftSide}>
+        <div className={cls.leftSide}  data-menu data-menu-visible="false">
             <div className={cls.full} onClick={() => push(`/fullShedule`)}>Полное расписание</div>
             <div className={cls.name}>Расписание</div>
 

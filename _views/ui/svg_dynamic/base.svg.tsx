@@ -74,3 +74,13 @@ export const LogOut = () => (
 
 
 )
+export const MenuIcon = () => (
+    <svg width="40" height="31" viewBox="0 0 40 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="40" height="7" rx="3" fill="currentColor"/>
+<rect y="12" width="40" height="7" rx="3" fill="currentColor"/>
+<rect y="24" width="40" height="7" rx="3" fill="currentColor"/>
+</svg>
+
+
+
+)

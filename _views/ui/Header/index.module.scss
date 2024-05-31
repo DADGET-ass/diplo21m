@@ -30,6 +30,8 @@
         }
 
         .menu {
+            position: absolute;
+            bottom: 0px;
             display: none;
         }
 
@@ -84,6 +86,14 @@
             }
             .menu {
                 display:block;
+                button{
+                    cursor: pointer;
+                        svg{
+                            width: 25px;
+                            color: white;
+                        }
+                    
+                }
             }
         }
 
