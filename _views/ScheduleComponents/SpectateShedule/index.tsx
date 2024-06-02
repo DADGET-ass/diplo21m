@@ -36,10 +36,10 @@ export interface ScheduleItemProps {
 interface SpectateSheduleProps {
     group: IGroupsFacult;
     tableRef: MutableRefObject<HTMLDivElement | null>;
-    items: IItems
+    // items: IItems
 }
 
-const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef, items }) => {
+const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
     const { selectedDate } = useDateStore()
     const { userRole } = useAuthStore()
     const { mode } = useTabsStore()
