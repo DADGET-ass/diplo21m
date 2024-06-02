@@ -1,15 +1,16 @@
 @import '../../../styles/assets/mixins/responsive_font.scss';
 
 .button {
-    padding: 41px 59px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 59px;
     color: var(--greenOne);
     background-color: white;
     border-radius: 10px;
     span{
         @include responsive_font(15, 13);
     }
-
-    
 
     &:focus {
         background: var(--lightGrey);

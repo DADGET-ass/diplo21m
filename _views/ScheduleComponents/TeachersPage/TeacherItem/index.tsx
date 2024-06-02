@@ -11,6 +11,7 @@ import { PopUp } from "@/_views/ui/PopUp";
 import { Form } from "@/_views/ui/Form";
 import { Input } from "@/_views/ui/Input";
 import { editTeacher } from "@/data/api/teachers/editTeachers";
+import { useDateStore } from "@/data/store/useDateStore";
 
 interface DisciplineProps {
     name: string
@@ -31,6 +32,7 @@ interface TeacherProps {
 const Teacher: FC<TeacherProps> = ({ teacher, setTrigger }) => {
     const { userRole } = useAuthStore()
     const { mode } = useTabsStore()
+    const { selectedDate } = useDateStore();
 
     const [isOpenPopUp, setOpenPopUp] = useState<boolean>(false)
     const [error, setError] = useState<string>('');
@@ -75,6 +77,9 @@ const Teacher: FC<TeacherProps> = ({ teacher, setTrigger }) => {
         })
     }
 
+    console.warn(selectedDate)
+    console.warn(teacher)
+
     return (
         <>
             <div className={cls.teachersBlock}>
@@ -89,8 +94,7 @@ const Teacher: FC<TeacherProps> = ({ teacher, setTrigger }) => {
                     </div>
                 )}
                 <div>Всего часов: {teacher.aH}</div>
-                <div>Отработано: {teacher.burden?.filter((e) => `${new Date(e.mounth).getFullYear()}_${new Date(e.mounth).getMonth()}` === `${new Date().getFullYear()}_${new Date().getMonth()}`)
-                    .map((e) => e.hH)[0] || '0'}
+                <div>Отработано: {teacher.burden?.filter((e) => `${new Date(e.mounth).getFullYear()}_${new Date(e.mounth).getMonth()}` === `${selectedDate.getFullYear()}_${selectedDate.getMonth()}`)[0]?.hH || '0'}
                     /{teacher.aH}
                 </div>
 
@@ -109,7 +113,7 @@ const Teacher: FC<TeacherProps> = ({ teacher, setTrigger }) => {
                     <Form onSubmit={onSubmit}>
                         <Input
                             type="text"
-                        
+
                             label="Фамилия"
                             placeholder={'Введите фамилию'}
                             value={formData.surname}

@@ -6,6 +6,7 @@ import { IAllTeachers, getTeachers } from '@/data/api';
 import cls from './index.module.scss';
 import { Teacher } from './TeacherItem';
 import { Loader } from '@/_views/ui/Loader';
+import { useDateStore } from '@/data/store/useDateStore';
 
 
 

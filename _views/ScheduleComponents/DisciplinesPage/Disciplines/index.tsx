@@ -28,6 +28,7 @@ import { DropdownInput } from '@/_views/ui/DropInput';
 import { deleteGroup } from '@/data/api/disciplines/deleteGroup';
 import { addTeacherToDiscipline } from '@/data/api/disciplines/addTeacherToDiscipline';
 import { deleteTeacher } from '@/data/api/disciplines/deleteTeacher';
+import { useDateStore } from '@/data/store/useDateStore';
 
 
 const TeachersCol = ({
@@ -84,7 +85,7 @@ const DisciplineForAH = ({ group,
     const [newAh, setNewAH] = useState<number>(group.aH)
     const { userRole } = useAuthStore()
     const { mode } = useTabsStore()
-
+    const { selectedDate } = useDateStore()
 
 
     const groupDelete = () => {
@@ -94,6 +95,10 @@ const DisciplineForAH = ({ group,
             }
         })
     }
+
+    const month = group.burden?.filter(e => new Date(e.month).toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }) === selectedDate.toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }))[0]?.month
+    const hH = group.burden?.filter(e => new Date(e.month).toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }) === selectedDate.toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }))[0]?.hH
+
     return (
         <div className={`${cls.col} ${cls.rr}`}>
             <div className={cls.column}>
@@ -111,11 +116,9 @@ const DisciplineForAH = ({ group,
                             max={300}
                         />
                     </div>
-                    {group.burden?.map(e => (
-                        <div>
-                            {e.month} - {e.hH}
-                        </div>
-                    ))}
+                    <div>
+                        {month && new Date(month).toLocaleDateString('ru-Ru', { year: 'numeric', month: '2-digit' })} - {hH}
+                    </div>
                 </div>
             </div>
             {userRole === UserRoleEnum.admin && mode === ModeEnum.edit && (
