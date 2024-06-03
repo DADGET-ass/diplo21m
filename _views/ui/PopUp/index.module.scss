@@ -14,7 +14,7 @@
 }
 
 .popBlock {
-    padding: 20px 40px 40px;
+    padding: 20px 40px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -23,6 +23,8 @@
     gap: 40px;
     width: 50vw;
     height: fit-content;
+    max-height: 80vh;
+    overflow-y: scroll;
     border-radius: 40px;
     inset: 50%;
     z-index: 111;

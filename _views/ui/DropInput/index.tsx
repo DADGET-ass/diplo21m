@@ -104,27 +104,35 @@ const DropdownInput: FC<DropdownInputProps> = ({
                 {WordsRows}
                 <textarea name="drop"
                     value={value ? value : currentValue}
-                    onChange={(e) => setActiveValue ? setActiveValue(e.target.value) : handleTextChange}
+                    onChange={(e) => {
+                        setActiveValue ? setActiveValue(e.target.value) : handleTextChange;
+                        setCurrentValue(e.target.value)
+                    }}
                     onFocus={() => setFocus(true)}
                 />
             </div>
             {list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue?.toLowerCase())).length > 0 && (
                 <div className={cls.drop} data-focus={focus}>
-                    {list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue.toLowerCase()) && !words.includes(e)).map((item, index) => (
-                        <div
-                            key={index}
-                            onClick={() => {
-                                if (setActiveValue) {
-                                    setActiveValue(item);
-                                    return
-                                }
-                                setWords((prevWords) => [...prevWords, item.trim()]);
-                                setCurrentValue('');
-                            }}
-                        >
-                            {highlightMatch(item, value ? value : currentValue)}
-                        </div>
-                    ))}
+                    {
+                        list.filter((e) => {
+                            console.log(words, '>>>>>', e)
+                            return e.toLowerCase().includes(value ? value.toLowerCase() : currentValue.toLowerCase()) && !words.includes(e) && e?.toLowerCase() !== words[words.length - 1]?.toLowerCase();
+                        }
+                        ).map((item, index) => (
+                            <div
+                                key={index}
+                                onClick={() => {
+                                    if (setActiveValue) {
+                                        setActiveValue(item);
+                                        return
+                                    }
+                                    setWords((prevWords) => [...prevWords, item.trim()]);
+                                    setCurrentValue('');
+                                }}
+                            >
+                                {highlightMatch(item, value ? value : currentValue)}
+                            </div>
+                        ))}
                 </div>
             )}
         </div>

@@ -122,9 +122,9 @@ const SpectateShedule: FC<SpectateSheduleProps> = ({ group, tableRef }) => {
 
 
                     </div>
-                    {userRole === UserRoleEnum.admin && mode === ModeEnum.spectate && (
+                    {/* {userRole === UserRoleEnum.admin && mode === ModeEnum.spectate && (
                         <Button darkBtn onClick={() => setOpenPopUp(true)}>Редактировать</Button>
-                    )}
+                    )} */}
                     {/* {isOpenPopUp && (
                 <PopUp title='Редактирование факультета' setOpenPopUp={setOpenPopUp} >
                     <Form onSubmit={onSubmit}>

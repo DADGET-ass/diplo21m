@@ -56,7 +56,7 @@ const FacultsHeader: FC<TeachersHeaderProps> = ({ setTrigger }) => {
     const onSubmit = (e: FormEvent) => {
         e.preventDefault()
         console.log(name, groups, audithories)
-        addFacults({ name, groups: groupsArray }).then(e => {
+        addFacults({ name: name.trim(), groups: groupsArray.map(e => e.trim()) }).then(e => {
             if (!e.result && e.message) {
                 setError(e.message);
                 return

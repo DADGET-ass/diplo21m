@@ -44,11 +44,12 @@
     top: 100%;
     background-color: white;
     height: auto;
+    max-height: 30vh;
     color: rgb(0, 0, 0);
     width: 100%;
     opacity: 1;
     transition: .4s;
-
+    overflow-y: auto;
     div {
         transition: .4s;
         border: 1px solid var(--grey);

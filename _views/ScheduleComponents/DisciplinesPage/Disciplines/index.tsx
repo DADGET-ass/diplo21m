@@ -29,6 +29,7 @@ import { deleteGroup } from '@/data/api/disciplines/deleteGroup';
 import { addTeacherToDiscipline } from '@/data/api/disciplines/addTeacherToDiscipline';
 import { deleteTeacher } from '@/data/api/disciplines/deleteTeacher';
 import { useDateStore } from '@/data/store/useDateStore';
+import { editGroupAh } from '@/data/api/disciplines/editDisciplineAh';
 
 
 const TeachersCol = ({
@@ -96,6 +97,12 @@ const DisciplineForAH = ({ group,
         })
     }
 
+    const editAh = () => {
+        editGroupAh({ disciplineId, groupId: group._id, aH: newAh }).then(e => {
+            // Обработка отработки запроса
+        })
+    }
+
     const month = group.burden?.filter(e => new Date(e.month).toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }) === selectedDate.toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }))[0]?.month
     const hH = group.burden?.filter(e => new Date(e.month).toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }) === selectedDate.toLocaleDateString('ru-Ru', { month: '2-digit', year: 'numeric' }))[0]?.hH
 
@@ -115,6 +122,7 @@ const DisciplineForAH = ({ group,
                             onChange={(e) => Number(e.target.value) <= 300 && setNewAH(Number(e.target.value))}
                             max={300}
                         />
+                        <Button darkBtn onClick={editAh}>ОК</Button>
                     </div>
                     <div>
                         {month && new Date(month).toLocaleDateString('ru-Ru', { year: 'numeric', month: '2-digit' })} - {hH}
