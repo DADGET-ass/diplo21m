@@ -28,9 +28,8 @@ type IResponsedisciplines = {
     disciplines: IDisciplines[];
 };
 
-export const getDisciplines = ({ id }: { id?: string }): Promise<IResponsedisciplines> =>
+export const getDisciplines = ({ groupId }: { groupId?: string }): Promise<IResponsedisciplines> =>
     methodDefault({
-        path: `discipline/get`,
+        path: `discipline/get?groupId=${groupId}`,
         method: "GET",
-
     });

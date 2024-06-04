@@ -10,7 +10,7 @@ import {
 } from 'react';
 
 import { Input } from '../Input';
-import { ArrowIcon } from '../svg_dynamic/base.svg';
+import { ArrowIcon, CircleIcon } from '../svg_dynamic/base.svg';
 import { CloseIcon } from '../svg_dynamic/base.svg';
 
 import cls from './index.module.scss';
@@ -40,7 +40,14 @@ const DropdownInput: FC<DropdownInputProps> = ({
         const lowerSearchQuery = searchQuery.toLowerCase();
 
         if (!searchQuery || !lowerText?.includes(lowerSearchQuery)) {
-            return <span>{text}</span>;
+            return <span
+                className={cls.dropTxt}
+                data-red={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) >= 1}
+                data-green={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) <= 2}
+            >
+                {text}
+                <CircleIcon />
+            </span>;
         }
 
         const startIdx = lowerText.indexOf(lowerSearchQuery);
@@ -49,7 +56,13 @@ const DropdownInput: FC<DropdownInputProps> = ({
         return (
             <span>
                 {text.substring(0, startIdx)}
-                <span className={cls.highlight}>{text.substring(startIdx, endIdx)}</span>
+                <span
+                    className={cls.highlight}
+                    data-red={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) >= 1.3}
+                    data-green={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) <= 2}
+                >
+                    {text.substring(startIdx, endIdx)} <CircleIcon />
+                </span>
                 {text.substring(endIdx)}
             </span>
         );
@@ -114,11 +127,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
             {list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue?.toLowerCase())).length > 0 && (
                 <div className={cls.drop} data-focus={focus}>
                     {
-                        list.filter((e) => {
-                            console.log(words, '>>>>>', e)
-                            return e.toLowerCase().includes(value ? value.toLowerCase() : currentValue.toLowerCase()) && !words.includes(e) && e?.toLowerCase() !== words[words.length - 1]?.toLowerCase();
-                        }
-                        ).map((item, index) => (
+                        list.filter((e) => e.toLowerCase().includes(value ? value.toLowerCase() : currentValue.toLowerCase()) && !words.includes(e) && e?.toLowerCase() !== words[words.length - 1]?.toLowerCase()).map((item, index) => (
                             <div
                                 key={index}
                                 onClick={() => {
@@ -129,6 +138,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
                                     setWords((prevWords) => [...prevWords, item.trim()]);
                                     setCurrentValue('');
                                 }}
+
                             >
                                 {highlightMatch(item, value ? value : currentValue)}
                             </div>

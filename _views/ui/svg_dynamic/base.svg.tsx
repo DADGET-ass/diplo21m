@@ -76,11 +76,14 @@ export const LogOut = () => (
 )
 export const MenuIcon = () => (
     <svg width="40" height="31" viewBox="0 0 40 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="40" height="7" rx="3" fill="currentColor"/>
-<rect y="12" width="40" height="7" rx="3" fill="currentColor"/>
-<rect y="24" width="40" height="7" rx="3" fill="currentColor"/>
-</svg>
+        <rect width="40" height="7" rx="3" fill="currentColor" />
+        <rect y="12" width="40" height="7" rx="3" fill="currentColor" />
+        <rect y="24" width="40" height="7" rx="3" fill="currentColor" />
+    </svg>
+)
 
-
-
+export const CircleIcon = () => (
+    <svg width="10" height="10" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19.5" cy="19.5" r="19.5" fill="currentColor" />
+    </svg>
 )

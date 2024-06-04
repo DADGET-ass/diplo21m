@@ -15,7 +15,6 @@ export interface ITeachers {
     patronymic: string,
     aH: number,
     burden: Array<IBurden>
-
 }
 
 type IResponseTeachers = {

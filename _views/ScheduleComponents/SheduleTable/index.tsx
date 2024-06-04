@@ -14,6 +14,7 @@ import { IGroupsFacult } from '@/data/api/facultets/getFacultets';
 
 import cls from './index.module.scss';
 import { Form } from '@/_views/ui/Form';
+import { editShedule } from '@/data/api/fullShedule/editShedule';
 
 const TableRow = dynamic(
     () =>
@@ -57,7 +58,7 @@ const TableRowWithTeachers: FC<{
             } catch (err) {
                 console.error(err);
             }
-        }, [item.discipline]);
+        }, [item.discipline, disciplines]);
 
         return (
             <TableRow
@@ -86,6 +87,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
     const [teachers, setTeachers] = useState<Array<ITeachers>>([]);
     const { selectedDate } = useDateStore();
     const [trigger, setTrigger] = useState<boolean>(false);
+    const [scheduleId, setScheduleId] = useState<string>('');
 
 
     const [disciplines, setDisciplines] = useState<IDisciplines[]>([]);
@@ -93,12 +95,25 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
     const [audithories, setAudithories] = useState<IAudith[]>([]);
     const [schedule, setSchedule] = useState<IShedule[]>([]);
     const [serverMessage, setServerMessage] = useState<string>();
-
     const [addShedulePayload, setAddShedulePayload] = useState<AddShedulePayload>();
+
+    useEffect(() => {
+        getShedule({ date: selectedDate.toISOString().slice(0, 10), group: group._id }).then(response => {
+            if (response.schedule) {
+                setScheduleItems(response.schedule[0].items.map(e => ({ discipline: e.discipline.name, audithoria: e.audithoria.name, number: e.number, teacher: `${e.teacher.surname} ${e.teacher.name} ${e.teacher.patronymic}`, type: e.type.name })));
+                setScheduleId(response.schedule[0]._id)
+            }
+            if (response.message) {
+                setScheduleItems([])
+            }
+        });
+    }, [selectedDate]);
 
     useEffect(() => {
         setAddShedulePayload({ group: group._id, date: selectedDate.toLocaleDateString('ru-Ru', { year: 'numeric', month: '2-digit', day: '2-digit' }), items: scheduleItems });
     }, [group, selectedDate, scheduleItems]);
+
+    console.log(scheduleItemsId)
 
     useEffect(() => {
         const updatedItems = scheduleItems.map(item => {
@@ -108,13 +123,13 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
             const teacherId = teachers?.find(teacher => teacher.surname === item.teacher.split(' ')[0])?._id || '';
             return { ...item, audithoria: audithoriaId, teacher: teacherId, type: typeId, discipline: disciplineId };
         });
-        
+
         setScheduleItemsId(updatedItems);
 
-    }, [scheduleItems, audithories, trigger]);
+    }, [scheduleItems, audithories, trigger, teachers]);
 
-    
-    
+
+
     useEffect(() => {
         getIAudith().then(e => {
             setAudithories(e.audithories);
@@ -128,7 +143,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
     }, []);
 
     useEffect(() => {
-        getDisciplines({ id: group._id }).then(e => {
+        getDisciplines({ groupId: group._id }).then(e => {
             setDisciplines(e.disciplines);
         });
     }, []);
@@ -161,8 +176,14 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
         setScheduleItems(updatedScheduleItems);
     };
 
+    const editScheduleItem = () => {
+        editShedule({ id: scheduleId, date: selectedDate.toISOString().slice(0, 10), group: group._id, items: scheduleItemsId }).then(response => {
+            setServerMessage(response.message || '');
 
-    
+            return;
+        });
+    }
+
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         addShedule({ date: selectedDate.toISOString().slice(0, 10), group: group._id, items: scheduleItemsId }).then(response => {
@@ -179,6 +200,7 @@ const SheduleTable: FC<SheduleTableProps> = ({ group, tableRef }) => {
                 <Button darkBtn type='submit'>Создать</Button>
                 <div className={cls.btn}>
                     <Button darkBtn onClick={addScheduleItem} type='button'>Добавить занятие</Button>
+                    <Button darkBtn onClick={editScheduleItem} type='button'>Сохранить изменения</Button>
                     <Button darkBtn onClick={deleteScheduleItem} type='button'>Удалить занятие</Button>
                 </div>
 

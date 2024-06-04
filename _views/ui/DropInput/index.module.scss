@@ -10,7 +10,7 @@
         cursor: pointer;
         padding-left: 5px;
         color: white;
-        
+
         @include responsive_font(18, 14);
     }
 
@@ -34,7 +34,7 @@
         resize: none;
         line-height: 40px;
         overflow: hidden;
-        
+
     }
 }
 
@@ -42,7 +42,7 @@
     position: absolute;
     z-index: 1111;
     top: 100%;
-    background-color: white;
+    background-color: var(--lightGrey);
     height: auto;
     max-height: 30vh;
     color: rgb(0, 0, 0);
@@ -50,6 +50,7 @@
     opacity: 1;
     transition: .4s;
     overflow-y: auto;
+
     div {
         transition: .4s;
         border: 1px solid var(--grey);
@@ -100,5 +101,21 @@
     &:hover .svg {
         color: red;
         transition: .4s;
+    }
+}
+
+.highlight {
+    color: rgb(0, 102, 0);
+}
+
+.dropTxt,
+.highlight svg {
+
+    &[data-red="true"] {
+        color: red;
+    }
+    
+    &[data-green="true"] {
+        color: green;
     }
 }

@@ -8,6 +8,7 @@ import { ITeachers } from "@/data/api";
 import { ITypes } from "@/data/api/disciplines/types/getTypes";
 import { IAudith } from "@/data/api/audithories/getAudithories";
 import { IItems } from "@/data/api/fullShedule/addShedule";
+import { useDateStore } from "@/data/store/useDateStore";
 
 const DropdownInput = dynamic(
     () =>
@@ -37,6 +38,9 @@ const TableRow: FC<TableRowProps> = ({
     activeFormDatas,
     setActiveFormDatas
 }) => {
+
+    const { selectedDate } = useDateStore();
+
     return (
         <div className={cls.row} key={item.number}>
             <div className={cls.item}>
@@ -60,7 +64,7 @@ const TableRow: FC<TableRowProps> = ({
             <div className={cls.item}>
                 {teachers && (
                     <DropdownInput
-                        list={teachers.map(e => `${e.surname} ${e.name} ${e.patronymic}`)}
+                        list={teachers.map(e => `${e.surname} ${e.name} ${e.patronymic} (${e.burden[0].hH}/${e.aH})`)}
                         value={activeFormDatas.teacher}
                         setActiveValue={newValue => setActiveFormDatas(prevState => {
                             const updatedScheduleItems = [...prevState];
@@ -86,11 +90,11 @@ const TableRow: FC<TableRowProps> = ({
 
             </div>
             <div className={cls.item}>
-                
+
                 {audithories && (
-                    
+
                     <DropdownInput
-                    list={audithories.map(e => `${e.name} ${e.pc ? "(Компьютерная)" : ""}`)}
+                        list={audithories.map(e => `${e.name} ${e.pc ? "(Компьютерная)" : ""}`)}
                         value={activeFormDatas.audithoria}
                         setActiveValue={newValue => setActiveFormDatas(prevState => {
                             const updatedScheduleItems = [...prevState];

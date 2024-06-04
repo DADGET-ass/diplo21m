@@ -31,7 +31,7 @@ interface IGetSheduleParams {
 }
 
 export interface IShedule {
-    id: string,
+    _id: string,
     date: Date,
     group: Array<{
         _id: string,
