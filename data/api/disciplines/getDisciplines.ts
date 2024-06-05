@@ -30,6 +30,6 @@ type IResponsedisciplines = {
 
 export const getDisciplines = ({ groupId }: { groupId?: string }): Promise<IResponsedisciplines> =>
     methodDefault({
-        path: `discipline/get?groupId=${groupId}`,
+        path: `discipline/get?${groupId && 'groupId='groupId}`,
         method: "GET",
     });
