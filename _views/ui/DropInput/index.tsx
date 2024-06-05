@@ -46,7 +46,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
                 data-green={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) <= 2}
             >
                 {text}
-                <CircleIcon />
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(text?.split('(')[1]?.slice(0, 1))) && <CircleIcon />}
             </span>;
         }
 
@@ -61,7 +61,7 @@ const DropdownInput: FC<DropdownInputProps> = ({
                     data-red={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) >= 1.3}
                     data-green={Number(text?.split('(')[1]?.split('/')[0]?.split(')')[0]) / Number(text?.split('(')[1]?.split('/')[1]?.split(')')[0]) <= 2}
                 >
-                    {text.substring(startIdx, endIdx)} <CircleIcon />
+                    {text.substring(startIdx, endIdx)} {[1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(text?.split('(')[1]?.slice(0, 1))) && <CircleIcon />}
                 </span>
                 {text.substring(endIdx)}
             </span>
