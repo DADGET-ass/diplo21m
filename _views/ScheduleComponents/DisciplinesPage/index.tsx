@@ -13,7 +13,7 @@ const DisciplinesPage = () => {
 
     const [trigger, setTrigger] = useState<boolean>(false);
     useEffect(() => {
-        getDisciplines({ groupId: '' }).then(e => {
+        getDisciplines().then(e => {
             setDisciplines(e.disciplines);
             setIsLoading(false)
         })
